@@ -1,0 +1,28 @@
+.header__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
+  background-color: white;
+  border-radius: 10px;
+  min-height: 20px;
+  margin: 20px auto 30px;
+  max-width: 100%;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.header__name {
+  width: 350px;
+}
+
+@media screen and (max-width: 880px) {
+  .header__name {
+    width: 300px;
+    text-align: start;
+    margin-left: 20px;
+  }
+}
+@media screen and (max-width: 710px) {
+  .header__container {
+    display: none;
+  }
+}
