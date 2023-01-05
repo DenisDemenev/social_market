@@ -48,7 +48,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://localhost/api/',
+  url: 'http://backend:8000/api/',
   headers: {
     'content-type': 'application/json',
   },
