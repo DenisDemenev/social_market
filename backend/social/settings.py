@@ -6,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-qhr6w#zu^1mq8ob6_*zac-0u9u+znknom+g0vgn6&2a0+b_td4'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['91.201.53.16', '*', 'http://localhost', ]
+ALLOWED_HOSTS = ['91.201.53.16', '*', 'http://localhost', 'http://smax.store/', 'https://smax.store/']
 
 
 INSTALLED_APPS = [
