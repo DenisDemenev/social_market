@@ -64,8 +64,8 @@ jobs:
           script: |
             sudo docker pull ekbtoys/social_frontend:v1
             sudo docker pull ekbtoys/social:v1
-            sudo docker-compose stop
-            sudo docker-compose rm backend
+            sudo docker compose stop
+            sudo docker compose rm backend
             rm .env
             touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
