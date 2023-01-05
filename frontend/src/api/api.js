@@ -12,7 +12,7 @@ class Api {
     sortValue,
   }) {
     const res = await fetch(
-      `${this._url}groups/?page=${pageCurrent}&limit=${limit}${
+      `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
         subjectValue ? `&subject__slug=${subjectValue}` : ''
       }${searchValue ? `&search=${searchValue}` : ''}${
         sortValue ? `&ordering=${sortValue}` : ''
@@ -26,14 +26,15 @@ class Api {
   }
 
   async getGroup(id) {
-    const res = await fetch(`${this._url}groups/${id ? id : ''}`, {
+    const res = await fetch(`${this._url}/api/groups/${id ? id : ''}`, {
       method: 'GET',
       headers: this._headers,
     });
     return this._checkResponse(res);
   }
+
   async getSubject() {
-    const res = await fetch(`${this._url}subject/`, {
+    const res = await fetch(`${this._url}/api/subject/`, {
       method: 'GET',
       headers: this._headers,
     });
@@ -48,7 +49,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://backend:8000/api/',
+  url: 'http://localhost',
   headers: {
     'content-type': 'application/json',
   },
