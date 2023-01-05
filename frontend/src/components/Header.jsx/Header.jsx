@@ -42,7 +42,7 @@ const Header = ({ window, children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            SocialMarket
+            SocialMax
           </Typography>
         </Toolbar>
       </AppBar>

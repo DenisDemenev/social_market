@@ -42,7 +42,7 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/social:v1 # <логин-на-docker-hub>/<репозиторий-на-docker-hub>:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/social:v1
       - name: Push frontend to Docker Hub
         uses: docker/build-push-action@v2
         with:

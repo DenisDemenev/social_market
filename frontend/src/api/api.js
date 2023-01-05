@@ -49,7 +49,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://backend:8000',
+  url: 'http://91.201.53.16/',
   headers: {
     'content-type': 'application/json',
   },
