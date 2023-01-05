@@ -45,6 +45,7 @@ class Subject(models.Model):
         return self.name
 
     class Meta():
+        ordering = ['name']
         verbose_name = 'Тема'        
         verbose_name_plural = 'Темы'
     
