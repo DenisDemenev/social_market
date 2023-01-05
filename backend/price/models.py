@@ -51,7 +51,7 @@ class Subject(models.Model):
 
 class Groups(models.Model):
     name = models.CharField(max_length=32, verbose_name='Название')
-    vk_id = models.PositiveIntegerField(verbose_name='ID группы в ВК', unique=True)
+    vk_id = models.BigIntegerField(verbose_name='ID группы в ВК', unique=True)
     link = models.URLField(verbose_name='Ссылка на группу')
     link_screen = models.URLField(verbose_name='Видимая ссылка')
     avatar = models.URLField(verbose_name='Аватар группы')
@@ -90,29 +90,3 @@ class Groups(models.Model):
         ordering = ['-subscribes']
         verbose_name = 'Группа'        
         verbose_name_plural = 'Группы'
-
-# class GroupsSubject(models.Model):
-#     groups = models.ForeignKey(
-#         Groups,
-#         on_delete=models.CASCADE,
-#         related_name='groups_subject',
-#         verbose_name='Группа',
-#     )
-#     subject = models.ForeignKey(
-#         Subject,
-#         on_delete=models.CASCADE,
-#         related_name='groups_subject',
-#         verbose_name='Тематика',
-#     )
-    
-#     class Meta:
-#         ordering = ['-id']
-#         verbose_name = 'Тематика группы'
-#         verbose_name_plural = 'Тематики группы'
-#         constraints = [
-#             models.UniqueConstraint(fields=['groups', 'subject'],
-#                                     name='groups_subject')
-#         ]
-
-#     def __str__(self):
-#         return str(self.subject)
