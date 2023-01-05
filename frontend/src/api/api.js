@@ -48,7 +48,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://91.201.53.16/api/',
+  url: 'http://localhost/api/',
   headers: {
     'content-type': 'application/json',
   },

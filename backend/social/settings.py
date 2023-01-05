@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-qhr6w#zu^1mq8ob6_*zac-0u9u+znknom+g0vgn6&2a0+b_td4
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['http://localhost:3000', 'http://127.0.0.1:3000', '*', 'http://localhost', '91.201.53.16',]
+ALLOWED_HOSTS = ['91.201.53.16', '*', 'http://localhost', ]
 
 
 INSTALLED_APPS = [
@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'django_filters',
-
     'rest_framework',
     'price',
     'api',
@@ -69,12 +68,12 @@ WSGI_APPLICATION = 'social.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
+        'ENGINE': os.environ.get('DB_ENGINE'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
