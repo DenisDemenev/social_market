@@ -1,10 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-
-import Group from './components/Group/Group';
-
-import { Home } from './pages/Home';
-import { Layout } from './components/Layout';
+import Home from './pages/Home';
+import Layout from './components/Layout';
 
 function App() {
   return (
@@ -12,7 +9,6 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/group/:id" element={<Group />} />
         </Routes>
       </Layout>
     </div>

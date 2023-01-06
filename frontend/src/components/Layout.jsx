@@ -1,6 +1,6 @@
 import Header from './Header.jsx/Header';
 
-export const Layout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <div className="container mx-auto">
@@ -9,3 +9,5 @@ export const Layout = ({ children }) => {
     </>
   );
 };
+
+export default Layout;

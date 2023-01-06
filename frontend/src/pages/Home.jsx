@@ -7,7 +7,7 @@ import api from '../api/api';
 import GroupHeader from '../components/GroupHeader/GroupHeader';
 import Groups from '../components/Groups/Groups';
 
-export const Home = () => {
+const Home = () => {
   const [groups, setGroups] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [pageCurrent, setPageCurrent] = useState(1);
@@ -58,3 +58,5 @@ export const Home = () => {
     </Container>
   );
 };
+
+export default Home;
