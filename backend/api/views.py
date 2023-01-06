@@ -9,10 +9,6 @@ from rest_framework import filters
 from api.pagination import LimitPageNumberPagination
 
 
-# from rest_framework.decorators import action
-# from rest_framework.response import Response
-
-
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Groups.objects.all()
     serializer_class = GroupsSerializer
@@ -22,7 +18,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     filter_class = (SubjectFilter, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
     filterset_fields = ('subject__slug',)
-    ordering_fields = ('price',)
+    ordering_fields = ('price', 'cpm')
 
 
 class SubjectViewSet(ReadOnlyModelViewSet):

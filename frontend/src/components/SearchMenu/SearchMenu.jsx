@@ -63,6 +63,8 @@ const SearchMenu = () => {
             onChange={handleChangeSortValue}>
             <MenuItem value="-price">сначала дороже</MenuItem>
             <MenuItem value="price">сначала дешевле</MenuItem>
+            <MenuItem value="-cpm">CPM по возростанию</MenuItem>
+            <MenuItem value="cpm">CPM по убыванию</MenuItem>
           </TextField>
         </ListItem>
         <ListItem>
