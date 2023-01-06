@@ -29,8 +29,8 @@ const Header = ({ window, children }) => {
       <AppBar
         position="fixed"
         sx={{
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          ml: { md: `${drawerWidth}px` },
+          width: { lg: `calc(100% - ${drawerWidth}px)` },
+          ml: { lg: `${drawerWidth}px` },
         }}>
         <Toolbar>
           <IconButton
@@ -38,7 +38,7 @@ const Header = ({ window, children }) => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}>
+            sx={{ mr: 2, display: { lg: 'none' } }}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
@@ -48,7 +48,7 @@ const Header = ({ window, children }) => {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+        sx={{ width: { lg: drawerWidth }, flexShrink: { md: 0 } }}
         aria-label="mailbox folders">
         <Drawer
           container={container}
@@ -59,7 +59,7 @@ const Header = ({ window, children }) => {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', md: 'none' },
+            display: { xs: 'block', lg: 'none' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
@@ -70,7 +70,7 @@ const Header = ({ window, children }) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', md: 'block' },
+            display: { xs: 'none', lg: 'block' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
@@ -85,7 +85,7 @@ const Header = ({ window, children }) => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
+          width: { lg: `calc(100% - ${drawerWidth}px)` },
         }}>
         <Toolbar />
         {children}
