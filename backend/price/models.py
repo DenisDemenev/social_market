@@ -12,7 +12,6 @@ class Requisites(models.Model):
     def __str__(self):
         return self.name
 
-   
     class Meta():
         verbose_name = 'Реквизиты'
         verbose_name_plural = 'Реквизиты'
@@ -28,7 +27,6 @@ class Partner(models.Model):
     def __str__(self):
         return self.name
 
-    
     def save(self, *args, **kwargs):
         partner_info = partner(self.vk_id)
         self.name = f'{partner_info["first_name"]} {partner_info["last_name"]}'   
@@ -53,7 +51,7 @@ class Subject(models.Model):
         ordering = ['name']
         verbose_name = 'Тема'        
         verbose_name_plural = 'Темы'
-    
+
 
 class Groups(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
@@ -77,7 +75,6 @@ class Groups(models.Model):
 
     def __str__(self):
         return self.name
-    
 
     def save(self, *args, **kwargs):
         self.link = f'https://vk.com/public{self.vk_id}'
@@ -93,7 +90,6 @@ class Groups(models.Model):
         if not self.coverage:
             self.coverage = 500
         self.cpm = (self.price / self.coverage * 1000)
-        
         super(Groups, self).save(*args, **kwargs)
 
     class Meta():
