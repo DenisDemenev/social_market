@@ -21,7 +21,7 @@ const Home = () => {
       .getGroupsInfo({ pageCurrent, subjectValue, searchValue, sortValue })
       .then((res) => {
         setGroups(res.results);
-        setPageCount(Math.ceil(res.count / 10));
+        setPageCount(Math.ceil(res.count / 20));
       })
       .catch((err) => {
         setPageCurrent(1);
