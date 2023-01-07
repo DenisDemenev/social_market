@@ -1,5 +1,7 @@
 from django.db import models
-from .utils.name_partner import partner, groups
+
+from .utils.name_partner import groups, partner
+
 
 class Requisites(models.Model):
     name = models.CharField(max_length=32, verbose_name='Название')

@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Partner, Groups, Requisites, Subject
+
+from .models import Groups, Partner, Requisites, Subject
+
 
 @admin.register(Groups)
 class GroupsAdmin(admin.ModelAdmin):

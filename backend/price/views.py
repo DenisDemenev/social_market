@@ -1,5 +1,7 @@
 from django.shortcuts import render
+
 from .models import Groups
+
 
 def index(request, subject_id =None):
 

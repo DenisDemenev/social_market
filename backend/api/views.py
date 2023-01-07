@@ -1,12 +1,11 @@
-from rest_framework import viewsets 
-from rest_framework.viewsets import ReadOnlyModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, viewsets
+from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from api.filters import GroupSearchFilter, SubjectFilter
-from price.models import Groups, Subject
-from api.serializers import GroupsSerializer, SubjectSerializer
-from rest_framework import filters
 from api.pagination import LimitPageNumberPagination
+from api.serializers import GroupsSerializer, SubjectSerializer
+from price.models import Groups, Subject
 
 
 class GroupViewSet(viewsets.ModelViewSet):
