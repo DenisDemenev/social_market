@@ -15,5 +15,5 @@ class GroupsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Groups
-        exclude  = ('owner', )
+        exclude = ('owner', )
         read_only_fields = ('subject', 'name', )

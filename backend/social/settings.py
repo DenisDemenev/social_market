@@ -7,7 +7,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['91.201.53.16', '*', 'http://localhost', 'http://smax.store/',]
+ALLOWED_HOSTS = ['91.201.53.16',
+    '*',
+    'http://localhost',
+    'http://smax.store/',
+]
 
 
 INSTALLED_APPS = [
@@ -22,10 +26,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'price',
     'api',
-    
 ]
-
-
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
@@ -39,7 +40,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'social.urls'
@@ -61,9 +61,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'social.wsgi.application'
-
-
-
 
 DATABASES = {
     'default': {
@@ -91,8 +88,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
@@ -116,6 +111,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
-    
-
 }
