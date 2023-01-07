@@ -7,7 +7,7 @@ from .models import Groups, Partner, Requisites, Subject
 class GroupsAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'stats', 'cpm')
     fields = ['vk_id', 'subject', 'owner',
-              'price', 'coverage', 'label',]
+              'price', 'coverage', 'label', ]
 
     ordering = ('name',)
     search_fields = ('name', 'vk_id')
@@ -29,7 +29,7 @@ class RequisitesAdmin(admin.ModelAdmin):
 
 
 @admin.register(Subject)
-class RequisitesAdmin(admin.ModelAdmin):
+class SubjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'slug')
     prepopulated_fields = {'slug': ('name',)}
     ordering = ('name',)
