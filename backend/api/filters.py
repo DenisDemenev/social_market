@@ -10,7 +10,7 @@ class GroupSearchFilter(SearchFilter):
 
 class SubjectFilter(FilterSet):
     subject = filters.AllValuesMultipleFilter(field_name='subject__slug')
-    
+
     class Meta:
         model = Groups
         fields = ('subject',)
