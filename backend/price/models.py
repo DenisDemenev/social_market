@@ -71,7 +71,7 @@ class Groups(models.Model):
     subscribes = models.PositiveIntegerField(verbose_name='Подписчики')
     coverage = models.PositiveIntegerField(verbose_name='Охват',
                                            blank=True, null=True)
-    cpm = models.PositiveIntegerField(default=500, verbose_name='CPM' )
+    cpm = models.PositiveIntegerField(default=500, verbose_name='CPM')
 
     def __str__(self):
         return self.name

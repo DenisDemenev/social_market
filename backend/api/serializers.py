@@ -12,8 +12,8 @@ class SubjectSerializer(serializers.ModelSerializer):
 
 class GroupsSerializer(serializers.ModelSerializer):
     subject = SubjectSerializer(read_only=True, many=True)
+
     class Meta:
         model = Groups
-        exclude  = ('owner',)
-        read_only_fields = ('subject', 'name',)
-
+        exclude  = ('owner', )
+        read_only_fields = ('subject', 'name', )

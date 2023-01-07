@@ -13,7 +13,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupsSerializer
     pagination_class = LimitPageNumberPagination
 
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter,
+                       filters.OrderingFilter)
     filter_class = (SubjectFilter, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
     filterset_fields = ('subject__slug',)
@@ -23,4 +24,3 @@ class GroupViewSet(viewsets.ModelViewSet):
 class SubjectViewSet(ReadOnlyModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    
