@@ -29,12 +29,12 @@ class Partner(models.Model):
 
     def save(self, *args, **kwargs):
         partner_info = partner(self.vk_id)
-        self.name = f'{partner_info["first_name"]} {partner_info["last_name"]}'   
-        self.avatar = partner_info["photo_max"]     
+        self.name = f'{partner_info["first_name"]} {partner_info["last_name"]}'
+        self.avatar = partner_info["photo_max"]
         super(Partner, self).save(*args, **kwargs)
 
     class Meta():
-        verbose_name = 'Партнер'        
+        verbose_name = 'Партнер'
         verbose_name_plural = 'Партнеры'
 
 
@@ -49,7 +49,7 @@ class Subject(models.Model):
 
     class Meta():
         ordering = ['name']
-        verbose_name = 'Тема'        
+        verbose_name = 'Тема'
         verbose_name_plural = 'Темы'
 
 
@@ -65,7 +65,7 @@ class Groups(models.Model):
     subject = models.ManyToManyField(Subject, verbose_name='Тематика',
                                      related_name='subject')
     stats = models.URLField(verbose_name='Ссылка на статистику')
-    owner = models.ForeignKey(Partner, on_delete = models.CASCADE,
+    owner = models.ForeignKey(Partner, on_delete=models.CASCADE,
                               verbose_name='Владелец')
     price = models.PositiveIntegerField(verbose_name='Цена')
     subscribes = models.PositiveIntegerField(verbose_name='Подписчики')
@@ -79,7 +79,7 @@ class Groups(models.Model):
     def save(self, *args, **kwargs):
         self.link = f'https://vk.com/public{self.vk_id}'
         self.stats = f'https://vk.com/stats?gid={self.vk_id}'
-        group = groups(self.vk_id)      
+        group = groups(self.vk_id)
         self.subscribes = group['members_count']
         self.name = group['name']
         self.name = group['name']
@@ -94,5 +94,5 @@ class Groups(models.Model):
 
     class Meta():
         ordering = ['-subscribes']
-        verbose_name = 'Группа'        
+        verbose_name = 'Группа'
         verbose_name_plural = 'Группы'
