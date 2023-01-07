@@ -7,7 +7,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['91.201.53.16',
+ALLOWED_HOSTS = [
+    '91.201.53.16',
     '*',
     'http://localhost',
     'http://smax.store/',
