@@ -1,4 +1,5 @@
 import os
+
 import vk
 
 token = os.environ.get('VK_TOKEN')
