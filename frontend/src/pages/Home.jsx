@@ -2,15 +2,18 @@ import { Grid, Pagination, PaginationItem } from '@mui/material';
 import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import api from '../api/api';
 import GroupHeader from '../components/GroupHeader/GroupHeader';
 import Groups from '../components/Groups/Groups';
 
 const Home = () => {
+  const location = useLocation();
   const [groups, setGroups] = useState([]);
   const [pageCount, setPageCount] = useState(0);
-  const [pageCurrent, setPageCurrent] = useState(1);
+  const [pageCurrent, setPageCurrent] = useState(
+    parseInt(location.search?.split('=')[1] || 1)
+  );
 
   const subjectValue = useSelector((state) => state.filter.subject);
   const searchValue = useSelector((state) => state.filter.search);
@@ -22,12 +25,13 @@ const Home = () => {
       .then((res) => {
         setGroups(res.results);
         setPageCount(Math.ceil(res.count / 20));
+        setPageCurrent(parseInt(location.search?.split('=')[1] || 1));
       })
       .catch((err) => {
         setPageCurrent(1);
         console.log(`Что-то пошло не так: ${err}`);
       });
-  }, [subjectValue, searchValue, pageCurrent, sortValue]);
+  }, [subjectValue, searchValue, pageCurrent, sortValue, location.search]);
 
   return (
     <Container maxWidth="lg">
@@ -48,7 +52,7 @@ const Home = () => {
           style={{ margin: 'auto', paddingBottom: 20, paddingTop: 15 }}
           renderItem={(item) => (
             <PaginationItem
-              component={NavLink}
+              component={Link}
               to={`/?page=${item.page}`}
               {...item}
             />
