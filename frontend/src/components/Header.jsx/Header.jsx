@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
@@ -42,7 +43,9 @@ const Header = ({ window, children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            SocialMax
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
+              SocialMax
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>
