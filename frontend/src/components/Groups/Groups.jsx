@@ -234,11 +234,6 @@ const Groups = ({ group }) => {
             <Typography variant="body2">
               Охват: {group.coverage.toLocaleString('ru')}
             </Typography>
-            <VisibilitySharpIcon
-              color="primary"
-              fontSize="inherit"
-              sx={{ ml: 0.5 }}
-            />
           </Box>
           <Box>
             <Typography variant="body2">CPM: {group.cpm}</Typography>
