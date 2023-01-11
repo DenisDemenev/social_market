@@ -65,14 +65,20 @@ const Groups = ({ group }) => {
               textAlign: { xs: 'center', sm: 'start' },
               width: { sm: '150px' },
             }}>
-            <Typography
-              sx={[
-                { fontSize: '14px', lineHeight: 1.2 },
-                () => (group.label ? { color: 'black' } : { color: 'gray' }),
-              ]}
-              component="div">
-              {group.name}
-            </Typography>
+            <a
+              href={group.link}
+              style={{ textDecoration: 'none' }}
+              target="_blank"
+              rel="noreferrer">
+              <Typography
+                sx={[
+                  { fontSize: '14px', lineHeight: 1.2 },
+                  () => (group.label ? { color: 'black' } : { color: 'gray' }),
+                ]}
+                component="div">
+                {group.name}
+              </Typography>
+            </a>
             <Typography
               variant="body2"
               color="text.secondary"
@@ -195,14 +201,20 @@ const Groups = ({ group }) => {
             justifyContent: 'space-between',
           }}>
           <Box>
-            <Typography
-              sx={[
-                { fontSize: '14px', lineHeight: 1.2, fontWeight: 600 },
-                () => (group.label ? { color: 'black' } : { color: 'gray' }),
-              ]}
-              component="div">
-              {group.name}
-            </Typography>
+            <a
+              href={group.link}
+              style={{ textDecoration: 'none' }}
+              target="_blank"
+              rel="noreferrer">
+              <Typography
+                sx={[
+                  { fontSize: '14px', lineHeight: 1.2, fontWeight: 600 },
+                  () => (group.label ? { color: 'black' } : { color: 'gray' }),
+                ]}
+                component="div">
+                {group.name}
+              </Typography>
+            </a>
             <Typography
               variant="body2"
               color="text.secondary"

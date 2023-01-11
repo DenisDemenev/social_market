@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
@@ -11,11 +11,20 @@ import {
   IconButton,
 } from '@mui/material';
 import SearchMenu from '../SearchMenu/SearchMenu';
+import { subjectValue, searchValue, sortValue } from '../../store/filterSlice';
+import { useDispatch } from 'react-redux';
 
 const drawerWidth = 240;
 
 const Header = ({ window, children }) => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleClickLogo = () => {
+    dispatch(subjectValue(''));
+    dispatch(searchValue(''));
+    dispatch(sortValue(''));
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -43,7 +52,10 @@ const Header = ({ window, children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
+            <Link
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              to="/"
+              onClick={handleClickLogo}>
               SocialMax
             </Link>
           </Typography>
