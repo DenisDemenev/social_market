@@ -11,15 +11,18 @@ import {
 import VisibilitySharpIcon from '@mui/icons-material/VisibilitySharp';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { useClipboard } from 'use-clipboard-copy';
 
 const Groups = ({ group }) => {
-  const copyToClipBoard = async (copyMe) => {
-    try {
-      await navigator.clipboard.writeText(copyMe);
-    } catch (err) {
-      console.log(`Ошибка копирования! ${err}`);
-    }
-  };
+  const clipboard = useClipboard();
+
+  // const copyToClipBoard = async (copyMe) => {
+  //   try {
+  //     await navigator.clipboard.writeText(copyMe);
+  //   } catch (err) {
+  //     console.log(`Ошибка копирования! ${err}`);
+  //   }
+  // };
 
   return (
     <>
@@ -89,7 +92,7 @@ const Groups = ({ group }) => {
           </Box>
           <Box sx={{ alignSelf: 'center' }}>
             <Tooltip title="Скопировать ссылку">
-              <IconButton onClick={() => copyToClipBoard(group.link)}>
+              <IconButton onClick={() => clipboard.copy(group.link)}>
                 <ContentCopyIcon color="primary" fontSize="large" />
               </IconButton>
             </Tooltip>
@@ -225,7 +228,7 @@ const Groups = ({ group }) => {
           </Box>
           <Box sx={{ alignSelf: 'center' }}>
             <Tooltip title="Скопировать ссылку">
-              <IconButton onClick={() => copyToClipBoard(group.link)}>
+              <IconButton onClick={() => clipboard.copy(group.link)}>
                 <ContentCopyIcon color="primary" fontSize="large" />
               </IconButton>
             </Tooltip>
