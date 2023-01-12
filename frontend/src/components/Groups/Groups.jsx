@@ -11,14 +11,11 @@ import {
 import VisibilitySharpIcon from '@mui/icons-material/VisibilitySharp';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { useState } from 'react';
 
 const Groups = ({ group }) => {
-  const [copy, setCopy] = useState;
-
-  const copyToClipBoard = async (copy) => {
+  const copyToClipBoard = async (copyMe) => {
     try {
-      await navigator.clipboard.write(copy);
+      await navigator.clipboard.write(copyMe);
     } catch (err) {
       console.log('Ошибка копирования!');
     }
@@ -92,7 +89,7 @@ const Groups = ({ group }) => {
           </Box>
           <Box sx={{ alignSelf: 'center' }}>
             <Tooltip title="Скопировать ссылку">
-              <IconButton onClick={() => setCopy(group.link)}>
+              <IconButton onClick={() => copyToClipBoard(group.link)}>
                 <ContentCopyIcon color="primary" fontSize="large" />
               </IconButton>
             </Tooltip>
