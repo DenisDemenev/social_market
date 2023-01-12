@@ -16,14 +16,6 @@ import { useClipboard } from 'use-clipboard-copy';
 const Groups = ({ group }) => {
   const clipboard = useClipboard();
 
-  // const copyToClipBoard = async (copyMe) => {
-  //   try {
-  //     await navigator.clipboard.writeText(copyMe);
-  //   } catch (err) {
-  //     console.log(`Ошибка копирования! ${err}`);
-  //   }
-  // };
-
   return (
     <>
       <Card
