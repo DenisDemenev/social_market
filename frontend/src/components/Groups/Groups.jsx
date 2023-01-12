@@ -14,9 +14,9 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const Groups = ({ group }) => {
   const link = String(group.link);
-  const copyToClipBoard = async (copy) => {
+  const copyToClipBoard = (copy) => {
     try {
-      await navigator.clipboard.writeText(copy);
+      navigator.clipboard.writeText(copy);
     } catch (err) {
       console.log(`Ошибка копирования! ${err}`);
     }
