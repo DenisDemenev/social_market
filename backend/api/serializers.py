@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator, UniqueValidator
 
 from price.models import Groups, Subject
 
@@ -32,7 +33,6 @@ class CustomUserSerializer(UserSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name', 'username', 'email')
-
 
 
 class SubjectSerializer(serializers.ModelSerializer):
