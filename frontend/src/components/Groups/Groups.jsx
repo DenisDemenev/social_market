@@ -13,7 +13,7 @@ import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const Groups = ({ group }) => {
-  const link = group.link;
+  const link = String(group.link);
   const copyToClipBoard = async (copy) => {
     try {
       await navigator.clipboard.writeText(copy);
