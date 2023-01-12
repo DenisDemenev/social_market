@@ -17,7 +17,7 @@ const Groups = ({ group }) => {
     try {
       await navigator.clipboard.write(copyMe);
     } catch (err) {
-      console.log('Ошибка копирования!');
+      console.log(`Ошибка копирования! ${err}`);
     }
   };
 
