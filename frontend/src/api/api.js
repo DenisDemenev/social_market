@@ -49,7 +49,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://backend:8000',
+  url: 'https://smax.store',
   headers: {
     'content-type': 'application/json',
   },
