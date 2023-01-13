@@ -24,7 +24,6 @@ class CustomUserCreateSerializer(UserCreateSerializer):
             'username': {'required': True},
             'email': {'required': True},
             'password': {'required': True},
-
         }
 
 

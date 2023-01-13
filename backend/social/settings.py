@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'djoser',
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
     'price',
     'api',
 ]

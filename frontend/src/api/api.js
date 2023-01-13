@@ -40,6 +40,22 @@ class Api {
     });
     return this._checkResponse(res);
   }
+
+  async signup({ email, password, username, first_name, last_name }) {
+    const res = await fetch(`${this._url}/api/users/`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        email,
+        password,
+        username,
+        first_name,
+        last_name,
+      }),
+    });
+    return this._checkResponse(res);
+  }
+
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
