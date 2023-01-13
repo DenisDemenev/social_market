@@ -31,9 +31,11 @@ services:
   nginx:
     image: nginx:1.19.3
     ports:
-      - 80:80
+      - 443:443
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./smax.crt:/etc/ssl/smax.crt
+      - ./smax.key:/etc/ssl/smax.key
       - ../frontend/build:/usr/share/nginx/html/
       - static_value:/var/html/static/
       - media_value:/var/html/media/
