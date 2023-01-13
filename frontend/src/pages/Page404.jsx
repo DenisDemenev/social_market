@@ -39,7 +39,7 @@ const Page404 = () => (
           </Box>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Button
-              component="a"
+              component="button"
               startIcon={<ArrowBackIcon fontSize="small" />}
               sx={{ mt: 3 }}
               variant="contained">
