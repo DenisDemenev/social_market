@@ -6,7 +6,7 @@ class Api {
 
   async getGroupsInfo({
     pageCurrent = 1,
-    limit = 20,
+    limit = 50,
     subjectValue,
     searchValue,
     sortValue,

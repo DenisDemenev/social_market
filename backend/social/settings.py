@@ -23,10 +23,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'djoser',
-    'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
+    'djoser',
+    'django_filters',
     'price',
     'api',
 ]
