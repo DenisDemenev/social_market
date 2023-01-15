@@ -26,7 +26,7 @@ const Home = () => {
       .getGroupsInfo({ pageCurrent, subjectValue, searchValue, sortValue })
       .then((res) => {
         setGroups(res.results);
-        setPageCount(Math.ceil(res.count / 20));
+        setPageCount(Math.ceil(res.count / 50));
         setPageCurrent(parseInt(location.search?.split('=')[1] || 1));
       })
       .catch((err) => {
