@@ -109,7 +109,7 @@ class GroupsTG(models.Model):
     avatar = models.URLField(verbose_name='Аватар группы',
                              blank=True, null=True)
     subject = models.ManyToManyField(Subject, verbose_name='Тематика',
-                                     related_name='subject')
+                                     related_name='tg_subject')
     stats = models.URLField(verbose_name='Ссылка на статистику',
                             blank=True, null=True)
     owner = models.ForeignKey(Partner, on_delete=models.CASCADE,
@@ -140,7 +140,7 @@ class GroupsInstagram(models.Model):
     link = models.URLField(verbose_name='Ссылка на группу')
     avatar = models.URLField(verbose_name='Аватар группы')
     subject = models.ManyToManyField(Subject, verbose_name='Тематика',
-                                     related_name='subject',
+                                     related_name='insta_subject',
                                      blank=True, null=True)
     stats = models.URLField(verbose_name='Ссылка на статистику',
                             blank=True, null=True)
