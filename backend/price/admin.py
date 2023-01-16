@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from price.models import (Groups, GroupsTG, GroupsInstagram, Partner,
-                     Requisites, Subject)
+                          Requisites, Subject)
 
 
 @admin.register(Groups)
