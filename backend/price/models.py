@@ -135,7 +135,7 @@ class GroupsTG(models.Model):
         verbose_name_plural = 'Группы Telegram'
 
 
-class GroupsInsta(models.Model):
+class GroupsInstagram(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
     link = models.URLField(verbose_name='Ссылка на группу')
     avatar = models.URLField(verbose_name='Аватар группы')

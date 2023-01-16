@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Groups, GroupsTG, GroupsInsta, Partner, Requisites, Subject
+from .models import (Groups, GroupsTG, GroupsInstagram, Partner,
+                     Requisites, Subject)
 
 
 @admin.register(Groups)
@@ -23,8 +24,8 @@ class GroupsTGAdmin(admin.ModelAdmin):
     search_fields = ('name', 'tg_id', 'link',)
 
 
-@admin.register(GroupsInsta)
-class GroupsInstaAdmin(admin.ModelAdmin):
+@admin.register(GroupsInstagram)
+class GroupsInstagramAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'cpm')
     fields = ['name', 'link', 'subject', 'owner',
               'price', 'price_storys', 'coverage', ]
