@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'djoser',
     'django_filters',
     'price',
+    'priceTelegram',
     'api',
 ]
 
