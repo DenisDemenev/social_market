@@ -4,7 +4,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from api.filters import GroupSearchFilter, SubjectFilter
 from api.pagination import LimitPageNumberPagination
-from api.serializers import (GroupsSerializer, SubjectSerializer, 
+from api.serializers import (GroupsSerializer, SubjectSerializer,
                              GroupsTelegramSerializer)
 from price.models import Groups, Subject
 from priceTelegram.models import GroupsTelegram
