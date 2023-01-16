@@ -21,4 +21,3 @@ class GroupsTelegramAdmin(admin.ModelAdmin):
 
 #     ordering = ('name',)
 #     search_fields = ('name', 'link',)
-
