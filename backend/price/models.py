@@ -160,7 +160,7 @@ class GroupsInstagram(models.Model):
     def save(self, *args, **kwargs):
         if not self.coverage:
             self.coverage = 500
-        self.cpm = (self.price / self.coverage * 1000)
+        self.cpm = (self.price_post / self.coverage * 1000)
         super(GroupsInstagram, self).save(*args, **kwargs)
 
     class Meta():
