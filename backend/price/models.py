@@ -101,7 +101,7 @@ class Groups(models.Model):
         verbose_name_plural = 'Группы'
 
 
-class GroupsTG(models.Model):
+class GroupsTelegram(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
     tg_id = models.PositiveIntegerField(verbose_name='ID группы в Telegram',
                                         unique=True)
@@ -127,7 +127,7 @@ class GroupsTG(models.Model):
         if not self.coverage:
             self.coverage = 500
         self.cpm = (self.price / self.coverage * 1000)
-        super(GroupsTG, self).save(*args, **kwargs)
+        super(GroupsTelegram, self).save(*args, **kwargs)
 
     class Meta():
         ordering = ['-subscribes']
@@ -146,7 +146,7 @@ class GroupsInstagram(models.Model):
     owner = models.ForeignKey(Partner, on_delete=models.CASCADE,
                               verbose_name='Владелец')
     price_post = models.PositiveIntegerField(verbose_name='Цена поста')
-    price_storys = models.PositiveIntegerField(verbose_name='Цена сторис')
+    price_story = models.PositiveIntegerField(verbose_name='Цена сторис')
     subscribes = models.PositiveIntegerField(verbose_name='Подписчики')
     coverage = models.PositiveIntegerField(verbose_name='Охват',
                                            blank=True, null=True)
@@ -168,28 +168,28 @@ class GroupsInstagram(models.Model):
         verbose_name_plural = 'Группы Instagram'
 
 
-class ShoppingList(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='cart',
-        verbose_name='Пользователь',
-    )
-    group = models.ForeignKey(
-        Groups,
-        on_delete=models.CASCADE,
-        related_name='cart',
-        verbose_name='Группа',
-    )
+# class ShoppingList(models.Model):
+#     user = models.ForeignKey(
+#         User,
+#         on_delete=models.CASCADE,
+#         related_name='cart',
+#         verbose_name='Пользователь',
+#     )
+#     group = models.ForeignKey(
+#         Groups,
+#         on_delete=models.CASCADE,
+#         related_name='cart',
+#         verbose_name='Группа',
+#     )
 
-    class Meta:
-        ordering = ['-id']
-        verbose_name = 'Корзина'
-        verbose_name_plural = 'В корзине'
-        constraints = [
-            models.UniqueConstraint(fields=['user', 'group'],
-                                    name='unique_cart_user')
-        ]
+#     class Meta:
+#         ordering = ['-id']
+#         verbose_name = 'Корзина'
+#         verbose_name_plural = 'В корзине'
+#         constraints = [
+#             models.UniqueConstraint(fields=['user', 'group'],
+#                                     name='unique_cart_user')
+#         ]
 
-    def __str__(self):
-        return f'группа {self.group} в списке заказа {self.user}'
+#     def __str__(self):
+#         return f'группа {self.group} в списке заказа {self.user}'

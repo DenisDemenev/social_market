@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from price.models import (Groups, GroupsTG, GroupsInstagram, Partner,
+from price.models import (Groups, GroupsTelegram, GroupsInstagram, Partner,
                           Requisites, Subject)
 
 
@@ -14,11 +14,11 @@ class GroupsAdmin(admin.ModelAdmin):
     search_fields = ('name', 'vk_id', 'link',)
 
 
-@admin.register(GroupsTG)
-class GroupsTGAdmin(admin.ModelAdmin):
+@admin.register(GroupsTelegram)
+class GroupsTelegramAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'cpm')
     fields = ['name', 'link', 'stats', 'tg_id', 'subject', 'owner',
-              'price', 'coverage', ]
+              'price', 'subscribes', 'coverage', ]
 
     ordering = ('name',)
     search_fields = ('name', 'tg_id', 'link',)
@@ -27,8 +27,8 @@ class GroupsTGAdmin(admin.ModelAdmin):
 @admin.register(GroupsInstagram)
 class GroupsInstagramAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'cpm')
-    fields = ['name', 'link', 'subject', 'owner',
-              'price_post', 'price_storys', 'coverage', ]
+    fields = ['name', 'link', 'subscribes', 'subject', 'owner',
+              'price_post', 'price_story', 'coverage', ]
 
     ordering = ('name',)
     search_fields = ('name', 'link',)
