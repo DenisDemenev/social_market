@@ -28,7 +28,7 @@ class GroupsTGAdmin(admin.ModelAdmin):
 class GroupsInstagramAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'cpm')
     fields = ['name', 'link', 'subject', 'owner',
-              'price', 'price_storys', 'coverage', ]
+              'price_post', 'price_storys', 'coverage', ]
 
     ordering = ('name',)
     search_fields = ('name', 'link',)
