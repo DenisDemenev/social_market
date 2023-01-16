@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Groups, Partner, Requisites, Subject, GroupsTG, GroupsInsta
+from .models import( Groups, GroupsTG, GroupsInsta,
+                    Partner, Requisites, Subject)
 
 
 @admin.register(Groups)
