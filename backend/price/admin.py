@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import (Groups, GroupsTG, GroupsInstagram, Partner,
+from price.models import (Groups, GroupsTG, GroupsInstagram, Partner,
                      Requisites, Subject)
 
 

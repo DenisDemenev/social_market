@@ -161,7 +161,7 @@ class GroupsInstagram(models.Model):
         if not self.coverage:
             self.coverage = 500
         self.cpm = (self.price / self.coverage * 1000)
-        super(GroupsTG, self).save(*args, **kwargs)
+        super(GroupsInstagram, self).save(*args, **kwargs)
 
     class Meta():
         ordering = ['-subscribes']
