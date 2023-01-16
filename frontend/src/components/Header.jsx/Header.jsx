@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as NavLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
+import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import {
   AppBar,
   Toolbar,
@@ -9,10 +10,13 @@ import {
   CssBaseline,
   Drawer,
   IconButton,
+  Button,
+  Link,
 } from '@mui/material';
 import SearchMenu from '../SearchMenu/SearchMenu';
 import { subjectValue, searchValue, sortValue } from '../../store/filterSlice';
 import { useDispatch } from 'react-redux';
+import { sizeWidth } from '@mui/system';
 
 const drawerWidth = 240;
 
@@ -51,14 +55,27 @@ const Header = ({ window, children }) => {
             sx={{ mr: 2, display: { lg: 'none' } }}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            <Link
+          <Typography variant="h6" noWrap component="div" edge="start">
+            <NavLink
               style={{ textDecoration: 'none', color: 'inherit' }}
               to="/"
               onClick={handleClickLogo}>
               SocialMax
-            </Link>
+            </NavLink>
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <Button
+            variant="outlined"
+            color="inherit"
+            startIcon={<MailOutlineOutlinedIcon />}
+            size="small">
+            <Link
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              href="https://vk.me/id773837067"
+              target={'_blank'}>
+              Написать нам
+            </Link>
+          </Button>
         </Toolbar>
       </AppBar>
       <Box

@@ -1,6 +1,9 @@
+from django.contrib.auth import 
 from django.db import models
 
 from .utils.name_partner import groups, partner
+
+User = get_user_model()
 
 
 class Requisites(models.Model):
@@ -96,3 +99,30 @@ class Groups(models.Model):
         ordering = ['-subscribes']
         verbose_name = 'Группа'
         verbose_name_plural = 'Группы'
+
+
+class ShoppingList(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='cart',
+        verbose_name='Пользователь',
+    )
+    group = models.ForeignKey(
+        Groups,
+        on_delete=models.CASCADE,
+        related_name='cart',
+        verbose_name='Группа',
+    )
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'В корзине'
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'group'],
+                                    name='unique_cart_user')
+        ]
+
+    def __str__(self):
+        return f'группа {self.group} в списке заказа {self.user}'
