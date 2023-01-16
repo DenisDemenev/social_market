@@ -4,6 +4,8 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
 from price.models import Groups, Subject
+from priceTelegram.models import GroupsTelegram
+
 
 User = get_user_model()
 
@@ -46,5 +48,14 @@ class GroupsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Groups
+        exclude = ('owner', )
+        read_only_fields = ('subject', 'name', )
+
+
+class GroupsTelegramSerializer(serializers.ModelSerializer):
+    subject = SubjectSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = GroupsTelegram
         exclude = ('owner', )
         read_only_fields = ('subject', 'name', )
