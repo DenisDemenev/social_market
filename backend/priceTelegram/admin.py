@@ -6,7 +6,7 @@ from priceTelegram.models import GroupsTelegram
 @admin.register(GroupsTelegram)
 class GroupsTelegramAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'cpm')
-    fields = ['name', 'link', 'avatar', 'stats', 'tg_id', 'subject', 'owner',
+    fields = ['name', 'link', 'image', 'stats', 'tg_id', 'subject', 'owner',
               'price', 'subscribes', 'coverage', ]
 
     ordering = ('name',)
