@@ -120,11 +120,27 @@ const Groups = ({ group }) => {
               </Box>
             </Tooltip>
           </Box>
-          <Tooltip title="CPM">
-            <Box sx={{ alignSelf: 'center', ml: 0.5 }}>
-              <Typography component="div">{group.cpm}</Typography>
-            </Box>
-          </Tooltip>
+          <Box sx={{ alignSelf: 'center', ml: 0.5 }}>
+            <Typography
+              component="div"
+              color="text.secondary"
+              sx={{ fontSize: '12px', lineHeight: 1 }}>
+              CPM
+            </Typography>
+            <Tooltip title="CPM">
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: '14px',
+                  lineHeight: 1,
+                  mt: 1,
+                  fontWeight: 500,
+                }}>
+                {group.cpm}
+              </Typography>
+            </Tooltip>
+          </Box>
+
           <Box
             sx={{
               alignSelf: 'center',

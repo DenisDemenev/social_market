@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/api';
-import GroupHeader from '../components/GroupHeader/GroupHeader';
 import Groups from '../components/Groups/Groups';
 
 const Home = () => {
@@ -48,7 +47,6 @@ const Home = () => {
     <Container maxWidth="lg">
       <Grid justifyContent="space-between" container spacing={2}>
         <Container maxWidth="lg">
-          <GroupHeader />
           {groups.map((group) => (
             <Groups key={group.id} group={group}></Groups>
           ))}
