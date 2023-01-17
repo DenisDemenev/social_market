@@ -16,7 +16,6 @@ import {
 import SearchMenu from '../SearchMenu/SearchMenu';
 import { subjectValue, searchValue, sortValue } from '../../store/filterSlice';
 import { useDispatch } from 'react-redux';
-import { sizeWidth } from '@mui/system';
 
 const drawerWidth = 240;
 

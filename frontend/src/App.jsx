@@ -12,6 +12,9 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/vk" element={<Home link={'vk'} />} />
+          <Route path="/instagram" element={<Home link={'instagram'} />} />
+          <Route path="/telegram" element={<Home link={'telegram'} />} />
           <Route path="register" element={<SignUp />} />
           <Route path="auth" element={<SignIn />} />
           <Route path="*" element={<Page404 />} />

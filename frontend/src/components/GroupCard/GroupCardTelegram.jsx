@@ -13,7 +13,7 @@ import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useClipboard } from 'use-clipboard-copy';
 
-const Groups = ({ group }) => {
+const GroupCardTelegram = ({ group }) => {
   const clipboard = useClipboard();
 
   return (
@@ -281,4 +281,4 @@ const Groups = ({ group }) => {
   );
 };
 
-export default Groups;
+export default GroupCardTelegram;

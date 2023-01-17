@@ -4,7 +4,7 @@ class Api {
     this._headers = data.headers;
   }
 
-  async getGroupsInfo({
+  async getGroupsVk({
     pageCurrent = 1,
     limit = 50,
     subjectValue,
@@ -25,11 +25,24 @@ class Api {
     return this._checkResponse(res);
   }
 
-  async getGroup(id) {
-    const res = await fetch(`${this._url}/api/groups/${id ? id : ''}`, {
-      method: 'GET',
-      headers: this._headers,
-    });
+  async getGroupsTelegram({
+    pageCurrent = 1,
+    limit = 50,
+    subjectValue,
+    searchValue,
+    sortValue,
+  }) {
+    const res = await fetch(
+      `${this._url}/api/groups-telegram/?page=${pageCurrent}&limit=${limit}${
+        subjectValue ? `&subject__slug=${subjectValue}` : ''
+      }${searchValue ? `&search=${searchValue}` : ''}${
+        sortValue ? `&ordering=${sortValue}` : ''
+      }`,
+      {
+        method: 'GET',
+        headers: this._headers,
+      }
+    );
     return this._checkResponse(res);
   }
 

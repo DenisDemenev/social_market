@@ -1,72 +1,47 @@
-import { Grid, Pagination, PaginationItem } from '@mui/material';
+import { Grid, Tab, Box } from '@mui/material';
 import { Container } from '@mui/system';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/api';
-import Groups from '../components/Groups/Groups';
+import { useState } from 'react';
+import { TabPanel, TabList, TabContext } from '@mui/lab/';
 
-const Home = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+import GroupsVk from '../components/Groups/GroupsVk';
+import { Link } from 'react-router-dom';
 
-  const [groups, setGroups] = useState([]);
-  const [pageCount, setPageCount] = useState(0);
-  const [pageCurrent, setPageCurrent] = useState(
-    parseInt(location.search?.split('=')[1] || 1)
-  );
+const Home = ({ link }) => {
+  const [value, setValue] = useState(link || 'vk');
 
-  const subjectValue = useSelector((state) => state.filter.subject);
-  const searchValue = useSelector((state) => state.filter.search);
-  const sortValue = useSelector((state) => state.filter.sort);
-
-  useEffect(() => {
-    api
-      .getGroupsInfo({ pageCurrent, subjectValue, searchValue, sortValue })
-      .then((res) => {
-        setGroups(res.results);
-        setPageCount(Math.ceil(res.count / 50));
-        setPageCurrent(parseInt(location.search?.split('=')[1] || 1));
-      })
-      .catch((err) => {
-        console.log(`Что-то пошло не так: ${err}`);
-        setPageCurrent(1);
-        (() => navigate('/?page=1'))();
-      });
-  }, [
-    subjectValue,
-    searchValue,
-    pageCurrent,
-    sortValue,
-    pageCount,
-    location.search,
-    navigate,
-  ]);
+  const handleChange = (_, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Container maxWidth="lg">
       <Grid justifyContent="space-between" container spacing={2}>
-        <Container maxWidth="lg">
-          {groups.map((group) => (
-            <Groups key={group.id} group={group}></Groups>
-          ))}
+        <Container maxWidth="lg" sx={{ mt: 2 }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList onChange={handleChange} aria-label="Соцети">
+                <Tab label="Вконтакте" value="vk" component={Link} to={`/vk`} />
+                <Tab
+                  label="Telegram"
+                  value="telegram"
+                  component={Link}
+                  to={`/telegram`}
+                />
+                <Tab
+                  label="Instangram"
+                  value="instagram"
+                  component={Link}
+                  to={`/instagram`}
+                />
+              </TabList>
+            </Box>
+            <TabPanel value="vk">
+              <GroupsVk />
+            </TabPanel>
+            <TabPanel value="telegram">В процессе разработки</TabPanel>
+            <TabPanel value="instagram">В процессе разработки</TabPanel>
+          </TabContext>
         </Container>
-        <Pagination
-          page={pageCurrent}
-          count={pageCount}
-          color="primary"
-          showFirstButton
-          showLastButton
-          onChange={(_, page) => setPageCurrent(page)}
-          style={{ margin: 'auto', paddingBottom: 20, paddingTop: 15 }}
-          renderItem={(item) => (
-            <PaginationItem
-              component={Link}
-              to={`/?page=${item.page}`}
-              {...item}
-            />
-          )}
-        />
       </Grid>
     </Container>
   );

@@ -5,7 +5,8 @@ from price.models import Subject, Partner
 class GroupsInstagram(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
     link = models.URLField(verbose_name='Ссылка на группу')
-    avatar = models.URLField(verbose_name='Аватар группы')
+    avatar = models.ImageField(upload_to='instagram/',
+                               verbose_name='Аватар', blank=True)
     subject = models.ManyToManyField(Subject, verbose_name='Тематика',
                                      related_name='instagram_subject')
     stats = models.URLField(verbose_name='Ссылка на статистику',

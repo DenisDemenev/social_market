@@ -7,7 +7,8 @@ class GroupsTelegram(models.Model):
     tg_id = models.PositiveIntegerField(verbose_name='ID группы в Telegram',
                                         unique=True)
     link = models.URLField(verbose_name='Ссылка на группу')
-    image = models.ImageField(upload_to='telegram', blank=True)
+    avatar = models.ImageField(upload_to='telegram/',
+                               verbose_name='Аватар', blank=True)
     subject = models.ManyToManyField(Subject, verbose_name='Тематика',
                                      related_name='telegram_subject')
     stats = models.URLField(verbose_name='Ссылка на статистику',
