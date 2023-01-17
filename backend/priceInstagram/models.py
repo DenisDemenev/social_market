@@ -13,7 +13,7 @@ class GroupsInstagram(models.Model):
     owner = models.ForeignKey(Partner, on_delete=models.CASCADE,
                               verbose_name='Владелец')
     price_post = models.PositiveIntegerField(verbose_name='Цена поста')
-    price_story = models.PositiveIntegerField(verbose_name='Цена сторис', 
+    price_story = models.PositiveIntegerField(verbose_name='Цена сторис',
                                               blank=True, null=True)
     subscribes = models.PositiveIntegerField(verbose_name='Подписчики')
     coverage = models.PositiveIntegerField(verbose_name='Охват',
