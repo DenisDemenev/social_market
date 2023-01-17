@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django_filters',
     'price',
     'priceTelegram',
+    'priceInstagram',
     'api',
 ]
 
