@@ -48,7 +48,7 @@ class GroupsInstagramViewSet(viewsets.ModelViewSet):
     filter_class = (GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link',)
     filterset_fields = ('subject__slug',)
-    ordering_fields = ('price', 'cpm')
+    ordering_fields = ('price_post', 'cpm')
 
 
 class SubjectViewSet(ReadOnlyModelViewSet):
