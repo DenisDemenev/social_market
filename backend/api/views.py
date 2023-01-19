@@ -22,7 +22,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     filter_class = (SubjectFilter, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
     filterset_fields = ('subject__slug',)
-    ordering_fields = ('price', 'cpm')
+    ordering_fields = ('price', 'cpm', 'label')
 
 
 class GroupsTelegramViewSet(viewsets.ModelViewSet):
