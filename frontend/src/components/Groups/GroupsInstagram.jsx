@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { pageCurrentValue, pageCountValue } from '../../store/paginatorSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
-import GroupCardTelegram from '../GroupCard/GroupCardTelegram';
+import GroupCardInstagram from '../GroupCard/GroupCardInstagram';
 import api from '../../api/api';
 import Paginator from '../Paginator';
 
-const GroupsTelegram = () => {
+const GroupsInstagram = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const GroupsTelegram = () => {
 
   useEffect(() => {
     api
-      .getGroupsTelegram({ pageCurrent, subjectValue, searchValue, sortValue })
+      .getGroupsInstagram({ pageCurrent, subjectValue, searchValue, sortValue })
       .then((res) => {
         setGroups(res.results);
         dispatch(pageCountValue(Math.ceil(res.count / 50)));
@@ -34,7 +34,7 @@ const GroupsTelegram = () => {
       .catch((err) => {
         console.log(`Что-то пошло не так: ${err}`);
         dispatch(pageCurrentValue(1));
-        (() => navigate(`/telegram?page=1`))();
+        (() => navigate(`/instagram?page=1`))();
       });
   }, [
     subjectValue,
@@ -51,9 +51,7 @@ const GroupsTelegram = () => {
       <Grid container spacing={2} flexDirection="column">
         <Paginator page={pageCurrent} count={pageCount} link={'telegram'} />
         {groups.map((group) => (
-          <GroupCardTelegram
-            key={group.tg_id}
-            group={group}></GroupCardTelegram>
+          <GroupCardInstagram key={group.id} group={group}></GroupCardInstagram>
         ))}
         <Paginator page={pageCurrent} count={pageCount} link={'telegram'} />
       </Grid>
@@ -61,4 +59,4 @@ const GroupsTelegram = () => {
   );
 };
 
-export default GroupsTelegram;
+export default GroupsInstagram;

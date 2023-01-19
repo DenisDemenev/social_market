@@ -6,19 +6,33 @@ import {
   MenuItem,
   TextField,
   Toolbar,
+  Checkbox,
+  FormControlLabel,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { subjectValue, searchValue, sortValue } from '../../store/filterSlice';
+import {
+  subjectValue,
+  searchValue,
+  sortValue,
+  labelValue,
+} from '../../store/filterSlice';
 import api from '../../api/api';
+import { selectIsAuth } from '../../store/authSlice';
 
 const SearchMenu = () => {
   const [subject, setSubject] = useState([]);
   const value = useSelector((state) => state.filter.subject);
   const search = useSelector((state) => state.filter.search);
   const sort = useSelector((state) => state.filter.sort);
+  const isLabel = useSelector((state) => state.filter.label);
+  const isAuth = useSelector(selectIsAuth);
 
   const dispatch = useDispatch();
+  const location = useLocation();
+  const priceValue =
+    location.pathname === '/instagram' ? 'price_post' : 'price';
 
   useEffect(() => {
     api
@@ -34,6 +48,11 @@ const SearchMenu = () => {
   const handleChangeSubjectValue = (e) => {
     dispatch(subjectValue(e.target.value));
   };
+
+  const handleChangeLabelValue = (e) => {
+    dispatch(labelValue(e.target.checked));
+  };
+
   const handleChangeSearchValue = (e) => {
     dispatch(searchValue(e.target.value));
   };
@@ -46,6 +65,7 @@ const SearchMenu = () => {
     dispatch(subjectValue(''));
     dispatch(searchValue(''));
     dispatch(sortValue(''));
+    dispatch(labelValue(false));
   };
 
   return (
@@ -61,8 +81,8 @@ const SearchMenu = () => {
             fullWidth
             value={sort}
             onChange={handleChangeSortValue}>
-            <MenuItem value="price">Цена по возрастанию</MenuItem>
-            <MenuItem value="-price">Цена по убыванию</MenuItem>
+            <MenuItem value={priceValue}>Цена по возрастанию</MenuItem>
+            <MenuItem value={`-${priceValue}`}>Цена по убыванию</MenuItem>
             <MenuItem value="cpm">CPM по возростанию</MenuItem>
             <MenuItem value="-cpm">CPM по убыванию</MenuItem>
           </TextField>
@@ -91,6 +111,18 @@ const SearchMenu = () => {
             ))}
           </TextField>
         </ListItem>
+        {isAuth ? (
+          <ListItem>
+            <FormControlLabel
+              control={
+                <Checkbox onChange={handleChangeLabelValue} checked={isLabel} />
+              }
+              label="Группы без метки"
+            />
+          </ListItem>
+        ) : (
+          <></>
+        )}
         <ListItem>
           <Button
             color="error"

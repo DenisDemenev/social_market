@@ -11,13 +11,14 @@ class Api {
     subjectValue,
     searchValue,
     sortValue,
+    isLabel,
   }) {
     const res = await fetch(
       `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
         subjectValue ? `&subject__slug=${subjectValue}` : ''
-      }${searchValue ? `&search=${searchValue}` : ''}${
-        sortValue ? `&ordering=${sortValue}` : ''
-      }`,
+      }${isLabel ? `&label=true` : ''}${
+        searchValue ? `&search=${searchValue}` : ''
+      }${sortValue ? `&ordering=${sortValue}` : ''}`,
       {
         method: 'GET',
         headers: this._headers,
@@ -56,7 +57,7 @@ class Api {
   }) {
     const res = await fetch(
       `${this._url}/api/groups-instagram/?page=${pageCurrent}&limit=${limit}${
-        subjectValue ? `&filter=${subjectValue}` : ''
+        subjectValue ? `&subject__slug=${subjectValue}` : ''
       }${searchValue ? `&search=${searchValue}` : ''}${
         sortValue ? `&ordering=${sortValue}` : ''
       }`,
@@ -99,18 +100,6 @@ class Api {
         email,
         password,
       }),
-    });
-    return this._checkResponse(res);
-  }
-  async getUserData() {
-    const token = localStorage.getItem('token');
-
-    const res = await fetch(`${this._url}/api/users/me/`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Token ${token}`,
-      },
     });
     return this._checkResponse(res);
   }

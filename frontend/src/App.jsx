@@ -5,8 +5,17 @@ import Layout from './components/Layout';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Page404 from './pages/Page404';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getMe } from './store/authSlice';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <Layout>

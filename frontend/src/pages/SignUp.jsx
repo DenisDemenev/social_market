@@ -1,6 +1,7 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Link as NavLink } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import {
   Avatar,
   Container,
@@ -10,16 +11,49 @@ import {
   TextField,
   CssBaseline,
   Button,
+  Snackbar,
+  Alert,
 } from '@mui/material';
+import api from '../api/api';
+import { useNavigate } from 'react-router-dom/';
+import { Navigate } from 'react-router-dom/';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../store/authSlice';
 
 const SignUp = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const isAuth = useSelector(selectIsAuth);
+  useEffect(() => {
+    if (isAuth) {
+      <Navigate to="/" />;
+    }
+  }, [isAuth]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      lastName: '',
+      firstName: '',
+      email: '',
+      password: '',
+    },
+    mode: 'all',
+  });
+
+  const onSubmit = (data) => {
+    api
+      .signUp(data)
+      .then((res) => {
+        (() => navigate(`/auth`))();
+      })
+      .catch((err) => {
+        setOpen(true);
+        console.log(`Что-то пошло не так: ${err}`);
+      });
   };
 
   return (
@@ -38,13 +72,18 @@ const SignUp = () => {
         <Typography component="h1" variant="h5">
           Регистрация
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="given-name"
+                error={Boolean(errors.firstName?.message)}
+                helperText={errors.firstName?.message}
+                {...register('firstName', { required: 'Укажите имя' })}
                 name="firstName"
-                required
                 fullWidth
                 id="firstName"
                 label="Имя"
@@ -53,45 +92,41 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
+                error={Boolean(errors.lastName?.message)}
+                helperText={errors.lastName?.message}
+                {...register('lastName', { required: 'Укажите фамилию' })}
                 fullWidth
                 id="lastName"
                 label="Фамилия"
                 name="lastName"
-                autoComplete="family-name"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
+                error={Boolean(errors.email?.message)}
+                helperText={errors.email?.message}
+                {...register('email', { required: 'Укажите Email' })}
                 fullWidth
                 id="email"
                 label="Email"
                 name="email"
-                autoComplete="email"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
+                error={Boolean(errors.password?.message)}
+                helperText={errors.password?.message}
+                {...register('password', { required: 'Укажите пароль' })}
                 fullWidth
                 name="password"
                 label="Пароль"
                 type="password"
                 id="password"
-                autoComplete="new-password"
               />
             </Grid>
-            {/* <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="Я хочу получать акции и обновления по электронной почте."
-                />
-              </Grid> */}
           </Grid>
           <Button
+            disabled={!isValid}
             type="submit"
             fullWidth
             variant="contained"
@@ -103,12 +138,20 @@ const SignUp = () => {
               <NavLink to="/auth">
                 <Typography variant="body2">
                   У вас уже есть аккаунт? Войти
-                </Typography>{' '}
+                </Typography>
               </NavLink>
             </Grid>
           </Grid>
         </Box>
       </Box>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={() => setOpen(false)}>
+        <Alert severity="error" sx={{ width: '100%' }}>
+          Что-то пошло не так
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

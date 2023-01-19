@@ -13,8 +13,14 @@ const Paginator = ({ page, count, link }) => {
       color="primary"
       showFirstButton
       showLastButton
+      hideNextButton
+      hidePrevButton
       onChange={(_, page) => dispatch(pageCurrentValue(page))}
-      style={{ margin: 'auto', paddingBottom: 20, paddingTop: 15 }}
+      sx={{
+        margin: 'auto',
+        paddingBottom: 2,
+        paddingTop: 1,
+      }}
       renderItem={(item) => (
         <PaginationItem
           component={Link}

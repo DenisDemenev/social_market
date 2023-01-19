@@ -61,7 +61,7 @@ const GroupCardVk = ({ group }) => {
               width: { sm: '150px' },
             }}>
             <a
-              href={group.link}
+              href={group.link_screen}
               style={{ textDecoration: 'none' }}
               target="_blank"
               rel="noreferrer">
@@ -213,7 +213,7 @@ const GroupCardVk = ({ group }) => {
           }}>
           <Box>
             <a
-              href={group.link}
+              href={group.link_screen}
               style={{ textDecoration: 'none' }}
               target="_blank"
               rel="noreferrer">

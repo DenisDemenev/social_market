@@ -8,11 +8,10 @@ import {
   Box,
   IconButton,
 } from '@mui/material';
-import VisibilitySharpIcon from '@mui/icons-material/VisibilitySharp';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useClipboard } from 'use-clipboard-copy';
 
-const GroupCardTelegram = ({ group }) => {
+const GroupCardInstagram = ({ group }) => {
   const clipboard = useClipboard();
 
   return (
@@ -86,48 +85,27 @@ const GroupCardTelegram = ({ group }) => {
             </Tooltip>
           </Box>
           <Box sx={{ alignSelf: 'center', textAlign: 'center' }}>
-            <Typography component="div">
-              {group.price.toLocaleString('ru')} руб.
-            </Typography>
-            <Tooltip title="Охват">
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}>
-                <Typography variant="body2" color="text.secondary">
-                  {group.coverage.toLocaleString('ru')}
-                </Typography>
-                <VisibilitySharpIcon
-                  color="primary"
-                  fontSize="inherit"
-                  sx={{ ml: 0.5 }}
-                />
-              </Box>
-            </Tooltip>
-          </Box>
-          <Box sx={{ alignSelf: 'center', ml: 0.5 }}>
             <Typography
-              component="div"
+              variant="body2"
               color="text.secondary"
               sx={{ fontSize: '12px', lineHeight: 1 }}>
-              CPM
+              Пост
             </Typography>
-            <Tooltip title="CPM">
-              <Typography
-                variant="body2"
-                sx={{
-                  fontSize: '14px',
-                  lineHeight: 1,
-                  mt: 1,
-                  fontWeight: 500,
-                }}>
-                {group.cpm}
-              </Typography>
-            </Tooltip>
+            <Typography component="div" sx={{ mt: 0.5 }}>
+              {group.price_post.toLocaleString('ru')} руб.
+            </Typography>
           </Box>
-
+          <Box sx={{ alignSelf: 'center', textAlign: 'center' }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ fontSize: '12px', lineHeight: 1 }}>
+              Сторис
+            </Typography>
+            <Typography component="div" sx={{ mt: 0.5 }}>
+              {group.price_story.toLocaleString('ru')} руб.
+            </Typography>
+          </Box>
           <Box
             sx={{
               alignSelf: 'center',
@@ -187,8 +165,13 @@ const GroupCardTelegram = ({ group }) => {
           />
           <Typography
             component="div"
-            sx={{ fontSize: '18px', lineHeight: 1.2, fontWeight: 700 }}>
-            {group.price.toLocaleString('ru')} руб.
+            sx={{ fontSize: '16px', lineHeight: 1.2, fontWeight: 500 }}>
+            Пост: {group.price_post.toLocaleString('ru')} руб.
+          </Typography>
+          <Typography
+            component="div"
+            sx={{ fontSize: '16px', lineHeight: 1.2, fontWeight: 500 }}>
+            Сторис: {group.price_story.toLocaleString('ru')} руб.
           </Typography>
         </Box>
         <Box
@@ -205,7 +188,12 @@ const GroupCardTelegram = ({ group }) => {
               target="_blank"
               rel="noreferrer">
               <Typography
-                sx={{ fontSize: '14px', lineHeight: 1.2, fontWeight: 600 }}
+                sx={{
+                  fontSize: '14px',
+                  lineHeight: 1.2,
+                  fontWeight: 600,
+                  color: 'black',
+                }}
                 component="div">
                 {group.name}
               </Typography>
@@ -227,19 +215,6 @@ const GroupCardTelegram = ({ group }) => {
           </Box>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}>
-            <Typography variant="body2">
-              Охват: {group.coverage.toLocaleString('ru')}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography variant="body2">CPM: {group.cpm}</Typography>
-          </Box>
-          <Box
-            sx={{
               alignSelf: 'center',
               textAlign: 'center',
             }}>
@@ -258,4 +233,4 @@ const GroupCardTelegram = ({ group }) => {
   );
 };
 
-export default GroupCardTelegram;
+export default GroupCardInstagram;

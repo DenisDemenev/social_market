@@ -16,6 +16,7 @@ const GroupsVk = () => {
   const [groups, setGroups] = useState([]);
 
   const subjectValue = useSelector((state) => state.filter.subject);
+  const isLabel = useSelector((state) => state.filter.label);
   const searchValue = useSelector((state) => state.filter.search);
   const sortValue = useSelector((state) => state.filter.sort);
   const pageCount = useSelector((state) => state.paginator.pageCount);
@@ -23,7 +24,13 @@ const GroupsVk = () => {
 
   useEffect(() => {
     api
-      .getGroupsVk({ pageCurrent, subjectValue, searchValue, sortValue })
+      .getGroupsVk({
+        pageCurrent,
+        subjectValue,
+        searchValue,
+        sortValue,
+        isLabel,
+      })
       .then((res) => {
         setGroups(res.results);
         dispatch(pageCountValue(Math.ceil(res.count / 50)));
@@ -44,17 +51,16 @@ const GroupsVk = () => {
     dispatch,
     location.search,
     navigate,
+    isLabel,
   ]);
 
   return (
     <Container maxWidth="lg">
-      <Grid justifyContent="space-between" container spacing={2}>
+      <Grid container spacing={2} flexDirection="column">
         <Paginator page={pageCurrent} count={pageCount} link={'vk'} />
-        <Container maxWidth="lg" sx={{ mt: 2 }}>
-          {groups.map((group) => (
-            <GroupCardVk key={group.id} group={group}></GroupCardVk>
-          ))}
-        </Container>
+        {groups.map((group) => (
+          <GroupCardVk key={group.id} group={group}></GroupCardVk>
+        ))}
         <Paginator page={pageCurrent} count={pageCount} link={'vk'} />
       </Grid>
     </Container>

@@ -1,6 +1,7 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Link as NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import {
   Box,
   Container,
@@ -10,16 +11,49 @@ import {
   CssBaseline,
   Button,
   Avatar,
+  Snackbar,
+  Alert,
 } from '@mui/material';
+import api from '../api/api';
+import { getMe, selectIsAuth } from '../store/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SignIn = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const isAuth = useSelector(selectIsAuth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuth) {
+      (() => navigate(`/`))();
+    }
+  }, [isAuth, navigate]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    mode: 'all',
+  });
+
+  const onSubmit = (data) => {
+    api
+      .signIn(data)
+      .then((res) => {
+        localStorage.setItem('token', res.auth_token);
+        dispatch(getMe());
+        (() => navigate(`/`))();
+      })
+      .catch((err) => {
+        setOpen(true);
+        console.log(`Что-то пошло не так: ${err}`);
+      });
   };
 
   return (
@@ -38,10 +72,16 @@ const SignIn = () => {
         <Typography component="h1" variant="h5">
           Авторизация
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          sx={{ mt: 1 }}>
           <TextField
             margin="normal"
-            required
+            error={Boolean(errors.email?.message)}
+            helperText={errors.email?.message}
+            {...register('email', { required: 'Укажите email' })}
             fullWidth
             id="email"
             label="Email"
@@ -51,7 +91,9 @@ const SignIn = () => {
           />
           <TextField
             margin="normal"
-            required
+            error={Boolean(errors.password?.message)}
+            helperText={errors.password?.message}
+            {...register('password', { required: 'Укажите пароль' })}
             fullWidth
             name="password"
             label="Пароль"
@@ -59,12 +101,9 @@ const SignIn = () => {
             id="password"
             autoComplete="current-password"
           />
-          {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Запомните меня"
-            /> */}
           <Button
             type="submit"
+            disabled={!isValid}
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}>
@@ -77,15 +116,23 @@ const SignIn = () => {
                 </Link> */}
             </Grid>
             <Grid item>
-              <NavLink to="/register">
+              {/* <NavLink to="/register">
                 <Typography variant="body2">
                   {'У вас нет аккаунта? Зарегистрироваться'}
                 </Typography>
-              </NavLink>
+              </NavLink> */}
             </Grid>
           </Grid>
         </Box>
       </Box>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={() => setOpen(false)}>
+        <Alert severity="error" sx={{ width: '100%' }}>
+          Неверный логин или пароль
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

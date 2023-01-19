@@ -6,6 +6,7 @@ const filterSlice = createSlice({
     subject: '',
     search: '',
     sort: '',
+    label: false,
   },
   reducers: {
     subjectValue(state, action) {
@@ -17,8 +18,12 @@ const filterSlice = createSlice({
     sortValue(state, action) {
       state.sort = action.payload;
     },
+    labelValue(state, action) {
+      state.label = action.payload;
+    },
   },
 });
 
-export const { subjectValue, searchValue, sortValue } = filterSlice.actions;
+export const { subjectValue, searchValue, sortValue, labelValue } =
+  filterSlice.actions;
 export default filterSlice.reducer;
