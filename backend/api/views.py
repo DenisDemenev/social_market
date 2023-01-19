@@ -21,8 +21,8 @@ class GroupViewSet(viewsets.ModelViewSet):
                        filters.OrderingFilter)
     filter_class = (SubjectFilter, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
-    filterset_fields = ('subject__slug',)
-    ordering_fields = ('price', 'cpm', 'label')
+    filterset_fields = ('subject__slug', 'label')
+    ordering_fields = ('price', 'cpm', )
 
 
 class GroupsTelegramViewSet(viewsets.ModelViewSet):
