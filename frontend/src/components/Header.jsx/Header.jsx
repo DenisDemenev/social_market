@@ -15,7 +15,12 @@ import {
   Link,
 } from '@mui/material';
 import SearchMenu from '../SearchMenu/SearchMenu';
-import { subjectValue, searchValue, sortValue } from '../../store/filterSlice';
+import {
+  subjectValue,
+  searchValue,
+  sortValue,
+  labelValue,
+} from '../../store/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectIsAuth } from '../../store/authSlice';
 
@@ -44,6 +49,7 @@ const Header = ({ window, children }) => {
   const handleLogout = () => {
     dispatch(logout({}));
     localStorage.removeItem('token');
+    dispatch(labelValue(false));
   };
 
   return (
