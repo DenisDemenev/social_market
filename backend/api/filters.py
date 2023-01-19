@@ -8,8 +8,16 @@ class GroupSearchFilter(SearchFilter):
     search_param = 'subject__slug', 'name', 'link', 'link_screen',
 
 
-class SubjectFilter(FilterSet):
-    subject = filters.AllValuesMultipleFilter(field_name='subject__slug')
+class SubjectFilterVk(FilterSet):
+    subject = filters.AllValuesMultipleFilter(field_name='filter')
+
+    class Meta:
+        model = Groups
+        fields = ('subject', 'label',)
+
+
+class SubjectFilterOther(FilterSet):
+    subject = filters.AllValuesMultipleFilter(field_name='filter')
 
     class Meta:
         model = Groups

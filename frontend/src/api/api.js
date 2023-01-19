@@ -2,6 +2,7 @@ class Api {
   constructor(data) {
     this._url = data.url;
     this._headers = data.headers;
+    this._authorization = 'authorization';
   }
 
   async getGroupsVk({
@@ -46,6 +47,27 @@ class Api {
     return this._checkResponse(res);
   }
 
+  async getGroupsInstagram({
+    pageCurrent = 1,
+    limit = 50,
+    subjectValue,
+    searchValue,
+    sortValue,
+  }) {
+    const res = await fetch(
+      `${this._url}/api/groups-instagram/?page=${pageCurrent}&limit=${limit}${
+        subjectValue ? `&filter=${subjectValue}` : ''
+      }${searchValue ? `&search=${searchValue}` : ''}${
+        sortValue ? `&ordering=${sortValue}` : ''
+      }`,
+      {
+        method: 'GET',
+        headers: this._headers,
+      }
+    );
+    return this._checkResponse(res);
+  }
+
   async getSubject() {
     const res = await fetch(`${this._url}/api/subject/`, {
       method: 'GET',
@@ -54,17 +76,41 @@ class Api {
     return this._checkResponse(res);
   }
 
-  async signup({ email, password, username, first_name, last_name }) {
+  async signUp({ email, password, firstName, lastName }) {
     const res = await fetch(`${this._url}/api/users/`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
         email,
         password,
-        username,
-        first_name,
-        last_name,
+        username: `${firstName} ${lastName}`,
+        first_name: firstName,
+        last_name: lastName,
       }),
+    });
+    return this._checkResponse(res);
+  }
+
+  async signIn({ email, password }) {
+    const res = await fetch(`${this._url}/api/auth/token/login/`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+    return this._checkResponse(res);
+  }
+  async getUserData() {
+    const token = localStorage.getItem('token');
+
+    const res = await fetch(`${this._url}/api/users/me/`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Token ${token}`,
+      },
     });
     return this._checkResponse(res);
   }

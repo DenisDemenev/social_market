@@ -2,7 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, viewsets
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from api.filters import GroupSearchFilter, SubjectFilter
+from api.filters import GroupSearchFilter, SubjectFilterVk, SubjectFilterOther
 from api.pagination import LimitPageNumberPagination
 from api.serializers import (GroupsSerializer, SubjectSerializer,
                              GroupsTelegramSerializer,
@@ -19,7 +19,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter,
                        filters.OrderingFilter)
-    filter_class = (SubjectFilter, GroupSearchFilter)
+    filter_class = (SubjectFilterVk, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
     filterset_fields = ('subject__slug', 'label')
     ordering_fields = ('price', 'cpm', )
@@ -32,7 +32,7 @@ class GroupsTelegramViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter,
                        filters.OrderingFilter)
-    filter_class = (GroupSearchFilter)
+    filter_class = (SubjectFilterOther, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link',)
     filterset_fields = ('subject__slug',)
     ordering_fields = ('price', 'cpm')
@@ -45,7 +45,7 @@ class GroupsInstagramViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter,
                        filters.OrderingFilter)
-    filter_class = (GroupSearchFilter)
+    filter_class = (SubjectFilterOther, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link',)
     filterset_fields = ('subject__slug',)
     ordering_fields = ('price_post', 'cpm')
