@@ -65,7 +65,7 @@ const GroupCardTelegram = ({ group }) => {
               target="_blank"
               rel="noreferrer">
               <Typography
-                sx={{ fontSize: '14px', lineHeight: 1.2 }}
+                sx={{ fontSize: '14px', lineHeight: 1.2, color: 'black' }}
                 component="div">
                 {group.name}
               </Typography>
@@ -205,7 +205,12 @@ const GroupCardTelegram = ({ group }) => {
               target="_blank"
               rel="noreferrer">
               <Typography
-                sx={{ fontSize: '14px', lineHeight: 1.2, fontWeight: 600 }}
+                sx={{
+                  fontSize: '14px',
+                  lineHeight: 1.2,
+                  fontWeight: 600,
+                  color: 'black',
+                }}
                 component="div">
                 {group.name}
               </Typography>
