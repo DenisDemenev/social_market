@@ -36,7 +36,9 @@ const Home = ({ link }) => {
       <TabPanel value="vk">
         <GroupsVk />
       </TabPanel>
-      <TabPanel value="telegram">В процессе разработки</TabPanel>
+      <TabPanel value="telegram">
+        <GroupsTelegram />
+      </TabPanel>
       <TabPanel value="instagram">В процессе разработки</TabPanel>
     </TabContext>
   );

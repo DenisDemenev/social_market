@@ -77,21 +77,6 @@ class Api {
     return this._checkResponse(res);
   }
 
-  async signUp({ email, password, firstName, lastName }) {
-    const res = await fetch(`${this._url}/api/users/`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        email,
-        password,
-        username: `${firstName} ${lastName}`,
-        first_name: firstName,
-        last_name: lastName,
-      }),
-    });
-    return this._checkResponse(res);
-  }
-
   async signIn({ email, password }) {
     const res = await fetch(`${this._url}/api/auth/token/login/`, {
       method: 'POST',
@@ -108,7 +93,7 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(`Ошибка: ${res.status} `);
   }
 }
 

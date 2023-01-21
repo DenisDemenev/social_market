@@ -2,7 +2,10 @@ import { Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { pageCurrentValue, pageCountValue } from '../../store/paginatorSlice';
+import {
+  pageCurrentValue,
+  pageCountValue,
+} from '../../store/slice/paginatorSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import GroupCardVk from '../GroupCard/GroupCardVk';
 import api from '../../api/api';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Pagination, PaginationItem } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { pageCurrentValue } from '../store/paginatorSlice';
+import { pageCurrentValue } from '../store/slice/paginatorSlice';
 
 const Paginator = ({ page, count, link }) => {
   const dispatch = useDispatch();

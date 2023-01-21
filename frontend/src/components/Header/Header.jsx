@@ -20,9 +20,9 @@ import {
   searchValue,
   sortValue,
   labelValue,
-} from '../../store/filterSlice';
+} from '../../store/slice/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectIsAuth } from '../../store/authSlice';
+import { logout, selectIsAuth } from '../../store/slice/authSlice';
 
 const drawerWidth = 240;
 
@@ -30,8 +30,7 @@ const Header = ({ window, children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
-  const user = useSelector((state) => state.auth.data);
-  console.log(user);
+  const user = useSelector((state) => state.auth.user);
 
   const handleClickLogo = () => {
     dispatch(subjectValue(''));

@@ -14,21 +14,23 @@ import {
   Snackbar,
   Alert,
 } from '@mui/material';
-import api from '../api/api';
 import { useNavigate } from 'react-router-dom/';
-import { Navigate } from 'react-router-dom/';
-import { useSelector } from 'react-redux';
-import { selectIsAuth } from '../store/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser, selectIsAuth } from '../store/slice/authSlice';
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const isAuth = useSelector(selectIsAuth);
+  const dispatch = useDispatch();
+  const isRegister = useSelector((state) => state.auth.status);
+  const error = useSelector((state) => state.auth.error);
+
   useEffect(() => {
     if (isAuth) {
-      <Navigate to="/" />;
+      return (() => navigate(`/`))();
     }
-  }, [isAuth]);
+  }, [isAuth, navigate]);
 
   const {
     register,
@@ -45,15 +47,12 @@ const SignUp = () => {
   });
 
   const onSubmit = (data) => {
-    api
-      .signUp(data)
-      .then((res) => {
-        (() => navigate(`/auth`))();
-      })
-      .catch((err) => {
-        setOpen(true);
-        console.log(`Что-то пошло не так: ${err}`);
-      });
+    dispatch(registerUser(data));
+    if (!(isRegister === 'error')) {
+      return (() => navigate(`/auth`))();
+    } else {
+      setOpen(true);
+    }
   };
 
   return (
@@ -116,7 +115,13 @@ const SignUp = () => {
               <TextField
                 error={Boolean(errors.password?.message)}
                 helperText={errors.password?.message}
-                {...register('password', { required: 'Укажите пароль' })}
+                {...register('password', {
+                  required: 'Укажите пароль',
+                  minLength: {
+                    value: 8,
+                    message: 'Длина пароля не менее 8 символов ',
+                  },
+                })}
                 fullWidth
                 name="password"
                 label="Пароль"
@@ -149,7 +154,7 @@ const SignUp = () => {
         autoHideDuration={3000}
         onClose={() => setOpen(false)}>
         <Alert severity="error" sx={{ width: '100%' }}>
-          Что-то пошло не так
+          `Что-то пошло не так: ${error}`
         </Alert>
       </Snackbar>
     </Container>

@@ -15,7 +15,7 @@ import {
   Alert,
 } from '@mui/material';
 import api from '../api/api';
-import { getMe, selectIsAuth } from '../store/authSlice';
+import { getMe, selectIsAuth } from '../store/slice/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const SignIn = () => {
@@ -42,9 +42,9 @@ const SignIn = () => {
     mode: 'all',
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (values) => {
     api
-      .signIn(data)
+      .signIn(values)
       .then((res) => {
         localStorage.setItem('token', res.auth_token);
         dispatch(getMe());

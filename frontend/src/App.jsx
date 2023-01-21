@@ -7,7 +7,7 @@ import SignUp from './pages/SignUp';
 import Page404 from './pages/Page404';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getMe } from './store/authSlice';
+import { getMe } from './store/slice/authSlice';
 
 function App() {
   const dispatch = useDispatch();

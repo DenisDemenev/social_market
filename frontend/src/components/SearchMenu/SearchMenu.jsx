@@ -17,9 +17,9 @@ import {
   searchValue,
   sortValue,
   labelValue,
-} from '../../store/filterSlice';
+} from '../../store/slice/filterSlice';
 import api from '../../api/api';
-import { selectIsAuth } from '../../store/authSlice';
+import { selectIsAuth } from '../../store/slice/authSlice';
 
 const SearchMenu = () => {
   const [subject, setSubject] = useState([]);
