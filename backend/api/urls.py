@@ -7,7 +7,7 @@ from api.views import (GroupViewSet, SubjectViewSet,
 app_name = 'api'
 
 router = DefaultRouter()
-router.register('groups', GroupViewSet, basename='groups')
+router.register(r'groups', GroupViewSet, basename='groups')
 router.register('groups-telegram', GroupsTelegramViewSet,
                 basename='groups_telegram')
 router.register('groups-instagram', GroupsInstagramViewSet,
