@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
@@ -105,7 +104,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
     def validate(self, data):
         if Favorite.objects.filter(user=data['user'],
                                    group=data['group_vk']).exists():
-            raise serializers.ValidationError('Группа уже добавлена в избраное')
+            raise serializers.ValidationError('Группа уже в избранном')
         return data
 
 
@@ -115,7 +114,6 @@ class CartSerializer(serializers.ModelSerializer):
     price = serializers.ReadOnlyField(source='group_vk.price')
     avatar = serializers.ReadOnlyField(source='group_vk.avatar')
     link = serializers.ReadOnlyField(source='group_vk.link_screen')
-
 
     class Meta:
         model = Cart
