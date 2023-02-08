@@ -48,7 +48,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         elif request.method == 'DELETE':
             return self.delete_obj(Cart, request.user, pk)
         return None
-    
+
     def add_obj(self, model, user, pk):
         if model.objects.filter(user=user, group_vk__id=pk).exists():
             return Response({
