@@ -33,7 +33,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     def favorite(self, request, pk=None):
         if request.method == 'POST':
             return self.add_obj(Favorite, request.user, pk)
-        if request.method == 'DELETE':
+        elif request.method == 'DELETE':
             return self.delete_obj(Favorite, request.user, pk)
         return None
 
@@ -42,7 +42,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     def shopping_cart(self, request, pk=None):
         if request.method == 'POST':
             return self.add_obj(Cart, request.user, pk)
-        if request.method == 'DELETE':
+        elif request.method == 'DELETE':
             return self.delete_obj(Cart, request.user, pk)
         return None
 
