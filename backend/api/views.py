@@ -28,7 +28,7 @@ class GroupViewSet(viewsets.ModelViewSet):
                        filters.OrderingFilter)
     filter_class = (SubjectFilterVk, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
-    filterset_fields = ('subject__slug', 'label')
+    filterset_fields = ('subject__slug', 'label', 'is_favorited',)
     ordering_fields = ('price', 'cpm', )
 
     @action(detail=True, methods=['post', 'delete'],

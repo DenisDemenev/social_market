@@ -13,7 +13,7 @@ class SubjectFilterVk(FilterSet):
 
     class Meta:
         model = Groups
-        fields = ('subject', 'label',)
+        fields = ('subject', 'label', 'is_favorited',)
 
 
 class SubjectFilterOther(FilterSet):
