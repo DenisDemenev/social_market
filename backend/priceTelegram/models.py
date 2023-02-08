@@ -5,7 +5,7 @@ from price.models import Subject, Partner
 class GroupsTelegram(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
     tg_id = models.PositiveIntegerField(verbose_name='ID группы в Telegram',
-                                        unique=True)
+                                        unique=True, blank=True, null=True)
     link = models.URLField(verbose_name='Ссылка на группу')
     avatar = models.ImageField(upload_to='telegram/',
                                verbose_name='Аватар', blank=True)
