@@ -11,8 +11,8 @@ class Favorite(models.Model):
                              related_name='favorites',
                              verbose_name='Пользователь',)
     group_vk = models.ForeignKey(Groups, on_delete=models.CASCADE,
-                               related_name='favorites',
-                               verbose_name='Группа ВК',)
+                                 related_name='favorites',
+                                 verbose_name='Группа ВК',)
 
     class Meta:
         ordering = ['-id']

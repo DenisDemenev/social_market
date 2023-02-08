@@ -58,7 +58,7 @@ class GroupsSerializer(serializers.ModelSerializer):
         exclude = ('owner', )
         read_only_fields = ('subject', 'name', )
 
-     def get_is_favorited(self, obj):
+    def get_is_favorited(self, obj):
         user = self.context.get('request').user
         if user.is_anonymous:
             return False
