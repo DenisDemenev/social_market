@@ -14,7 +14,7 @@ class Cart(models.Model):
         verbose_name='Пользователь',
     )
     group_vk = models.ForeignKey(Groups, on_delete=models.CASCADE,
-                                 related_name='favorites',
+                                 related_name='cart',
                                  verbose_name='Группа ВК',)
 
     class Meta:
