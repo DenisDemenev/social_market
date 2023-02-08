@@ -1,14 +1,17 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, viewsets
+from rest_framework import filters, viewsets, status
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import action
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from api.filters import GroupSearchFilter, SubjectFilterVk, SubjectFilterOther
 from api.pagination import LimitPageNumberPagination
 from api.serializers import (GroupsSerializer, SubjectSerializer,
                              GroupsTelegramSerializer,
-                             GroupsInstagramSerializer)
+                             GroupsInstagramSerializer,
+                             CropGroupsSerializer)
 from price.models import Groups, Subject
 from priceTelegram.models import GroupsTelegram
 from priceInstagram.models import GroupsInstagram
@@ -45,6 +48,25 @@ class GroupViewSet(viewsets.ModelViewSet):
         elif request.method == 'DELETE':
             return self.delete_obj(Cart, request.user, pk)
         return None
+    
+    def add_obj(self, model, user, pk):
+        if model.objects.filter(user=user, group_vk__id=pk).exists():
+            return Response({
+                'errors': 'Группа уже добавлена в список'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        group_vk = get_object_or_404(Groups, id=pk)
+        model.objects.create(user=user, group_vk=group_vk)
+        serializer = CropGroupsSerializer(group_vk)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def delete_obj(self, model, user, pk):
+        obj = model.objects.filter(user=user, group_vk__id=pk)
+        if obj.exists():
+            obj.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({
+            'errors': 'Группа уже удалена'
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class GroupsTelegramViewSet(viewsets.ModelViewSet):

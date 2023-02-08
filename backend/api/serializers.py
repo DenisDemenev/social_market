@@ -108,6 +108,14 @@ class FavoriteSerializer(serializers.ModelSerializer):
         return data
 
 
+class CropGroupsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Groups
+        exclude = ('owner', )
+        read_only_fields = ('subject', 'name', )
+
+
 class CartSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField(source='group_vk.id')
     name = serializers.ReadOnlyField(source='group_vk.name')
