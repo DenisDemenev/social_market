@@ -102,7 +102,7 @@ class SubjectViewSet(ReadOnlyModelViewSet):
 
 
 class FavoriteViewSet(viewsets.ModelViewSet):
-    queryset = Favorite.objects.all()
+    queryset = favorites.objects.all()
     serializer_class = FavoriteSerializer
     pagination_class = LimitPageNumberPagination
 
