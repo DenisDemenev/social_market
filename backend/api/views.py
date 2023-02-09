@@ -31,7 +31,6 @@ class GroupViewSet(viewsets.ModelViewSet):
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
     ordering_fields = ('price', 'cpm', )
 
-
     @action(detail=True, methods=['post', 'delete'],
             permission_classes=[IsAuthenticated])
     def favorite(self, request, pk=None):
