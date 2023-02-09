@@ -6,7 +6,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.filters import GroupSearchFilter, SubjectFilterVk, SubjectFilterOther
+from api.filters import GroupSearchFilter, SubjectFilterOther
 from api.pagination import LimitPageNumberPagination
 from api.serializers import (GroupsSerializer, SubjectSerializer,
                              GroupsTelegramSerializer,

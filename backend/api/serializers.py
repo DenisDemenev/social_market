@@ -55,7 +55,7 @@ class GroupsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Groups
         exclude = ('owner', )
-        read_only_fields = ('subject', 'name', 'is_favorited' )
+        read_only_fields = ('subject', 'name', 'is_favorited')
 
     def get_is_favorited(self, obj):
         user = self.context.get('request').user
