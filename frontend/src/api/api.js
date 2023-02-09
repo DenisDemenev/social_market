@@ -17,7 +17,7 @@ class Api {
     const authorization = token ? { authorization: `Token ${token}` } : {};
     const res = await fetch(
       `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
-        subjectValue ? `&subject__slug=${subjectValue}` : ''
+        subjectValue ? `&subject=${subjectValue}` : ''
       }${isLabel ? `&label=true` : ''}${
         searchValue ? `&search=${searchValue}` : ''
       }${sortValue ? `&ordering=${sortValue}` : ''}`,
@@ -41,7 +41,7 @@ class Api {
   }) {
     const res = await fetch(
       `${this._url}/api/groups-telegram/?page=${pageCurrent}&limit=${limit}${
-        subjectValue ? `&subject=${subjectValue}` : ''
+        subjectValue ? `&subject__slug=${subjectValue}` : ''
       }${searchValue ? `&search=${searchValue}` : ''}${
         sortValue ? `&ordering=${sortValue}` : ''
       }`,
