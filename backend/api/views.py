@@ -26,9 +26,9 @@ class GroupViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter,
                        filters.OrderingFilter)
-    filter_class = (SubjectFilterVk, GroupSearchFilter)
+    filterset_class = SubjectFilterVk
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
-    filterset_fields = ('subject__slug', 'label')
+    # filterset_fields = ('subject__slug', 'label')
     ordering_fields = ('price', 'cpm', )
 
     @action(detail=True, methods=['post', 'delete'],
