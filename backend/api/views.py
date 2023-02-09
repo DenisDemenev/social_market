@@ -63,7 +63,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         obj = model.objects.filter(user=user, group_vk__id=pk)
         if obj.exists():
             obj.delete()
-            return Response('Группа удалена',
+            return Response({'ok': 'Группа удалена'},
                             status=status.HTTP_204_NO_CONTENT)
         return Response({
             'errors': 'Группа уже удалена'
