@@ -10,6 +10,7 @@ class GroupSearchFilter(SearchFilter):
 
 class SubjectFilterVk(FilterSet):
     subject = filters.AllValuesMultipleFilter(field_name='subject_slug')
+    label = filters.BooleanFilter(method='filter_label')
     is_favorited = filters.BooleanFilter(method='filter_is_favorited')
     is_in_shopping_cart = filters.BooleanFilter(
         method='filter_is_in_shopping_cart')
