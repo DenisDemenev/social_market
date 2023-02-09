@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.filters import GroupSearchFilter, SubjectFilterVk, SubjectFilterOther
+from api.permissions import IsOwnerOrReadOnly
 from api.pagination import LimitPageNumberPagination
 from api.serializers import (GroupsSerializer, SubjectSerializer,
                              GroupsTelegramSerializer,
@@ -23,13 +24,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Groups.objects.all()
     serializer_class = GroupsSerializer
     pagination_class = LimitPageNumberPagination
-
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter,
-                       filters.OrderingFilter)
-    filter_class = (SubjectFilterVk, GroupSearchFilter)
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter,
+                       filters.SearchFilter)
+    filterset_class = SubjectFilterVk
+    permission_classes = [IsOwnerOrReadOnly]
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
-    filterset_fields = ('subject__slug', 'label')
     ordering_fields = ('price', 'cpm', )
+
 
     @action(detail=True, methods=['post', 'delete'],
             permission_classes=[IsAuthenticated])
