@@ -18,7 +18,6 @@ from priceTelegram.models import GroupsTelegram
 from priceInstagram.models import GroupsInstagram
 from favorite.models import Favorite
 from basket.models import Cart
-from favorite.models import Favorite
 
 
 class GroupViewSet(viewsets.ModelViewSet):
