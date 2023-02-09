@@ -17,7 +17,6 @@ router.register(r'subject', SubjectViewSet, basename='subject')
 router.register(r'favorite', FavoriteViewSet, basename='favorite')
 
 
-
 urlpatterns = [
     path('', include(router.urls)),
     path('', include('djoser.urls')),
