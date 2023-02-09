@@ -16,6 +16,7 @@ from api.serializers import (GroupsSerializer, SubjectSerializer,
 from price.models import Groups, Subject
 from priceTelegram.models import GroupsTelegram
 from priceInstagram.models import GroupsInstagram
+from favorite.models import Favorite
 from basket.models import Cart
 from favorite.models import Favorite
 
@@ -102,7 +103,7 @@ class SubjectViewSet(ReadOnlyModelViewSet):
 
 
 class FavoriteViewSet(viewsets.ModelViewSet):
-    queryset = Groups.objects.all()
+    queryset = Favorite.objects.all()
     serializer_class = FavoriteSerializer
     pagination_class = LimitPageNumberPagination
 
