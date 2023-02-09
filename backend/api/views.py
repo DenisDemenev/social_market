@@ -63,7 +63,9 @@ class GroupViewSet(viewsets.ModelViewSet):
         obj = model.objects.filter(user=user, group_vk__id=pk)
         if obj.exists():
             obj.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            group_vk = get_object_or_404(Groups, id=pk)
+            serializer = CropGroupsSerializer(group_vk)
+            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
         return Response({
             'errors': 'Группа уже удалена'
         }, status=status.HTTP_400_BAD_REQUEST)
