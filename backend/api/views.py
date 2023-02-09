@@ -6,7 +6,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.filters import GroupSearchFilter, SubjectFilterOther
+from api.filters import GroupSearchFilter, SubjectFilterVk, SubjectFilterOther
 from api.pagination import LimitPageNumberPagination
 from api.serializers import (GroupsSerializer, SubjectSerializer,
                              GroupsTelegramSerializer,
@@ -26,9 +26,9 @@ class GroupViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter,
                        filters.OrderingFilter)
-    # filter_class = (SubjectFilterVk, GroupSearchFilter)
+    filter_class = (SubjectFilterVk, GroupSearchFilter)
     search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
-    filterset_fields = ('subject__slug', 'label',)
+    filterset_fields = ('subject__slug', 'label')
     ordering_fields = ('price', 'cpm', )
 
     @action(detail=True, methods=['post', 'delete'],
