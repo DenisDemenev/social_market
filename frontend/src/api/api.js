@@ -13,6 +13,8 @@ class Api {
     sortValue,
     isLabel,
   }) {
+    const token = localStorage.getItem('token');
+    const authorization = token ? { authorization: `Token ${token}` } : {};
     const res = await fetch(
       `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
         subjectValue ? `&subject__slug=${subjectValue}` : ''
@@ -21,7 +23,10 @@ class Api {
       }${sortValue ? `&ordering=${sortValue}` : ''}`,
       {
         method: 'GET',
-        headers: this._headers,
+        headers: {
+          ...this._headers,
+          ...authorization,
+        },
       }
     );
     return this._checkResponse(res);
@@ -36,7 +41,7 @@ class Api {
   }) {
     const res = await fetch(
       `${this._url}/api/groups-telegram/?page=${pageCurrent}&limit=${limit}${
-        subjectValue ? `&subject__slug=${subjectValue}` : ''
+        subjectValue ? `&subject=${subjectValue}` : ''
       }${searchValue ? `&search=${searchValue}` : ''}${
         sortValue ? `&ordering=${sortValue}` : ''
       }`,
@@ -85,6 +90,58 @@ class Api {
         email,
         password,
       }),
+    });
+    return this._checkResponse(res);
+  }
+
+  async addToFavorites({ id }) {
+    const token = localStorage.getItem('token');
+
+    const res = await fetch(`${this._url}/api/groups/${id}/favorite/`, {
+      method: 'POST',
+      headers: {
+        ...this._headers,
+        authorization: `Token ${token}`,
+      },
+    });
+    return this._checkResponse(res);
+  }
+
+  async removeFromFavorites({ id }) {
+    const token = localStorage.getItem('token');
+
+    const res = await fetch(`${this._url}/api/groups/${id}/favorite/`, {
+      method: 'DELETE',
+      headers: {
+        ...this._headers,
+        authorization: `Token ${token}`,
+      },
+    });
+    return this._checkResponse(res);
+  }
+
+  async addToCart({ id }) {
+    const token = localStorage.getItem('token');
+
+    const res = await fetch(`${this._url}/api/groups/${id}/shopping_cart/`, {
+      method: 'POST',
+      headers: {
+        ...this._headers,
+        authorization: `Token ${token}`,
+      },
+    });
+    return this._checkResponse(res);
+  }
+
+  async removeFromCart({ id }) {
+    const token = localStorage.getItem('token');
+
+    const res = await fetch(`${this._url}/api/groups/${id}/shopping_cart/`, {
+      method: 'DELETE',
+      headers: {
+        ...this._headers,
+        authorization: `Token ${token}`,
+      },
     });
     return this._checkResponse(res);
   }
