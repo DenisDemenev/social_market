@@ -2,8 +2,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from api.views import (GroupViewSet, SubjectViewSet,
-                       GroupsTelegramViewSet, GroupsInstagramViewSet,
-                       FavoriteViewSet)
+                       GroupsTelegramViewSet, GroupsInstagramViewSet)
 
 app_name = 'api'
 
@@ -14,7 +13,6 @@ router.register('groups-telegram', GroupsTelegramViewSet,
 router.register('groups-instagram', GroupsInstagramViewSet,
                 basename='groups_instagram')
 router.register(r'subject', SubjectViewSet, basename='subject')
-router.register(r'favorite', FavoriteViewSet, basename='favorite')
 
 
 urlpatterns = [

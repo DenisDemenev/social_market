@@ -11,8 +11,7 @@ from api.pagination import LimitPageNumberPagination
 from api.serializers import (GroupsSerializer, SubjectSerializer,
                              GroupsTelegramSerializer,
                              GroupsInstagramSerializer,
-                             CropGroupsSerializer,
-                             FavoriteSerializer)
+                             CropGroupsSerializer)
 from price.models import Groups, Subject
 from priceTelegram.models import GroupsTelegram
 from priceInstagram.models import GroupsInstagram
@@ -99,16 +98,3 @@ class GroupsInstagramViewSet(viewsets.ModelViewSet):
 class SubjectViewSet(ReadOnlyModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-
-
-class FavoriteViewSet(viewsets.ModelViewSet):
-    queryset = favorites.objects.all()
-    serializer_class = FavoriteSerializer
-    pagination_class = LimitPageNumberPagination
-
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter,
-                       filters.OrderingFilter)
-    filter_class = (SubjectFilterVk, GroupSearchFilter)
-    search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
-    filterset_fields = ('subject__slug', 'label')
-    ordering_fields = ('price', 'cpm', )
