@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Link as NavLink } from 'react-router-dom';
+import { Link as NavLink, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   AppBar,
   Toolbar,
@@ -13,6 +14,7 @@ import {
   IconButton,
   Button,
   Link,
+  Badge,
 } from '@mui/material';
 import SearchMenu from '../SearchMenu/SearchMenu';
 import {
@@ -28,9 +30,12 @@ const drawerWidth = 240;
 
 const Header = ({ window, children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const badge = useSelector((state) => state.badge.badge);
+
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
 
   const handleClickLogo = () => {
     dispatch(subjectValue(''));
@@ -107,6 +112,11 @@ const Header = ({ window, children }) => {
             </>
           ) : (
             <>
+              <IconButton onClick={() => navigate(`/basket`)} color="inherit">
+                <Badge badgeContent={badge} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
               <Typography sx={{ mr: 1 }}>{user.username}</Typography>
               <Button
                 onClick={handleLogout}

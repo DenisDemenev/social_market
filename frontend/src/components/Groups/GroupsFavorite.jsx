@@ -18,6 +18,7 @@ const GroupsVk = () => {
   const dispatch = useDispatch();
 
   const [groups, setGroups] = useState([]);
+  const [count, setCount] = useState(0);
 
   const subjectValue = useSelector((state) => state.filter.subject);
   const isLabel = useSelector((state) => state.filter.label);
@@ -34,6 +35,7 @@ const GroupsVk = () => {
         searchValue,
         sortValue,
         isLabel,
+        isFavorite: 'True',
       })
       .then((res) => {
         setGroups(res.results);
@@ -45,7 +47,7 @@ const GroupsVk = () => {
       .catch((err) => {
         console.log(`Что-то пошло не так: ${err}`);
         dispatch(pageCurrentValue(1));
-        (() => navigate(`/vk?page=1`))();
+        (() => navigate(`/favorite?page=1`))();
       });
   }, [
     subjectValue,
@@ -56,7 +58,9 @@ const GroupsVk = () => {
     location.search,
     navigate,
     isLabel,
+    count,
   ]);
+
   useEffect(() => {
     api
       .getGroupsVk({
@@ -97,6 +101,7 @@ const GroupsVk = () => {
       return group;
     });
     setGroups(groupsUpdated);
+    setCount(count + 1);
     api
       .removeFromFavorites({ id })
       .then((res) => {})

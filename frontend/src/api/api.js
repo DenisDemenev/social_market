@@ -12,6 +12,8 @@ class Api {
     searchValue,
     sortValue,
     isLabel,
+    isFavorite,
+    isShoppingCart,
   }) {
     const token = localStorage.getItem('token');
     const authorization = token ? { authorization: `Token ${token}` } : {};
@@ -19,6 +21,8 @@ class Api {
       `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
         subjectValue ? `&subject=${subjectValue}` : ''
       }${isLabel ? `&label=true` : ''}${
+        isFavorite ? `&is_favorited=true` : ''
+      }${isShoppingCart ? `&is_in_shopping_cart=true` : ''}${
         searchValue ? `&search=${searchValue}` : ''
       }${sortValue ? `&ordering=${sortValue}` : ''}`,
       {

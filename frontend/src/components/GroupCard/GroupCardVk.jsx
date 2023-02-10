@@ -12,9 +12,23 @@ import VisibilitySharpIcon from '@mui/icons-material/VisibilitySharp';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useClipboard } from 'use-clipboard-copy';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../../store/slice/authSlice';
 
-const GroupCardVk = ({ group }) => {
+const GroupCardVk = ({
+  group,
+  handleLike,
+  handleDeleteLike,
+  handleDeleteCart,
+  handleCart,
+}) => {
   const clipboard = useClipboard();
+  const id = group.id;
+  const isLike = group.is_favorited;
+  const isShoppingCart = group.is_in_shopping_cart;
+  const isAuth = useSelector(selectIsAuth);
 
   return (
     <>
@@ -157,13 +171,36 @@ const GroupCardVk = ({ group }) => {
               </Typography>
             ))}
           </Box>
-          <Tooltip title="Срок размещения: Топ/лента">
+          {isAuth ? (
             <Box sx={{ alignSelf: 'center' }}>
-              <Typography variant="body2" color="text.secondary">
-                1/24
-              </Typography>
+              <IconButton
+                onClick={(_) =>
+                  isLike ? handleDeleteLike({ id }) : handleLike({ id })
+                }>
+                <FavoriteIcon
+                  color={isLike ? 'primary' : 'inherit'}
+                  fontSize="large"
+                />
+              </IconButton>
+              <IconButton
+                onClick={(_) =>
+                  isShoppingCart ? handleDeleteCart({ id }) : handleCart({ id })
+                }>
+                <ShoppingCartIcon
+                  color={isShoppingCart ? 'primary' : 'inherit'}
+                  fontSize="large"
+                />
+              </IconButton>
             </Box>
-          </Tooltip>
+          ) : (
+            <Tooltip title="Срок размещения: Топ/лента">
+              <Box sx={{ alignSelf: 'center' }}>
+                <Typography variant="body2" color="text.secondary">
+                  1/24
+                </Typography>
+              </Box>
+            </Tooltip>
+          )}
         </Box>
       </Card>
 
@@ -248,6 +285,30 @@ const GroupCardVk = ({ group }) => {
               </IconButton>
             </Tooltip>
           </Box>
+          {isAuth ? (
+            <Box sx={{ alignSelf: 'center' }}>
+              <IconButton
+                onClick={(_) =>
+                  isLike ? handleDeleteLike({ id }) : handleLike({ id })
+                }>
+                <FavoriteIcon
+                  color={isLike ? 'primary' : 'inherit'}
+                  fontSize="large"
+                />
+              </IconButton>
+              <IconButton
+                onClick={(_) =>
+                  isShoppingCart ? handleDeleteCart({ id }) : handleCart({ id })
+                }>
+                <ShoppingCartIcon
+                  color={isShoppingCart ? 'primary' : 'inherit'}
+                  fontSize="large"
+                />
+              </IconButton>
+            </Box>
+          ) : (
+            <></>
+          )}
           <Box
             sx={{
               display: 'flex',

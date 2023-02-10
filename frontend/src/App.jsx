@@ -1,6 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Basket from './pages/Basket';
 import Layout from './components/Layout';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -24,6 +25,8 @@ function App() {
           <Route path="/vk" element={<Home link={'vk'} />} />
           <Route path="/instagram" element={<Home link={'instagram'} />} />
           <Route path="/telegram" element={<Home link={'telegram'} />} />
+          <Route path="/favorite" element={<Home link={'favorite'} />} />
+          <Route path="/basket" element={<Basket />} />
           <Route path="register" element={<SignUp />} />
           <Route path="auth" element={<SignIn />} />
           <Route path="*" element={<Page404 />} />

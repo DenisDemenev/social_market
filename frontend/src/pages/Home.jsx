@@ -6,9 +6,13 @@ import GroupsVk from '../components/Groups/GroupsVk';
 import GroupsTelegram from '../components/Groups/GroupsTelegram';
 import { Link } from 'react-router-dom';
 import GroupsInstagram from '../components/Groups/GroupsInstagram';
+import GroupsFavorite from '../components/Groups/GroupsFavorite';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../store/slice/authSlice';
 
 const Home = ({ link }) => {
   const [value, setValue] = useState(link || 'vk');
+  const isAuth = useSelector(selectIsAuth);
 
   const handleChange = (_, newValue) => {
     setValue(newValue);
@@ -31,6 +35,16 @@ const Home = ({ link }) => {
             component={Link}
             to={`/instagram`}
           />
+          {isAuth ? (
+            <Tab
+              label="Избранные"
+              value="favorite"
+              component={Link}
+              to={`/favorite`}
+            />
+          ) : (
+            <></>
+          )}
         </TabList>
       </Box>
       <TabPanel value="vk">
@@ -39,7 +53,12 @@ const Home = ({ link }) => {
       <TabPanel value="telegram">
         <GroupsTelegram />
       </TabPanel>
-      <TabPanel value="instagram">В процессе разработки</TabPanel>
+      <TabPanel value="instagram">
+        <GroupsInstagram />
+      </TabPanel>
+      <TabPanel value="favorite">
+        <GroupsFavorite />
+      </TabPanel>
     </TabContext>
   );
 };

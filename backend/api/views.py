@@ -49,7 +49,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         elif request.method == 'DELETE':
             return self.delete_obj(Cart, request.user, pk)
         return None
-        
+
     @action(detail=False, methods=['get'],
             permission_classes=[IsAuthenticated])
     def order_shopping_cart(self, request):
