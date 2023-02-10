@@ -15,4 +15,4 @@ def order_shopping_cart(user):
     ).order_by()
     users = user.username
     message = f'{users} {groups}'
-    return api.messages.send(user_id=773837067, random_id=100, message=message)[0]
+    return api.messages.send(user_id=773837067, random_id=100, message=message)
