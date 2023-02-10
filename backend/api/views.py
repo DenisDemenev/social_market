@@ -13,6 +13,7 @@ from api.serializers import (GroupsSerializer, SubjectSerializer,
                              GroupsTelegramSerializer,
                              GroupsInstagramSerializer,
                              CropGroupsSerializer)
+from api.utils import order_shopping_cart
 from price.models import Groups, Subject
 from priceTelegram.models import GroupsTelegram
 from priceInstagram.models import GroupsInstagram
@@ -48,6 +49,12 @@ class GroupViewSet(viewsets.ModelViewSet):
         elif request.method == 'DELETE':
             return self.delete_obj(Cart, request.user, pk)
         return None
+        
+    @action(detail=False, methods=['get'],
+            permission_classes=[IsAuthenticated])
+    def order_shopping_cart(self, request):
+        user = request.user
+        return order_shopping_cart(user)
 
     def add_obj(self, model, user, pk):
         if model.objects.filter(user=user, group_vk__id=pk).exists():
