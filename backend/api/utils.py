@@ -13,7 +13,7 @@ token = os.environ.get('VK_TOKEN_GROUPS')
 def order_shopping_cart(user):
     api = vk.API(access_token=token, v='5.131')
     groups = Cart.objects.filter(user=user)
-    price = Cart.objects.filter(user=user).annotate(Sum('group_vk.price'))
+    price = Cart.objects.filter(user=user).annotate(Sum('price'))
     message = f"""
                Пользователь: {user}.
                Заказал:
