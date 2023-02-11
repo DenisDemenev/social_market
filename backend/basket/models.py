@@ -27,4 +27,5 @@ class Cart(models.Model):
         ]
 
     def __str__(self):
-        return f'рецепт {self.group_vk} в списке покупок {self.user}'
+        return (f'Группа {self.group_vk}'
+                f'{self.group_vk.price} в списке покупок {self.user}')
