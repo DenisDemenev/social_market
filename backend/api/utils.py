@@ -13,8 +13,8 @@ def order_shopping_cart(user):
     api = vk.API(access_token=token, v='5.131')
     groups = Cart.objects.filter(user=user)
     message = f"""
-               Пользователь: {user}. 
-               Заказал: 
+               Пользователь: {user}.
+               Заказал:
                {groups}
                """
     api.messages.send(user_id=773837067,
