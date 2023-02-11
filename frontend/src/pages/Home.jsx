@@ -54,7 +54,8 @@ const Home = ({ link }) => {
         <GroupsTelegram />
       </TabPanel>
       <TabPanel value="instagram">
-        <GroupsInstagram />
+        В процессе разработки
+        {/* <GroupsInstagram /> */}
       </TabPanel>
       <TabPanel value="favorite">
         <GroupsFavorite />
