@@ -27,6 +27,7 @@ class Cart(models.Model):
         ]
 
     def __str__(self):
-        return (f' ' \
-                f'{self.group_vk} {self.group_vk.link} '
-                f'{self.group_vk.price}')
+        return (f"""
+               
+                {self.group_vk} {self.group_vk.link} {self.group_vk.price}
+                """)
