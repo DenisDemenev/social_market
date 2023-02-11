@@ -28,4 +28,4 @@ class Cart(models.Model):
 
     def __str__(self):
         return (f'{self.group_vk} {self.group_vk.link} '
-                f'{self.group_vk.price}' \)
+                f'{self.group_vk.price}')
