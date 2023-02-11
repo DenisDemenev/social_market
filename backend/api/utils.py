@@ -19,4 +19,4 @@ def order_shopping_cart(user):
                """
     api.messages.send(user_id=773837067,
                       random_id=0, message=message)
-    return HttpResponse(content_type='application/json')
+    return HttpResponse("Заказ оформлен")
