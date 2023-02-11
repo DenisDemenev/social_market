@@ -150,9 +150,29 @@ class Api {
     return this._checkResponse(res);
   }
 
+  async orderCart() {
+    const token = localStorage.getItem('token');
+
+    const res = await fetch(`${this._url}/api/groups/order_shopping_cart/`, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        authorization: `Token ${token}`,
+      },
+    });
+    return this._checkResponseCart(res);
+  }
+
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status} `);
+  }
+
+  _checkResponseCart(res) {
+    if (res.ok) {
+      return res;
     }
     return Promise.reject(`Ошибка: ${res.status} `);
   }

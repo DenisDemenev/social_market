@@ -9,6 +9,7 @@ import Page404 from './pages/Page404';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getMe } from './store/slice/authSlice';
+import OrderConfirm from './pages/OrderConfirm';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
           <Route path="/basket" element={<Basket />} />
           <Route path="register" element={<SignUp />} />
           <Route path="auth" element={<SignIn />} />
+          <Route path="confirm" element={<OrderConfirm />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Layout>

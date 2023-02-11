@@ -83,6 +83,32 @@ const Basket = () => {
       });
   };
 
+  const handleOrderCart = () => {
+    api
+      .orderCart()
+      .then((res) => {
+        groups.map((group) => {
+          const id = group.id;
+          api
+            .removeFromCart({ id })
+            .then((res) => {})
+            .catch((err) => {
+              const { errors } = err;
+              if (errors) {
+                alert(errors);
+              }
+            });
+          return navigate('/confirm');
+        });
+      })
+      .catch((err) => {
+        const { errors } = err;
+        if (errors) {
+          alert(errors);
+        }
+      });
+  };
+
   return (
     <Container maxWidth="lg">
       <TableContainer component={Paper}>
@@ -124,7 +150,9 @@ const Basket = () => {
               <TableCell></TableCell>
               <TableCell></TableCell>
               <TableCell align="right">
-                <Button variant="contained">Заказать</Button>
+                <Button variant="contained" onClick={() => handleOrderCart()}>
+                  Заказать
+                </Button>
               </TableCell>
             </TableRow>
           </TableBody>
