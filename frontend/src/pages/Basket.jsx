@@ -22,6 +22,7 @@ const Basket = () => {
   const [groups, setGroups] = useState([]);
   const [sum, setSum] = useState(0);
   const [count, setCount] = useState(0);
+  const isDisabled = Boolean(groups.length);
 
   useEffect(() => {
     api
@@ -150,7 +151,10 @@ const Basket = () => {
               <TableCell></TableCell>
               <TableCell></TableCell>
               <TableCell align="right">
-                <Button variant="contained" onClick={() => handleOrderCart()}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleOrderCart()}
+                  disabled={!isDisabled}>
                   Заказать
                 </Button>
               </TableCell>
