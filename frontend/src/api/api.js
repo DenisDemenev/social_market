@@ -121,7 +121,7 @@ class Api {
         authorization: `Token ${token}`,
       },
     });
-    return this._checkResponse(res);
+    return this._checkResponseCart(res);
   }
 
   async addToCart({ id }) {
@@ -147,7 +147,7 @@ class Api {
         authorization: `Token ${token}`,
       },
     });
-    return this._checkResponse(res);
+    return this._checkResponseCart(res);
   }
 
   async orderCart() {

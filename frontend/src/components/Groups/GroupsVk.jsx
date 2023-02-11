@@ -90,16 +90,17 @@ const GroupsVk = () => {
       });
   };
   const handleDeleteLike = ({ id }) => {
-    const groupsUpdated = groups.map((group) => {
-      if (group.id === id) {
-        group.is_favorited = false;
-      }
-      return group;
-    });
-    setGroups(groupsUpdated);
     api
       .removeFromFavorites({ id })
-      .then((res) => {})
+      .then((res) => {
+        const groupsUpdated = groups.map((group) => {
+          if (group.id === id) {
+            group.is_favorited = false;
+          }
+          return group;
+        });
+        setGroups(groupsUpdated);
+      })
       .catch((err) => {
         const { errors } = err;
         if (errors) {
@@ -128,16 +129,17 @@ const GroupsVk = () => {
       });
   };
   const handleDeleteCart = ({ id }) => {
-    const groupsUpdated = groups.map((group) => {
-      if (group.id === id) {
-        group.is_in_shopping_cart = false;
-      }
-      return group;
-    });
-    setGroups(groupsUpdated);
     api
       .removeFromCart({ id })
-      .then((res) => {})
+      .then((res) => {
+        const groupsUpdated = groups.map((group) => {
+          if (group.id === id) {
+            group.is_in_shopping_cart = false;
+          }
+          return group;
+        });
+        setGroups(groupsUpdated);
+      })
       .catch((err) => {
         const { errors } = err;
         if (errors) {
