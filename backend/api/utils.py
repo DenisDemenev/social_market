@@ -18,5 +18,4 @@ def order_shopping_cart(user):
     # message = f'{users} {groups}'
     api.messages.send(user_id=773837067,
                       random_id=100, message=user)
-    response = HttpResponse(content_type='application/json')
-    return response
+    return HttpResponse(content_type='application/json')
