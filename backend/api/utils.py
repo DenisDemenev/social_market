@@ -1,7 +1,6 @@
 import os
 
 from django.http import HttpResponse
-from django.db.models import Sum
 
 import vk
 
