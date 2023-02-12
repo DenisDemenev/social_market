@@ -113,7 +113,7 @@ const Basket = () => {
   return (
     <Container maxWidth="lg">
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 380 }} aria-label="spanning table">
+        <Table sx={{ minWidth: 320 }} aria-label="spanning table">
           <TableHead>
             <TableRow>
               <TableCell align="center" colSpan={8}>
