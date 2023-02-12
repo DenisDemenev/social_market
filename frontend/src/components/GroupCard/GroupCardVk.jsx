@@ -235,6 +235,30 @@ const GroupCardVk = ({
               mx: 'auto',
             }}
           />
+          {isAuth ? (
+            <Box sx={{ alignSelf: 'center' }}>
+              <IconButton
+                onClick={(_) =>
+                  isLike ? handleDeleteLike({ id }) : handleLike({ id })
+                }>
+                <FavoriteIcon
+                  color={isLike ? 'primary' : 'inherit'}
+                  fontSize="large"
+                />
+              </IconButton>
+              <IconButton
+                onClick={(_) =>
+                  isShoppingCart ? handleDeleteCart({ id }) : handleCart({ id })
+                }>
+                <ShoppingCartIcon
+                  color={isShoppingCart ? 'primary' : 'inherit'}
+                  fontSize="large"
+                />
+              </IconButton>
+            </Box>
+          ) : (
+            <></>
+          )}
           <Typography
             component="div"
             sx={{ fontSize: '18px', lineHeight: 1.2, fontWeight: 700 }}>
@@ -285,30 +309,7 @@ const GroupCardVk = ({
               </IconButton>
             </Tooltip>
           </Box>
-          {isAuth ? (
-            <Box sx={{ alignSelf: 'center' }}>
-              <IconButton
-                onClick={(_) =>
-                  isLike ? handleDeleteLike({ id }) : handleLike({ id })
-                }>
-                <FavoriteIcon
-                  color={isLike ? 'primary' : 'inherit'}
-                  fontSize="large"
-                />
-              </IconButton>
-              <IconButton
-                onClick={(_) =>
-                  isShoppingCart ? handleDeleteCart({ id }) : handleCart({ id })
-                }>
-                <ShoppingCartIcon
-                  color={isShoppingCart ? 'primary' : 'inherit'}
-                  fontSize="large"
-                />
-              </IconButton>
-            </Box>
-          ) : (
-            <></>
-          )}
+
           <Box
             sx={{
               display: 'flex',
