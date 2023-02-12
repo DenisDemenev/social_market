@@ -5,7 +5,7 @@ import { TabPanel, TabList, TabContext } from '@mui/lab/';
 import GroupsVk from '../components/Groups/GroupsVk';
 import GroupsTelegram from '../components/Groups/GroupsTelegram';
 import { Link } from 'react-router-dom';
-import GroupsInstagram from '../components/Groups/GroupsInstagram';
+// import GroupsInstagram from '../components/Groups/GroupsInstagram';
 import GroupsFavorite from '../components/Groups/GroupsFavorite';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../store/slice/authSlice';
@@ -29,12 +29,12 @@ const Home = ({ link }) => {
             component={Link}
             to={`/telegram`}
           />
-          <Tab
+          {/* <Tab
             label="Instangram"
             value="instagram"
             component={Link}
             to={`/instagram`}
-          />
+          /> */}
           {isAuth ? (
             <Tab
               label="Избранные"
@@ -53,10 +53,9 @@ const Home = ({ link }) => {
       <TabPanel value="telegram">
         <GroupsTelegram />
       </TabPanel>
-      <TabPanel value="instagram">
-        В процессе разработки
-        {/* <GroupsInstagram /> */}
-      </TabPanel>
+      {/* <TabPanel value="instagram">
+        <GroupsInstagram />
+      </TabPanel> */}
       <TabPanel value="favorite">
         <GroupsFavorite />
       </TabPanel>
