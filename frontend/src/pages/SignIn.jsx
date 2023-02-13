@@ -75,8 +75,8 @@ const SignIn = () => {
         .loginVk(location.search)
         .then((res) => {
           localStorage.setItem('access', res.access);
-          dispatch(getMe());
-          (() => navigate(`/`))();
+          setTimeout(dispatch(getMe()), 500);
+          setTimeout((() => navigate(`/`))(), 500);
         })
         .catch((err) => {
           console.log(`Что-то пошло не так: ${err}`);
