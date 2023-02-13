@@ -158,7 +158,7 @@ SIMPLE_JWT = {
 
 DJOSER = {
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['https://smax.store/api/auth/o/vk-oauth2/',],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['https://smax.store/api/auth/o/vk-oauth2/', ],
     'LOGIN_FIELD': 'email',
     'HIDE_USERS': False,
     'SERIALIZERS': {
