@@ -154,7 +154,7 @@ const SignIn = () => {
           <Box>
             <Typography variant="body1">Войти через:</Typography>
             <IconButton onClick={() => handleVk()}>
-              <Avatar src="/static/images/VK.com-logo.svg.png" />
+              <Avatar src="/static/images/vk-1.svg" />
             </IconButton>
           </Box>
         </Box>

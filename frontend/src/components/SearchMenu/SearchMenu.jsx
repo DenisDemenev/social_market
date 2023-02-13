@@ -8,6 +8,8 @@ import {
   Toolbar,
   Checkbox,
   FormControlLabel,
+  Link,
+  Box,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -20,6 +22,7 @@ import {
 } from '../../store/slice/filterSlice';
 import api from '../../api/api';
 import { selectIsAuth } from '../../store/slice/authSlice';
+import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 
 const SearchMenu = () => {
   const [subject, setSubject] = useState([]);
@@ -134,6 +137,23 @@ const SearchMenu = () => {
         </ListItem>
       </List>
       <Divider />
+      {isAuth ? (
+        <Box sx={{ pt: 5 }}>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<MailOutlineOutlinedIcon />}>
+            <Link
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              href="https://vk.me/id773837067"
+              target={'_blank'}>
+              Написать нам
+            </Link>
+          </Button>
+        </Box>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
