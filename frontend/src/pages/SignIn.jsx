@@ -75,13 +75,14 @@ const SignIn = () => {
         .loginVk(location.search)
         .then((res) => {
           localStorage.setItem('access', res.access);
+          dispatch(getMe());
           (() => navigate(`/`))();
         })
         .catch((err) => {
           console.log(`Что-то пошло не так: ${err}`);
         });
     }
-  }, [location, navigate]);
+  });
 
   return (
     <Container component="main" maxWidth="xs">
