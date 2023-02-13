@@ -76,9 +76,7 @@ const SignIn = () => {
         .then((res) => {
           localStorage.setItem('access', res.access);
           dispatch(getMe());
-          if (isAuth) {
-            (() => navigate(`/`))();
-          }
+          window.location.replace('https://smax.store/');
         })
         .catch((err) => {
           console.log(`Что-то пошло не так: ${err}`);
