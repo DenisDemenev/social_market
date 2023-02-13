@@ -1,5 +1,5 @@
 import { Tab, Box } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TabPanel, TabList, TabContext } from '@mui/lab/';
 
 import GroupsVk from '../components/Groups/GroupsVk';
@@ -7,8 +7,8 @@ import GroupsTelegram from '../components/Groups/GroupsTelegram';
 import { Link } from 'react-router-dom';
 // import GroupsInstagram from '../components/Groups/GroupsInstagram';
 import GroupsFavorite from '../components/Groups/GroupsFavorite';
-import { useSelector } from 'react-redux';
-import { selectIsAuth } from '../store/slice/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMe, selectIsAuth } from '../store/slice/authSlice';
 
 const Home = ({ link }) => {
   const [value, setValue] = useState(link || 'vk');
@@ -17,6 +17,11 @@ const Home = ({ link }) => {
   const handleChange = (_, newValue) => {
     setValue(newValue);
   };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
 
   return (
     <TabContext value={value}>
