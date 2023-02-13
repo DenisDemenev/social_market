@@ -62,8 +62,7 @@ const SignIn = () => {
     api
       .authVk()
       .then((res) => {
-        (() => navigate(`${res.authorization_url}`))();
-        console.log(res);
+        window.location.replace(res.authorization_url);
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ${err}`);
@@ -82,7 +81,7 @@ const SignIn = () => {
           console.log(`Что-то пошло не так: ${err}`);
         });
     }
-  });
+  }, [location, navigate]);
 
   return (
     <Container component="main" maxWidth="xs">
