@@ -118,7 +118,9 @@ const Header = ({ window, children }) => {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-              <Typography sx={{ mr: 1 }}>{user.username}</Typography>
+              <Typography sx={{ mr: 1 }}>
+                {user.first_name} {user.last_name}
+              </Typography>
               <Button
                 onClick={handleLogout}
                 variant="outlined"
