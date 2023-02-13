@@ -158,7 +158,7 @@ SIMPLE_JWT = {
 
 DJOSER = {
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://127.0.0.1:3000/auth', ],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['https://smax.store/auth', ],
     'LOGIN_FIELD': 'email',
     'HIDE_USERS': False,
     'SERIALIZERS': {

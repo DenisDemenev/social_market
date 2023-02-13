@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import {
   Box,
@@ -13,6 +13,7 @@ import {
   Avatar,
   Snackbar,
   Alert,
+  IconButton,
 } from '@mui/material';
 import api from '../api/api';
 import { getMe, selectIsAuth } from '../store/slice/authSlice';
@@ -20,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
@@ -55,6 +57,32 @@ const SignIn = () => {
         console.log(`Что-то пошло не так: ${err}`);
       });
   };
+
+  const handleVk = () => {
+    api
+      .authVk()
+      .then((res) => {
+        (() => navigate(`${res.authorization_url}`))();
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ${err}`);
+      });
+  };
+
+  useEffect(() => {
+    if (location.search) {
+      api
+        .loginVk(location.search)
+        .then((res) => {
+          console.log(res.access);
+          localStorage.setItem('access', res.access);
+        })
+        .catch((err) => {
+          console.log(`Что-то пошло не так: ${err}`);
+        });
+    }
+  });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -123,6 +151,12 @@ const SignIn = () => {
               </NavLink> */}
             </Grid>
           </Grid>
+          <Box>
+            <Typography variant="body1">Войти через:</Typography>
+            <IconButton onClick={() => handleVk()}>
+              <Avatar src="/static/images/VK.com-logo.svg.png" />
+            </IconButton>
+          </Box>
         </Box>
       </Box>
       <Snackbar

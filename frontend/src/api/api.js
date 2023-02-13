@@ -98,6 +98,27 @@ class Api {
     return this._checkResponse(res);
   }
 
+  async authVk() {
+    const res = await fetch(
+      `${this._url}/api/auth/o/vk-oauth2/?redirect_uri=http://smax.store/auth`,
+      {
+        method: 'GET',
+        headers: this._headers,
+      }
+    );
+    return this._checkResponse(res);
+  }
+
+  async loginVk(location) {
+    const res = await fetch(`${this._url}/api/auth/o/vk-oauth2/${location}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+    });
+    return this._checkResponse(res);
+  }
+
   async addToFavorites({ id }) {
     const token = localStorage.getItem('token');
 
