@@ -81,5 +81,7 @@ jobs:
             echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
             echo VK_TOKEN=${{ secrets.VK_TOKEN }} >> .env
             echo VK_TOKEN_GROUPS=${{ secrets.VK_TOKEN_GROUPS }} >> .env
+            echo VK_OAUTH2_KEY=${{ secrets.VK_OAUTH2_KEY }} >> .env
+            echo 'OAUTH2_SECRET'=${{ secrets.'OAUTH2_SECRET' }} >> .env
             sudo docker compose up -d
             sudo docker compose exec -T backend python manage.py collectstatic --noinput
