@@ -50,7 +50,7 @@ const SignIn = () => {
       .then((res) => {
         localStorage.setItem('token', res.auth_token);
         dispatch(getMe());
-        (() => navigate(`/`))();
+        window.location.replace('https://smax.store/');
       })
       .catch((err) => {
         setOpen(true);
