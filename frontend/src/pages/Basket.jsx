@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Paper,
   Table,
@@ -142,7 +143,7 @@ const Basket = () => {
               <TableCell align="right">Сумма:</TableCell>
               <TableCell align="right">{sum} руб.</TableCell>
             </TableRow>
-            <TableRow>
+            <TableRow sx={{ display: { xs: 'none', sm: 'contents' } }}>
               <TableCell>
                 <Button variant="contained" onClick={() => navigate(`/`)}>
                   назад
@@ -161,6 +162,22 @@ const Basket = () => {
             </TableRow>
           </TableBody>
         </Table>
+        <Box
+          sx={{
+            display: { xs: 'flex', sm: 'none' },
+            justifyContent: 'space-between',
+            m: 2,
+          }}>
+          <Button variant="contained" onClick={() => navigate(`/`)}>
+            назад
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleOrderCart()}
+            disabled={!isDisabled}>
+            Заказать
+          </Button>
+        </Box>
       </TableContainer>
     </Container>
   );
