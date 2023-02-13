@@ -53,6 +53,7 @@ const Header = ({ window, children }) => {
   const handleLogout = () => {
     dispatch(logout({}));
     localStorage.removeItem('token');
+    localStorage.removeItem('access');
     dispatch(labelValue(false));
   };
 

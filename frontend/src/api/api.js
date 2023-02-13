@@ -3,6 +3,14 @@ class Api {
     this._url = data.url;
     this._headers = data.headers;
     this._authorization = 'authorization';
+    this._token = localStorage.getItem('token');
+    this._access = localStorage.getItem('access');
+    this._authorizationToken = this._token
+      ? { authorization: `Token ${this._token}` }
+      : {};
+    this._authorizationJWT = this._access
+      ? { authorization: `Bearer ${this._access}` }
+      : {};
   }
 
   async getGroupsVk({
@@ -15,12 +23,6 @@ class Api {
     isFavorite,
     isShoppingCart,
   }) {
-    const token = localStorage.getItem('token');
-    const access = localStorage.getItem('access');
-    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
-    const authorizationJWT = access
-      ? { authorization: `Bearer ${access}` }
-      : {};
     const res = await fetch(
       `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
         subjectValue ? `&subject=${subjectValue}` : ''
@@ -33,8 +35,8 @@ class Api {
         method: 'GET',
         headers: {
           ...this._headers,
-          ...authorizationToken,
-          ...authorizationJWT,
+          ...this._authorizationToken,
+          ...this._authorizationJWT,
         },
       }
     );
@@ -125,95 +127,60 @@ class Api {
   }
 
   async addToFavorites({ id }) {
-    const token = localStorage.getItem('token');
-    const access = localStorage.getItem('access');
-    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
-    const authorizationJWT = access
-      ? { authorization: `Bearer ${access}` }
-      : {};
-
     const res = await fetch(`${this._url}/api/groups/${id}/favorite/`, {
       method: 'POST',
       headers: {
         ...this._headers,
-        ...authorizationToken,
-        ...authorizationJWT,
+        ...this._authorizationToken,
+        ...this._authorizationJWT,
       },
     });
     return this._checkResponse(res);
   }
 
   async removeFromFavorites({ id }) {
-    const token = localStorage.getItem('token');
-    const access = localStorage.getItem('access');
-    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
-    const authorizationJWT = access
-      ? { authorization: `Bearer ${access}` }
-      : {};
-
     const res = await fetch(`${this._url}/api/groups/${id}/favorite/`, {
       method: 'DELETE',
       headers: {
         ...this._headers,
-        ...authorizationToken,
-        ...authorizationJWT,
+        ...this._authorizationToken,
+        ...this._authorizationJWT,
       },
     });
     return this._checkResponseCart(res);
   }
 
   async addToCart({ id }) {
-    const token = localStorage.getItem('token');
-    const access = localStorage.getItem('access');
-    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
-    const authorizationJWT = access
-      ? { authorization: `Bearer ${access}` }
-      : {};
-
     const res = await fetch(`${this._url}/api/groups/${id}/shopping_cart/`, {
       method: 'POST',
       headers: {
         ...this._headers,
-        ...authorizationToken,
-        ...authorizationJWT,
+        ...this._authorizationToken,
+        ...this._authorizationJWT,
       },
     });
     return this._checkResponse(res);
   }
 
   async removeFromCart({ id }) {
-    const token = localStorage.getItem('token');
-    const access = localStorage.getItem('access');
-    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
-    const authorizationJWT = access
-      ? { authorization: `Bearer ${access}` }
-      : {};
-
     const res = await fetch(`${this._url}/api/groups/${id}/shopping_cart/`, {
       method: 'DELETE',
       headers: {
         ...this._headers,
-        ...authorizationToken,
-        ...authorizationJWT,
+        ...this._authorizationToken,
+        ...this._authorizationJWT,
       },
     });
     return this._checkResponseCart(res);
   }
 
   async orderCart() {
-    const token = localStorage.getItem('token');
-    const access = localStorage.getItem('access');
-    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
-    const authorizationJWT = access
-      ? { authorization: `Bearer ${access}` }
-      : {};
-
     const res = await fetch(`${this._url}/api/groups/order_shopping_cart/`, {
       method: 'GET',
       headers: {
         ...this._headers,
-        ...authorizationToken,
-        ...authorizationJWT,
+        ...this._authorizationToken,
+        ...this._authorizationJWT,
       },
     });
     return this._checkResponseCart(res);
