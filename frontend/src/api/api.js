@@ -16,7 +16,11 @@ class Api {
     isShoppingCart,
   }) {
     const token = localStorage.getItem('token');
-    const authorization = token ? { authorization: `Token ${token}` } : {};
+    const access = localStorage.getItem('access');
+    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
+    const authorizationJWT = access
+      ? { authorization: `Bearer ${access}` }
+      : {};
     const res = await fetch(
       `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
         subjectValue ? `&subject=${subjectValue}` : ''
@@ -29,7 +33,8 @@ class Api {
         method: 'GET',
         headers: {
           ...this._headers,
-          ...authorization,
+          ...authorizationToken,
+          ...authorizationJWT,
         },
       }
     );
@@ -121,12 +126,18 @@ class Api {
 
   async addToFavorites({ id }) {
     const token = localStorage.getItem('token');
+    const access = localStorage.getItem('access');
+    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
+    const authorizationJWT = access
+      ? { authorization: `Bearer ${access}` }
+      : {};
 
     const res = await fetch(`${this._url}/api/groups/${id}/favorite/`, {
       method: 'POST',
       headers: {
         ...this._headers,
-        authorization: `Token ${token}`,
+        ...authorizationToken,
+        ...authorizationJWT,
       },
     });
     return this._checkResponse(res);
@@ -134,12 +145,18 @@ class Api {
 
   async removeFromFavorites({ id }) {
     const token = localStorage.getItem('token');
+    const access = localStorage.getItem('access');
+    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
+    const authorizationJWT = access
+      ? { authorization: `Bearer ${access}` }
+      : {};
 
     const res = await fetch(`${this._url}/api/groups/${id}/favorite/`, {
       method: 'DELETE',
       headers: {
         ...this._headers,
-        authorization: `Token ${token}`,
+        ...authorizationToken,
+        ...authorizationJWT,
       },
     });
     return this._checkResponseCart(res);
@@ -147,12 +164,18 @@ class Api {
 
   async addToCart({ id }) {
     const token = localStorage.getItem('token');
+    const access = localStorage.getItem('access');
+    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
+    const authorizationJWT = access
+      ? { authorization: `Bearer ${access}` }
+      : {};
 
     const res = await fetch(`${this._url}/api/groups/${id}/shopping_cart/`, {
       method: 'POST',
       headers: {
         ...this._headers,
-        authorization: `Token ${token}`,
+        ...authorizationToken,
+        ...authorizationJWT,
       },
     });
     return this._checkResponse(res);
@@ -160,12 +183,18 @@ class Api {
 
   async removeFromCart({ id }) {
     const token = localStorage.getItem('token');
+    const access = localStorage.getItem('access');
+    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
+    const authorizationJWT = access
+      ? { authorization: `Bearer ${access}` }
+      : {};
 
     const res = await fetch(`${this._url}/api/groups/${id}/shopping_cart/`, {
       method: 'DELETE',
       headers: {
         ...this._headers,
-        authorization: `Token ${token}`,
+        ...authorizationToken,
+        ...authorizationJWT,
       },
     });
     return this._checkResponseCart(res);
@@ -173,12 +202,18 @@ class Api {
 
   async orderCart() {
     const token = localStorage.getItem('token');
+    const access = localStorage.getItem('access');
+    const authorizationToken = token ? { authorization: `Token ${token}` } : {};
+    const authorizationJWT = access
+      ? { authorization: `Bearer ${access}` }
+      : {};
 
     const res = await fetch(`${this._url}/api/groups/order_shopping_cart/`, {
       method: 'GET',
       headers: {
         ...this._headers,
-        authorization: `Token ${token}`,
+        ...authorizationToken,
+        ...authorizationJWT,
       },
     });
     return this._checkResponseCart(res);

@@ -10,5 +10,11 @@ if (localStorage.getItem('token')) {
     return config;
   });
 }
+if (localStorage.getItem('access')) {
+  instance.interceptors.request.use((config) => {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('access')}`;
+    return config;
+  });
+}
 
 export default instance;
