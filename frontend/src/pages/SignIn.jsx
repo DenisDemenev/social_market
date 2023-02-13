@@ -71,17 +71,18 @@ const SignIn = () => {
 
   useEffect(() => {
     if (location.search) {
-      (async function () {
-        try {
-          await api.loginVk(location.search).then((res) => {
-            localStorage.setItem('access', res.access);
-            dispatch(getMe());
+      api
+        .loginVk(location.search)
+        .then((res) => {
+          localStorage.setItem('access', res.access);
+          dispatch(getMe());
+          if (isAuth) {
             (() => navigate(`/`))();
-          });
-        } catch (err) {
+          }
+        })
+        .catch((err) => {
           console.log(`Что-то пошло не так: ${err}`);
-        }
-      })();
+        });
     }
   });
 
