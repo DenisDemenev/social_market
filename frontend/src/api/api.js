@@ -100,7 +100,7 @@ class Api {
 
   async authVk() {
     const res = await fetch(
-      `${this._url}/api/auth/o/vk-oauth2/?redirect_uri=http://smax.store/auth`,
+      `${this._url}/api/auth/o/vk-oauth2/?redirect_uri=https://smax.store/auth`,
       {
         method: 'GET',
         headers: this._headers,
