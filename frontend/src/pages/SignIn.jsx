@@ -76,7 +76,7 @@ const SignIn = () => {
         .then((res) => {
           localStorage.setItem('access', res.access);
           setTimeout(dispatch(getMe()), 500);
-          setTimeout((() => navigate(`/`))(), 500);
+          setTimeout((() => navigate(`/`))(), 1000);
         })
         .catch((err) => {
           console.log(`Что-то пошло не так: ${err}`);
