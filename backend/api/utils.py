@@ -13,7 +13,8 @@ token = os.environ.get('VK_TOKEN_GROUPS')
 def order_shopping_cart(user):
     api = vk.API(access_token=token, v='5.131')
     groups = Cart.objects.filter(user=user)
-    user_social_uid = UserSocialAuth.objects.filter(user=user).values('uid')[0]['uid']
+    user_social_uid = UserSocialAuth.objects.filter(
+        user=user).values('uid')[0]['uid']
 
     message = f"""
                Пользователь: {user.first_name} {user.last_name}.
