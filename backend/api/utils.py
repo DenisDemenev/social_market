@@ -4,6 +4,7 @@ from django.http import HttpResponse
 
 import vk
 
+from social_django.models import UserSocialAuth
 from basket.models import Cart
 
 token = os.environ.get('VK_TOKEN_GROUPS')
@@ -12,8 +13,11 @@ token = os.environ.get('VK_TOKEN_GROUPS')
 def order_shopping_cart(user):
     api = vk.API(access_token=token, v='5.131')
     groups = Cart.objects.filter(user=user)
+    user_social_uid = UserSocialAuth.objects.filter(user=user).values('uid')[0]['uid']
+
     message = f"""
-               Пользователь: {user}.
+               Пользователь: {user.first_name} {user.last_name}.
+               Ссылка: https://vk.com/id{user_social_uid}
                Заказал:
                {groups}
                """
