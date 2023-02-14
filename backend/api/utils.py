@@ -21,7 +21,7 @@ def order_shopping_cart(user):
     for idx, grp in enumerate(groups, start=1):
         group_message.append((
             f"""
-               {idx}. {grp["group_vk__name"]} - {grp["group_vk__price"]} руб 
+               {idx}. {grp["group_vk__name"]} - {grp["group_vk__price"]} руб
                {grp["group_vk__link"]}
              """
         ))
