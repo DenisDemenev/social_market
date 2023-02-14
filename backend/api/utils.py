@@ -21,9 +21,9 @@ def order_shopping_cart(user):
     for idx, grp in enumerate(groups, start=1):
         group_message.append((
             f"""
-               {idx}. {grp["group_vk__name"]} - {grp["group_vk__price"]} руб
-               {grp["group_vk__link"]}
-             """
+            {idx}. {grp["group_vk__name"]} - {grp["group_vk__price"]} руб
+            {grp["group_vk__link"]}
+            """
         ))
     user_social_uid = ''
     if UserSocialAuth.objects.filter(user=user):
@@ -31,12 +31,12 @@ def order_shopping_cart(user):
             user=user).values('uid')[0]['uid']
 
     message = f"""
-               Пользователь: {user.first_name} {user.last_name}.
-               Ссылка: https://vk.com/id{user_social_uid}
-               Заказал:
-               {' '.join(group_message)}
-               Сумма: {sum} руб.
-               """
+        Пользователь: {user.first_name} {user.last_name}.
+        Ссылка: https://vk.com/id{user_social_uid}
+        Заказал:
+        {' '.join(group_message)}
+        Сумма: {sum} руб.
+        """
     api.messages.send(user_id=773837067,
                       random_id=0, message=message)
     return HttpResponse("Заказ оформлен")
