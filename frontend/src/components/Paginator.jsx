@@ -15,6 +15,7 @@ const Paginator = ({ page, count, link }) => {
       showLastButton
       hideNextButton
       hidePrevButton
+      boundaryCount={0}
       onChange={(_, page) => dispatch(pageCurrentValue(page))}
       sx={{
         margin: 'auto',

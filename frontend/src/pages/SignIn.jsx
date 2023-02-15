@@ -13,7 +13,6 @@ import {
   Avatar,
   Snackbar,
   Alert,
-  IconButton,
 } from '@mui/material';
 import api from '../api/api';
 import { getMe, selectIsAuth } from '../store/slice/authSlice';
@@ -152,10 +151,15 @@ const SignIn = () => {
             </Grid>
           </Grid>
           <Box>
-            <Typography variant="body1">Войти через:</Typography>
-            <IconButton onClick={() => handleVk()}>
-              <Avatar src="/static/images/vk-1.svg" />
-            </IconButton>
+            <Typography component="h2" variant="h5" sx={{ pb: 1 }}>
+              Войти через:
+            </Typography>
+            <Button
+              startIcon={<Avatar src="/static/images/vk-96.svg" />}
+              variant="outlined"
+              onClick={() => handleVk()}>
+              Вконтакте
+            </Button>
           </Box>
         </Box>
       </Box>
