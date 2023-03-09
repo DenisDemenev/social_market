@@ -22,6 +22,8 @@ class Api {
     isLabel,
     isFavorite,
     isShoppingCart,
+    priceMin,
+    priceMax,
   }) {
     const res = await fetch(
       `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
@@ -30,7 +32,9 @@ class Api {
         isFavorite ? `&is_favorited=true` : ''
       }${isShoppingCart ? `&is_in_shopping_cart=true` : ''}${
         searchValue ? `&search=${searchValue}` : ''
-      }${sortValue ? `&ordering=${sortValue}` : ''}`,
+      }${sortValue ? `&ordering=${sortValue}` : ''}${
+        priceMin ? `&price_min=${priceMin}` : ''
+      }${priceMax ? `&price_max=${priceMax}` : ''}`,
       {
         method: 'GET',
         headers: {

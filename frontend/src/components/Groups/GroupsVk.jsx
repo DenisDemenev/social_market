@@ -25,6 +25,8 @@ const GroupsVk = () => {
   const sortValue = useSelector((state) => state.filter.sort);
   const pageCount = useSelector((state) => state.paginator.pageCount);
   const pageCurrent = useSelector((state) => state.paginator.pageCurrent);
+  const priceMin = useSelector((state) => state.filter.priceMin);
+  const priceMax = useSelector((state) => state.filter.priceMax);
 
   useEffect(() => {
     api
@@ -34,6 +36,8 @@ const GroupsVk = () => {
         searchValue,
         sortValue,
         isLabel,
+        priceMin,
+        priceMax,
       })
       .then((res) => {
         setGroups(res.results);
@@ -56,6 +60,8 @@ const GroupsVk = () => {
     location.search,
     navigate,
     isLabel,
+    priceMin,
+    priceMax,
   ]);
   useEffect(() => {
     api
@@ -149,9 +155,16 @@ const GroupsVk = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Grid container spacing={2} flexDirection="column">
-        <Paginator page={pageCurrent} count={pageCount} link={'vk'} />
+    <Container maxWidth='lg'>
+      <Grid
+        container
+        spacing={2}
+        flexDirection='column'>
+        <Paginator
+          page={pageCurrent}
+          count={pageCount}
+          link={'vk'}
+        />
         {groups.map((group) => (
           <GroupCardVk
             key={group.id}
@@ -161,7 +174,11 @@ const GroupsVk = () => {
             handleCart={handleCart}
             handleDeleteCart={handleDeleteCart}></GroupCardVk>
         ))}
-        <Paginator page={pageCurrent} count={pageCount} link={'vk'} />
+        <Paginator
+          page={pageCurrent}
+          count={pageCount}
+          link={'vk'}
+        />
       </Grid>
     </Container>
   );

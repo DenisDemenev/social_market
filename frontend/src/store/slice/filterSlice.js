@@ -6,6 +6,8 @@ const filterSlice = createSlice({
     subject: '',
     search: '',
     sort: '',
+    priceMin: 0,
+    priceMax: 10000,
     label: false,
   },
   reducers: {
@@ -21,9 +23,21 @@ const filterSlice = createSlice({
     labelValue(state, action) {
       state.label = action.payload;
     },
+    priceMinValue(state, action) {
+      state.priceMin = action.payload;
+    },
+    priceMaxValue(state, action) {
+      state.priceMax = action.payload;
+    },
   },
 });
 
-export const { subjectValue, searchValue, sortValue, labelValue } =
-  filterSlice.actions;
+export const {
+  subjectValue,
+  searchValue,
+  sortValue,
+  labelValue,
+  priceMaxValue,
+  priceMinValue,
+} = filterSlice.actions;
 export default filterSlice.reducer;

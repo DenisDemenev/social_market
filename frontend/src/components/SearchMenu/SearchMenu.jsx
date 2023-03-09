@@ -10,6 +10,7 @@ import {
   FormControlLabel,
   Link,
   Box,
+  Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -19,6 +20,8 @@ import {
   searchValue,
   sortValue,
   labelValue,
+  priceMaxValue,
+  priceMinValue,
 } from '../../store/slice/filterSlice';
 import api from '../../api/api';
 import { selectIsAuth } from '../../store/slice/authSlice';
@@ -29,6 +32,8 @@ const SearchMenu = () => {
   const value = useSelector((state) => state.filter.subject);
   const search = useSelector((state) => state.filter.search);
   const sort = useSelector((state) => state.filter.sort);
+  const priceMin = useSelector((state) => state.filter.priceMin);
+  const priceMax = useSelector((state) => state.filter.priceMax);
   const isLabel = useSelector((state) => state.filter.label);
   const isAuth = useSelector(selectIsAuth);
 
@@ -64,11 +69,21 @@ const SearchMenu = () => {
     dispatch(sortValue(e.target.value));
   };
 
+  const handleChangePriceMinValue = (e) => {
+    dispatch(priceMinValue(e.target.value));
+  };
+
+  const handleChangePriceMaxValue = (e) => {
+    dispatch(priceMaxValue(e.target.value));
+  };
+
   const handleClickButtonClear = () => {
     dispatch(subjectValue(''));
     dispatch(searchValue(''));
     dispatch(sortValue(''));
     dispatch(labelValue(false));
+    dispatch(priceMaxValue(10000));
+    dispatch(priceMinValue(0));
   };
 
   return (
@@ -78,37 +93,60 @@ const SearchMenu = () => {
       <List>
         <ListItem>
           <TextField
-            id="sort"
-            label="Сортировать"
+            id='sort'
+            label='Сортировать'
             select
             fullWidth
             value={sort}
             onChange={handleChangeSortValue}>
             <MenuItem value={priceValue}>Цена по возрастанию</MenuItem>
             <MenuItem value={`-${priceValue}`}>Цена по убыванию</MenuItem>
-            <MenuItem value="cpm">CPM по возростанию</MenuItem>
-            <MenuItem value="-cpm">CPM по убыванию</MenuItem>
+            <MenuItem value='cpm'>CPM по возростанию</MenuItem>
+            <MenuItem value='-cpm'>CPM по убыванию</MenuItem>
           </TextField>
         </ListItem>
         <ListItem>
           <TextField
-            id="outlined-basic"
-            label="Поиск"
-            variant="outlined"
+            id='outlined-basic'
+            label='Поиск'
+            variant='outlined'
             value={search}
             onChange={handleChangeSearchValue}
           />
         </ListItem>
         <ListItem>
           <TextField
-            id="category"
-            label="Категория"
+            id='outlined-basic'
+            label='Цена от'
+            variant='outlined'
+            value={priceMin}
+            onChange={handleChangePriceMinValue}
+          />
+          <Typography
+            component='span'
+            sx={{ paddingX: 0.5 }}>
+            -
+          </Typography>
+          <TextField
+            id='outlined-basic'
+            label='до'
+            variant='outlined'
+            value={priceMax}
+            onChange={handleChangePriceMaxValue}
+          />
+        </ListItem>
+        <ListItem>
+          <TextField
+            id='category'
+            label='Категория'
             select
             fullWidth
             value={value}
             onChange={handleChangeSubjectValue}>
             {subject.map((item) => (
-              <MenuItem key={item.id} value={item.slug}>
+              <MenuItem
+                key={item.id}
+                value={item.slug}>
                 {item.name}
               </MenuItem>
             ))}
@@ -118,9 +156,12 @@ const SearchMenu = () => {
           <ListItem>
             <FormControlLabel
               control={
-                <Checkbox onChange={handleChangeLabelValue} checked={isLabel} />
+                <Checkbox
+                  onChange={handleChangeLabelValue}
+                  checked={isLabel}
+                />
               }
-              label="Группы без метки"
+              label='Группы без метки'
             />
           </ListItem>
         ) : (
@@ -128,8 +169,8 @@ const SearchMenu = () => {
         )}
         <ListItem>
           <Button
-            color="error"
-            variant="contained"
+            color='error'
+            variant='contained'
             sx={{ marginX: 'auto' }}
             onClick={handleClickButtonClear}>
             Сбросить
@@ -140,12 +181,12 @@ const SearchMenu = () => {
       {isAuth ? (
         <Box sx={{ pt: 5 }}>
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             startIcon={<MailOutlineOutlinedIcon />}>
             <Link
               style={{ textDecoration: 'none', color: 'inherit' }}
-              href="https://vk.me/id773837067"
+              href='https://vk.me/id773837067'
               target={'_blank'}>
               Написать нам
             </Link>
