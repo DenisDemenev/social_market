@@ -37,7 +37,8 @@ class CustomUserSerializer(UserSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'username', 'email')
+        fields = ('id', 'first_name', 'last_name', 'username',
+                  'email', 'is_superuser')
 
 
 class SubjectSerializer(serializers.ModelSerializer):
