@@ -28,7 +28,7 @@ class SubjectFilterVk(FilterSet):
 
     class Meta:
         model = Groups
-        fields = ('subject', 'label','price')
+        fields = ('subject', 'label', 'price')
 
 
 class SubjectFilterOther(FilterSet):
