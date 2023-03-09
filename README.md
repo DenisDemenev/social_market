@@ -1,3 +1,5 @@
+![example workflow](https://github.com/DenisDemenev/social_market/actions/workflows/social_workflow.yml/badge.svg)
+
 Описание проекта:
 Проект прайс-листа для SMM агенства. Размещены рекламные ресурсы из соц. сети VK.
 Подключено VK API для загрузки информации о ресурсе по id.
