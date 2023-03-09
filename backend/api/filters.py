@@ -12,7 +12,7 @@ class SubjectFilterVk(FilterSet):
     subject = filters.AllValuesMultipleFilter(field_name='subject__slug')
     label = filters.BooleanFilter(field_name='label')
     is_favorited = filters.BooleanFilter(method='filter_is_favorited')
-    price_min_max = filters.RangeFilter(filed_name='price')
+    price = filters.RangeFilter(filed_name='price')
     is_in_shopping_cart = filters.BooleanFilter(
         method='filter_is_in_shopping_cart')
 
@@ -28,7 +28,7 @@ class SubjectFilterVk(FilterSet):
 
     class Meta:
         model = Groups
-        fields = ('subject', 'label')
+        fields = ('subject', 'label','price')
 
 
 class SubjectFilterOther(FilterSet):
