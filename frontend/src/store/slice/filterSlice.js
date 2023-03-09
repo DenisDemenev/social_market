@@ -6,8 +6,8 @@ const filterSlice = createSlice({
     subject: '',
     search: '',
     sort: '',
-    priceMin: 0,
-    priceMax: 10000,
+    priceMin: '',
+    priceMax: '',
     label: false,
   },
   reducers: {

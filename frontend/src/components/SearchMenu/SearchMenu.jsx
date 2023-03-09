@@ -82,8 +82,8 @@ const SearchMenu = () => {
     dispatch(searchValue(''));
     dispatch(sortValue(''));
     dispatch(labelValue(false));
-    dispatch(priceMaxValue(10000));
-    dispatch(priceMinValue(0));
+    dispatch(priceMaxValue(''));
+    dispatch(priceMinValue(''));
   };
 
   return (
@@ -108,15 +108,6 @@ const SearchMenu = () => {
         <ListItem>
           <TextField
             id='outlined-basic'
-            label='Поиск'
-            variant='outlined'
-            value={search}
-            onChange={handleChangeSearchValue}
-          />
-        </ListItem>
-        <ListItem>
-          <TextField
-            id='outlined-basic'
             label='Цена от'
             variant='outlined'
             value={priceMin}
@@ -135,6 +126,16 @@ const SearchMenu = () => {
             onChange={handleChangePriceMaxValue}
           />
         </ListItem>
+        <ListItem>
+          <TextField
+            id='outlined-basic'
+            label='Поиск'
+            variant='outlined'
+            value={search}
+            onChange={handleChangeSearchValue}
+          />
+        </ListItem>
+
         <ListItem>
           <TextField
             id='category'
