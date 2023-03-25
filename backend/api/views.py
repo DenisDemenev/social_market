@@ -6,30 +6,26 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.filters import GroupSearchFilter, SubjectFilterVk, SubjectFilterOther
-from api.permissions import IsOwnerOrReadOnly
+from api.filters import (CategoryFilterVk, CategoryFilterTelegram,
+                         CategoryFilterInstagram)
 from api.pagination import LimitPageNumberPagination
-from api.serializers import (GroupsSerializer, SubjectSerializer,
+from api.serializers import (GroupsVkSerializer, CategorySerializer,
                              GroupsTelegramSerializer,
                              GroupsInstagramSerializer,
                              CropGroupsSerializer)
 from api.utils import order_shopping_cart
-from price.models import Groups, Subject
-from priceTelegram.models import GroupsTelegram
-from priceInstagram.models import GroupsInstagram
-from favorite.models import Favorite
-from basket.models import Cart
+from price.models import (GroupsVk, Category, GroupsTelegram, GroupsInstagram,
+                          Favorite, Cart)
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Groups.objects.all()
-    serializer_class = GroupsSerializer
+class GroupVkViewSet(viewsets.ModelViewSet):
+    queryset = GroupsVk.objects.all()
+    serializer_class = GroupsVkSerializer
     pagination_class = LimitPageNumberPagination
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter,
                        filters.SearchFilter)
-    filterset_class = SubjectFilterVk
-    permission_classes = [IsOwnerOrReadOnly]
-    search_fields = ('subject__slug', 'name', 'link', 'link_screen',)
+    filterset_class = CategoryFilterVk
+    search_fields = ('category__slug', 'name', 'link', 'link_screen',)
     ordering_fields = ('price', 'cpm', )
 
     @action(detail=True, methods=['post', 'delete'],
@@ -61,7 +57,7 @@ class GroupViewSet(viewsets.ModelViewSet):
             return Response({
                 'errors': 'Группа уже добавлена в список'
             }, status=status.HTTP_400_BAD_REQUEST)
-        group_vk = get_object_or_404(Groups, id=pk)
+        group_vk = get_object_or_404(GroupsVk, id=pk)
         model.objects.create(user=user, group_vk=group_vk)
         serializer = CropGroupsSerializer(group_vk)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -83,9 +79,8 @@ class GroupsTelegramViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter,
                        filters.OrderingFilter)
-    filter_class = (SubjectFilterOther, GroupSearchFilter)
-    search_fields = ('subject__slug', 'name', 'link',)
-    filterset_fields = ('subject__slug',)
+    filterset_class = CategoryFilterTelegram
+    search_fields = ('category__slug', 'name', 'link',)
     ordering_fields = ('price', 'cpm')
 
 
@@ -96,12 +91,11 @@ class GroupsInstagramViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter,
                        filters.OrderingFilter)
-    filter_class = (SubjectFilterOther, GroupSearchFilter)
-    search_fields = ('subject__slug', 'name', 'link',)
-    filterset_fields = ('subject__slug',)
+    filterset_class = CategoryFilterInstagram
+    search_fields = ('category__slug', 'name', 'link',)
     ordering_fields = ('price_post', 'cpm')
 
 
-class SubjectViewSet(ReadOnlyModelViewSet):
-    queryset = Subject.objects.all()
-    serializer_class = SubjectSerializer
+class CategoryViewSet(ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer

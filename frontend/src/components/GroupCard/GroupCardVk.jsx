@@ -44,9 +44,9 @@ const GroupCardVk = ({
         }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <CardMedia
-            component="img"
-            width="70"
-            height="70"
+            component='img'
+            width='70'
+            height='70'
             alt={group.name}
             src={group.avatar}
             sx={{
@@ -77,58 +77,69 @@ const GroupCardVk = ({
             <a
               href={group.link_screen}
               style={{ textDecoration: 'none' }}
-              target="_blank"
-              rel="noreferrer">
+              target='_blank'
+              rel='noreferrer'>
               <Typography
                 sx={[
                   { fontSize: '14px', lineHeight: 1.2 },
                   () => (group.label ? { color: 'black' } : { color: 'gray' }),
                 ]}
-                component="div">
+                component='div'>
                 {group.name}
               </Typography>
             </a>
             <Typography
-              variant="body2"
-              color="text.secondary"
+              variant='body2'
+              color='text.secondary'
               sx={{ fontSize: '12px', lineHeight: 1, mt: 0.5 }}>
               {group.subscribes.toLocaleString('ru')}{' '}
               {num_word(group.subscribes)}
             </Typography>
           </Box>
           <Box sx={{ alignSelf: 'center' }}>
-            <Tooltip title="Скопировать ссылку">
+            <Tooltip title='Скопировать ссылку'>
               <IconButton onClick={() => clipboard.copy(group.link)}>
-                <ContentCopyIcon color="primary" fontSize="large" />
+                <ContentCopyIcon
+                  color='primary'
+                  fontSize='large'
+                />
               </IconButton>
             </Tooltip>
           </Box>
           <Box sx={{ alignSelf: 'center' }}>
-            <Tooltip title="Посмотреть статистику">
+            <Tooltip title='Посмотреть статистику'>
               <IconButton>
-                <a href={group.stats} target="_blank" rel="noreferrer">
-                  <SignalCellularAltIcon color="primary" fontSize="large" />
+                <a
+                  href={group.stats}
+                  target='_blank'
+                  rel='noreferrer'>
+                  <SignalCellularAltIcon
+                    color='primary'
+                    fontSize='large'
+                  />
                 </a>
               </IconButton>
             </Tooltip>
           </Box>
           <Box sx={{ alignSelf: 'center', textAlign: 'center' }}>
-            <Typography component="div">
+            <Typography component='div'>
               {group.price.toLocaleString('ru')} руб.
             </Typography>
-            <Tooltip title="Охват">
+            <Tooltip title='Охват'>
               <Box
                 sx={{
                   display: 'flex',
                   flexDirection: 'row',
                   justifyContent: 'center',
                 }}>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant='body2'
+                  color='text.secondary'>
                   {group.coverage.toLocaleString('ru')}
                 </Typography>
                 <VisibilitySharpIcon
-                  color="primary"
-                  fontSize="inherit"
+                  color='primary'
+                  fontSize='inherit'
                   sx={{ ml: 0.5 }}
                 />
               </Box>
@@ -136,14 +147,14 @@ const GroupCardVk = ({
           </Box>
           <Box sx={{ alignSelf: 'center', ml: 0.5 }}>
             <Typography
-              component="div"
-              color="text.secondary"
+              component='div'
+              color='text.secondary'
               sx={{ fontSize: '12px', lineHeight: 1 }}>
               CPM
             </Typography>
-            <Tooltip title="CPM">
+            <Tooltip title='CPM'>
               <Typography
-                variant="body2"
+                variant='body2'
                 sx={{
                   fontSize: '14px',
                   lineHeight: 1,
@@ -162,12 +173,12 @@ const GroupCardVk = ({
               textAlign: 'start',
               ml: 0.5,
             }}>
-            {group.subject.map((subject) => (
+            {group.category.map((category) => (
               <Typography
-                variant="body2"
-                color="text.secondary"
-                key={subject.id}>
-                {subject.name}
+                variant='body2'
+                color='text.secondary'
+                key={category.id}>
+                {category.name}
               </Typography>
             ))}
           </Box>
@@ -179,7 +190,7 @@ const GroupCardVk = ({
                 }>
                 <FavoriteIcon
                   color={isLike ? 'primary' : 'inherit'}
-                  fontSize="large"
+                  fontSize='large'
                 />
               </IconButton>
               <IconButton
@@ -188,14 +199,16 @@ const GroupCardVk = ({
                 }>
                 <ShoppingCartIcon
                   color={isShoppingCart ? 'primary' : 'inherit'}
-                  fontSize="large"
+                  fontSize='large'
                 />
               </IconButton>
             </Box>
           ) : (
-            <Tooltip title="Срок размещения: Топ/лента">
+            <Tooltip title='Срок размещения: Топ/лента'>
               <Box sx={{ alignSelf: 'center' }}>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant='body2'
+                  color='text.secondary'>
                   1/24
                 </Typography>
               </Box>
@@ -222,9 +235,9 @@ const GroupCardVk = ({
             justifyContent: 'space-between',
           }}>
           <CardMedia
-            component="img"
-            width="100"
-            height="100"
+            component='img'
+            width='100'
+            height='100'
             alt={group.name}
             src={group.avatar}
             sx={{
@@ -243,7 +256,7 @@ const GroupCardVk = ({
                 }>
                 <FavoriteIcon
                   color={isLike ? 'primary' : 'inherit'}
-                  fontSize="large"
+                  fontSize='large'
                 />
               </IconButton>
               <IconButton
@@ -252,7 +265,7 @@ const GroupCardVk = ({
                 }>
                 <ShoppingCartIcon
                   color={isShoppingCart ? 'primary' : 'inherit'}
-                  fontSize="large"
+                  fontSize='large'
                 />
               </IconButton>
             </Box>
@@ -260,7 +273,7 @@ const GroupCardVk = ({
             <></>
           )}
           <Typography
-            component="div"
+            component='div'
             sx={{ fontSize: '18px', lineHeight: 1.2, fontWeight: 700 }}>
             {group.price.toLocaleString('ru')} руб.
           </Typography>
@@ -276,35 +289,44 @@ const GroupCardVk = ({
             <a
               href={group.link_screen}
               style={{ textDecoration: 'none' }}
-              target="_blank"
-              rel="noreferrer">
+              target='_blank'
+              rel='noreferrer'>
               <Typography
                 sx={[
                   { fontSize: '14px', lineHeight: 1.2, fontWeight: 600 },
                   () => (group.label ? { color: 'black' } : { color: 'gray' }),
                 ]}
-                component="div">
+                component='div'>
                 {group.name}
               </Typography>
             </a>
             <Typography
-              variant="body2"
-              color="text.secondary"
+              variant='body2'
+              color='text.secondary'
               sx={{ fontSize: '12px', lineHeight: 1, mt: 0.5 }}>
               {group.subscribes.toLocaleString('ru')}{' '}
               {num_word(group.subscribes)}
             </Typography>
           </Box>
           <Box sx={{ alignSelf: 'center' }}>
-            <Tooltip title="Скопировать ссылку">
+            <Tooltip title='Скопировать ссылку'>
               <IconButton onClick={() => clipboard.copy(group.link)}>
-                <ContentCopyIcon color="primary" fontSize="large" />
+                <ContentCopyIcon
+                  color='primary'
+                  fontSize='large'
+                />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Посмотреть статистику">
+            <Tooltip title='Посмотреть статистику'>
               <IconButton>
-                <a href={group.stats} target="_blank" rel="noreferrer">
-                  <SignalCellularAltIcon color="primary" fontSize="large" />
+                <a
+                  href={group.stats}
+                  target='_blank'
+                  rel='noreferrer'>
+                  <SignalCellularAltIcon
+                    color='primary'
+                    fontSize='large'
+                  />
                 </a>
               </IconButton>
             </Tooltip>
@@ -316,24 +338,24 @@ const GroupCardVk = ({
               flexDirection: 'row',
               justifyContent: 'center',
             }}>
-            <Typography variant="body2">
+            <Typography variant='body2'>
               Охват: {group.coverage.toLocaleString('ru')}
             </Typography>
           </Box>
           <Box>
-            <Typography variant="body2">CPM: {group.cpm}</Typography>
+            <Typography variant='body2'>CPM: {group.cpm}</Typography>
           </Box>
           <Box
             sx={{
               alignSelf: 'center',
               textAlign: 'center',
             }}>
-            {group.subject.map((subject) => (
+            {group.category.map((category) => (
               <Typography
-                variant="body2"
-                color="text.secondary"
-                key={subject.id}>
-                {subject.name}
+                variant='body2'
+                color='text.secondary'
+                key={category.id}>
+                {category.name}
               </Typography>
             ))}
           </Box>

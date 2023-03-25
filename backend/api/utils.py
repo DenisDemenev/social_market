@@ -5,7 +5,7 @@ from django.http import HttpResponse
 import vk
 
 from social_django.models import UserSocialAuth
-from basket.models import Cart
+from price.models import Cart
 
 token = os.environ.get('VK_TOKEN_GROUPS')
 

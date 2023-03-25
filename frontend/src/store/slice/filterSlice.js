@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    subject: '',
+    category: '',
     search: '',
     sort: '',
     priceMin: '',
@@ -11,8 +11,8 @@ const filterSlice = createSlice({
     label: false,
   },
   reducers: {
-    subjectValue(state, action) {
-      state.subject = action.payload;
+    categoryValue(state, action) {
+      state.category = action.payload;
     },
     searchValue(state, action) {
       state.search = action.payload;
@@ -33,7 +33,7 @@ const filterSlice = createSlice({
 });
 
 export const {
-  subjectValue,
+  categoryValue,
   searchValue,
   sortValue,
   labelValue,

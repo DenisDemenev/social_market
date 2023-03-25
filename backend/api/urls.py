@@ -1,18 +1,18 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from api.views import (GroupViewSet, SubjectViewSet,
+from api.views import (GroupVkViewSet, CategoryViewSet,
                        GroupsTelegramViewSet, GroupsInstagramViewSet)
 
 app_name = 'api'
 
 router = DefaultRouter()
-router.register(r'groups', GroupViewSet, basename='groups')
+router.register(r'groups-vk', GroupVkViewSet, basename='groups_vk')
 router.register('groups-telegram', GroupsTelegramViewSet,
                 basename='groups_telegram')
 router.register('groups-instagram', GroupsInstagramViewSet,
                 basename='groups_instagram')
-router.register(r'subject', SubjectViewSet, basename='subject')
+router.register(r'category', CategoryViewSet, basename='category')
 
 
 urlpatterns = [

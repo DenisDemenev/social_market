@@ -13,7 +13,7 @@ import { Container } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import api from '../api/api';
+import { addToCart, getGroupsVk, orderCart, removeFromCart } from '../api/api';
 import BasketElement from '../components/BasketElement/BasketElement';
 import { badgeValue } from '../store/slice/badgeSlice';
 
@@ -26,10 +26,9 @@ const Basket = () => {
   const isDisabled = Boolean(groups.length);
 
   useEffect(() => {
-    api
-      .getGroupsVk({
-        isShoppingCart: 'True',
-      })
+    getGroupsVk({
+      isShoppingCart: 'True',
+    })
       .then((res) => {
         setGroups(res.results);
         setSum(
@@ -37,7 +36,7 @@ const Basket = () => {
             .map((group) => group.price)
             .reduce(function (sum, current) {
               return sum + current;
-            }, 0)
+            }, 0),
         );
         dispatch(badgeValue(res.count));
       })
@@ -47,8 +46,7 @@ const Basket = () => {
   }, [dispatch, count]);
 
   const handleCart = ({ id }) => {
-    api
-      .addToCart({ id })
+    addToCart({ id })
       .then((res) => {
         const groupsUpdated = groups.map((group) => {
           if (group.id === id) {
@@ -74,8 +72,7 @@ const Basket = () => {
     });
     setGroups(groupsUpdated);
     setCount(count + 1);
-    api
-      .removeFromCart({ id })
+    removeFromCart({ id })
       .then((res) => {})
       .catch((err) => {
         const { errors } = err;
@@ -86,13 +83,11 @@ const Basket = () => {
   };
 
   const handleOrderCart = () => {
-    api
-      .orderCart()
+    orderCart()
       .then((res) => {
         groups.map((group) => {
           const id = group.id;
-          api
-            .removeFromCart({ id })
+          removeFromCart({ id })
             .then((res) => {})
             .catch((err) => {
               const { errors } = err;
@@ -112,20 +107,24 @@ const Basket = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth='lg'>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 320 }} aria-label="spanning table">
+        <Table
+          sx={{ minWidth: 320 }}
+          aria-label='spanning table'>
           <TableHead>
             <TableRow>
-              <TableCell align="center" colSpan={8}>
+              <TableCell
+                align='center'
+                colSpan={8}>
                 Корзина
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell align="left">Название</TableCell>
+              <TableCell align='left'>Название</TableCell>
               <TableCell></TableCell>
-              <TableCell align="right">Цена</TableCell>
+              <TableCell align='right'>Цена</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -140,20 +139,22 @@ const Basket = () => {
             <TableRow>
               <TableCell></TableCell>
               <TableCell></TableCell>
-              <TableCell align="right">Сумма:</TableCell>
-              <TableCell align="right">{sum} руб.</TableCell>
+              <TableCell align='right'>Сумма:</TableCell>
+              <TableCell align='right'>{sum} руб.</TableCell>
             </TableRow>
             <TableRow sx={{ display: { xs: 'none', sm: 'contents' } }}>
               <TableCell>
-                <Button variant="contained" onClick={() => navigate(`/`)}>
+                <Button
+                  variant='contained'
+                  onClick={() => navigate(`/`)}>
                   назад
                 </Button>
               </TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
-              <TableCell align="right">
+              <TableCell align='right'>
                 <Button
-                  variant="contained"
+                  variant='contained'
                   onClick={() => handleOrderCart()}
                   disabled={!isDisabled}>
                   Заказать
@@ -168,11 +169,13 @@ const Basket = () => {
             justifyContent: 'space-between',
             m: 2,
           }}>
-          <Button variant="contained" onClick={() => navigate(`/`)}>
+          <Button
+            variant='contained'
+            onClick={() => navigate(`/`)}>
             назад
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={() => handleOrderCart()}
             disabled={!isDisabled}>
             Заказать

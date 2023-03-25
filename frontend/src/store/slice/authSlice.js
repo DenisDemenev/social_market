@@ -8,10 +8,11 @@ export const getMe = createAsyncThunk(
       const { data } = await axios.get('/users/me/');
       return data;
     } catch (error) {
-      return rejectWithValue(error.request.responseText);
+      return rejectWithValue(error);
     }
   }
 );
+
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async ({ email, password, firstName, lastName }, { rejectWithValue }) => {

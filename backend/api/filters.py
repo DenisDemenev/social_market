@@ -1,15 +1,11 @@
 from django_filters.rest_framework import FilterSet, filters
 from rest_framework.filters import SearchFilter
 
-from price.models import Groups
+from price.models import GroupsVk, GroupsTelegram, GroupsInstagram
 
 
-class GroupSearchFilter(SearchFilter):
-    search_param = 'subject__slug', 'name', 'link', 'link_screen',
-
-
-class SubjectFilterVk(FilterSet):
-    subject = filters.AllValuesMultipleFilter(field_name='subject__slug')
+class CategoryFilterVk(FilterSet):
+    category = filters.AllValuesMultipleFilter(field_name='category__slug')
     label = filters.BooleanFilter(field_name='label')
     is_favorited = filters.BooleanFilter(method='filter_is_favorited')
     price = filters.RangeFilter(field_name='price')
@@ -27,13 +23,23 @@ class SubjectFilterVk(FilterSet):
         return queryset
 
     class Meta:
-        model = Groups
-        fields = ('subject', 'label', 'price')
+        model = GroupsVk
+        fields = ('category', 'label', 'price')
 
 
-class SubjectFilterOther(FilterSet):
-    subject = filters.AllValuesMultipleFilter(field_name='subject_slug')
-
+class CategoryFilterTelegram(FilterSet):
+    category = filters.AllValuesMultipleFilter(field_name='category__slug')
+    price = filters.RangeFilter(field_name='price')
+ 
     class Meta:
-        model = Groups
-        fields = ('subject',)
+        model = GroupsTelegram
+        fields = ('category', 'price')
+
+
+class CategoryFilterInstagram(FilterSet):
+    category = filters.AllValuesMultipleFilter(field_name='category__slug')
+    price = filters.RangeFilter(field_name='price_post')
+ 
+    class Meta:
+        model = GroupsInstagram
+        fields = ('category', 'price_post')

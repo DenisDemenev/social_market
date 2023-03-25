@@ -1,215 +1,162 @@
-class Api {
-  constructor(data) {
-    this._url = data.url;
-    this._headers = data.headers;
-    this._authorization = 'authorization';
-    this._token = localStorage.getItem('token');
-    this._access = localStorage.getItem('access');
-    this._authorizationToken = this._token
-      ? { authorization: `Token ${this._token}` }
-      : {};
-    this._authorizationJWT = this._access
-      ? { authorization: `Bearer ${this._access}` }
-      : {};
-  }
+import axios from '../axios';
 
-  async getGroupsVk({
-    pageCurrent = 1,
-    limit = 50,
-    subjectValue,
-    searchValue,
-    sortValue,
-    isLabel,
-    isFavorite,
-    isShoppingCart,
-    priceMin,
-    priceMax,
-  }) {
-    const res = await fetch(
-      `${this._url}/api/groups/?page=${pageCurrent}&limit=${limit}${
-        subjectValue ? `&subject=${subjectValue}` : ''
-      }${isLabel ? `&label=true` : ''}${
-        isFavorite ? `&is_favorited=true` : ''
-      }${isShoppingCart ? `&is_in_shopping_cart=true` : ''}${
-        searchValue ? `&search=${searchValue}` : ''
-      }${sortValue ? `&ordering=${sortValue}` : ''}${
-        priceMin ? `&price_min=${priceMin}` : ''
+const catchError = (err) => {
+  if (err.response.status === 401) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('access');
+    window.location.reload()
+  }
+  return Promise.reject(`Ошибка: ${err}`);
+};
+
+
+export const getGroupsVk = async ({
+  pageCurrent = 1,
+  limit = 50,
+  categoryValue,
+  searchValue,
+  sortValue,
+  isLabel,
+  isFavorite,
+  isShoppingCart,
+  priceMin,
+  priceMax,
+}) => {
+  try {
+    const { data } = await axios.get(
+      `/groups-vk/?page=${pageCurrent}&limit=${limit}${categoryValue ? `&category=${categoryValue}` : ''
+      }${isLabel ? `&label=true` : ''}${isFavorite ? `&is_favorited=true` : ''
+      }${isShoppingCart ? `&is_in_shopping_cart=true` : ''}${searchValue ? `&search=${searchValue}` : ''
+      }${sortValue ? `&ordering=${sortValue}` : ''}${priceMin ? `&price_min=${priceMin}` : ''
       }${priceMax ? `&price_max=${priceMax}` : ''}`,
-      {
-        method: 'GET',
-        headers: {
-          ...this._headers,
-          ...this._authorizationToken,
-          ...this._authorizationJWT,
-        },
-      }
     );
-    return this._checkResponse(res);
+    return data;
+  } catch (err) {
+    catchError(err)
   }
+};
 
-  async getGroupsTelegram({
-    pageCurrent = 1,
-    limit = 50,
-    subjectValue,
-    searchValue,
-    sortValue,
-  }) {
-    const res = await fetch(
-      `${this._url}/api/groups-telegram/?page=${pageCurrent}&limit=${limit}${
-        subjectValue ? `&subject__slug=${subjectValue}` : ''
-      }${searchValue ? `&search=${searchValue}` : ''}${
-        sortValue ? `&ordering=${sortValue}` : ''
+
+export const getGroupsInstagram = async ({
+  pageCurrent = 1,
+  limit = 50,
+  categoryValue,
+  searchValue,
+  sortValue,
+}) => {
+  try {
+    const { data } = await axios.get(
+      `/groups-instagram/?page=${pageCurrent}&limit=${limit}${categoryValue ? `&category=${categoryValue}` : ''
+      }${searchValue ? `&search=${searchValue}` : ''}${sortValue ? `&ordering=${sortValue}` : ''
       }`,
-      {
-        method: 'GET',
-        headers: this._headers,
-      }
     );
-    return this._checkResponse(res);
+    return data;
+  } catch (err) {
+    catchError(err)
   }
-
-  async getGroupsInstagram({
-    pageCurrent = 1,
-    limit = 50,
-    subjectValue,
-    searchValue,
-    sortValue,
-  }) {
-    const res = await fetch(
-      `${this._url}/api/groups-instagram/?page=${pageCurrent}&limit=${limit}${
-        subjectValue ? `&subject__slug=${subjectValue}` : ''
-      }${searchValue ? `&search=${searchValue}` : ''}${
-        sortValue ? `&ordering=${sortValue}` : ''
+};
+export const getGroupsTelegram = async ({
+  pageCurrent = 1,
+  limit = 50,
+  categoryValue,
+  searchValue,
+  sortValue,
+}) => {
+  try {
+    const { data } = await axios.get(
+      `/groups-telegram/?page=${pageCurrent}&limit=${limit}${categoryValue ? `&category=${categoryValue}` : ''
+      }${searchValue ? `&search=${searchValue}` : ''}${sortValue ? `&ordering=${sortValue}` : ''
       }`,
-      {
-        method: 'GET',
-        headers: this._headers,
-      }
     );
-    return this._checkResponse(res);
+    return data;
+  } catch (err) {
+    catchError(err)
   }
+};
 
-  async getSubject() {
-    const res = await fetch(`${this._url}/api/subject/`, {
-      method: 'GET',
-      headers: this._headers,
+export const getCategory = async () => {
+  try {
+    const { data } = await axios.get(`/category/`);
+    return data;
+  } catch (err) {
+    catchError(err)
+  }
+};
+
+export const addToCart = async ({ id }) => {
+  try {
+    const { data } = await axios.post(`/groups-vk/${id}/shopping_cart/`);
+    return data;
+  } catch (err) {
+    catchError(err)
+
+  }
+};
+
+export const removeFromCart = async ({ id }) => {
+  try {
+    const { data } = await axios.delete(`/groups-vk/${id}/shopping_cart/`);
+    return data;
+  } catch (err) {
+    catchError(err)
+  }
+};
+
+export const orderCart = async () => {
+  try {
+    const { data } = await axios.get(`/groups-vk/order_shopping_cart/`);
+    return data;
+  } catch (err) {
+    catchError(err)
+  }
+};
+
+export const addToFavorites = async ({ id }) => {
+  try {
+    const { data } = await axios.post(`/groups-vk/${id}/favorite/`);
+    return data;
+  } catch (err) {
+    catchError(err)
+  }
+};
+
+export const removeFromFavorites = async ({ id }) => {
+  try {
+    const { data } = await axios.delete(`/groups-vk/${id}/favorite/`);
+    return data;
+  } catch (err) {
+    catchError(err)
+  }
+};
+
+export const signIn = async ({ email, password }) => {
+  try {
+    const { data } = await axios.post(`/auth/token/login/`, {
+      email,
+      password,
     });
-    return this._checkResponse(res);
+    return data;
+  } catch (err) {
+    catchError(err)
   }
+};
 
-  async signIn({ email, password }) {
-    const res = await fetch(`${this._url}/api/auth/token/login/`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    return this._checkResponse(res);
-  }
-
-  async authVk() {
-    const res = await fetch(
-      `${this._url}/api/auth/o/vk-oauth2/?redirect_uri=https://smax.store/auth`,
-      {
-        method: 'GET',
-        headers: this._headers,
-      }
+export const authVk = async () => {
+  try {
+    const { data } = await axios.get(
+      `/auth/o/vk-oauth2/?redirect_uri=https://smax.store/auth`,
     );
-    return this._checkResponse(res);
+    return data;
+  } catch (err) {
+    catchError(err)
   }
+};
 
-  async loginVk(location) {
-    const res = await fetch(`${this._url}/api/auth/o/vk-oauth2/${location}`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-      },
-    });
-    return this._checkResponse(res);
+export const loginVk = async (location) => {
+  try {
+    const { data } = await axios.post(`/auth/o/vk-oauth2/${location}`);
+    return data;
+  } catch (err) {
+    catchError(err)
   }
-
-  async addToFavorites({ id }) {
-    const res = await fetch(`${this._url}/api/groups/${id}/favorite/`, {
-      method: 'POST',
-      headers: {
-        ...this._headers,
-        ...this._authorizationToken,
-        ...this._authorizationJWT,
-      },
-    });
-    return this._checkResponse(res);
-  }
-
-  async removeFromFavorites({ id }) {
-    const res = await fetch(`${this._url}/api/groups/${id}/favorite/`, {
-      method: 'DELETE',
-      headers: {
-        ...this._headers,
-        ...this._authorizationToken,
-        ...this._authorizationJWT,
-      },
-    });
-    return this._checkResponseCart(res);
-  }
-
-  async addToCart({ id }) {
-    const res = await fetch(`${this._url}/api/groups/${id}/shopping_cart/`, {
-      method: 'POST',
-      headers: {
-        ...this._headers,
-        ...this._authorizationToken,
-        ...this._authorizationJWT,
-      },
-    });
-    return this._checkResponse(res);
-  }
-
-  async removeFromCart({ id }) {
-    const res = await fetch(`${this._url}/api/groups/${id}/shopping_cart/`, {
-      method: 'DELETE',
-      headers: {
-        ...this._headers,
-        ...this._authorizationToken,
-        ...this._authorizationJWT,
-      },
-    });
-    return this._checkResponseCart(res);
-  }
-
-  async orderCart() {
-    const res = await fetch(`${this._url}/api/groups/order_shopping_cart/`, {
-      method: 'GET',
-      headers: {
-        ...this._headers,
-        ...this._authorizationToken,
-        ...this._authorizationJWT,
-      },
-    });
-    return this._checkResponseCart(res);
-  }
-
-  _checkResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status} `);
-  }
-
-  _checkResponseCart(res) {
-    if (res.ok) {
-      return res;
-    }
-    return Promise.reject(`Ошибка: ${res.status} `);
-  }
-}
-
-const api = new Api({
-  url: 'https://smax.store',
-  headers: {
-    'content-type': 'application/json',
-  },
-});
-
-export default api;
+};

@@ -5,8 +5,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = 'hbvuygyg98u90utfdeds46rt980ui-oi089traa67yuhbvcr46789ihgfrd65768g'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '91.201.53.16',
@@ -30,10 +31,6 @@ INSTALLED_APPS = [
     'django_filters',
     'social_django',
     'price',
-    'priceTelegram',
-    'priceInstagram',
-    'basket',
-    'favorite',
     'api',
 ]
 
@@ -84,6 +81,13 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

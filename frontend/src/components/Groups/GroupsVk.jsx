@@ -8,7 +8,13 @@ import {
 } from '../../store/slice/paginatorSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import GroupCardVk from '../GroupCard/GroupCardVk';
-import api from '../../api/api';
+import {
+  addToCart,
+  addToFavorites,
+  getGroupsVk,
+  removeFromCart,
+  removeFromFavorites,
+} from '../../api/api';
 import Paginator from '../Paginator';
 import { badgeValue } from '../../store/slice/badgeSlice';
 
@@ -19,7 +25,7 @@ const GroupsVk = () => {
 
   const [groups, setGroups] = useState([]);
 
-  const subjectValue = useSelector((state) => state.filter.subject);
+  const categoryValue = useSelector((state) => state.filter.category);
   const isLabel = useSelector((state) => state.filter.label);
   const searchValue = useSelector((state) => state.filter.search);
   const sortValue = useSelector((state) => state.filter.sort);
@@ -29,21 +35,20 @@ const GroupsVk = () => {
   const priceMax = useSelector((state) => state.filter.priceMax);
 
   useEffect(() => {
-    api
-      .getGroupsVk({
-        pageCurrent,
-        subjectValue,
-        searchValue,
-        sortValue,
-        isLabel,
-        priceMin,
-        priceMax,
-      })
+    getGroupsVk({
+      pageCurrent,
+      categoryValue,
+      searchValue,
+      sortValue,
+      isLabel,
+      priceMin,
+      priceMax,
+    })
       .then((res) => {
         setGroups(res.results);
         dispatch(pageCountValue(Math.ceil(res.count / 50)));
         dispatch(
-          pageCurrentValue(parseInt(location.search?.split('=')[1] || 1))
+          pageCurrentValue(parseInt(location.search?.split('=')[1] || 1)),
         );
       })
       .catch((err) => {
@@ -52,7 +57,7 @@ const GroupsVk = () => {
         (() => navigate(`/vk?page=1`))();
       });
   }, [
-    subjectValue,
+    categoryValue,
     searchValue,
     pageCurrent,
     sortValue,
@@ -63,11 +68,11 @@ const GroupsVk = () => {
     priceMin,
     priceMax,
   ]);
+
   useEffect(() => {
-    api
-      .getGroupsVk({
-        isShoppingCart: 'True',
-      })
+    getGroupsVk({
+      isShoppingCart: 'True',
+    })
       .then((res) => {
         dispatch(badgeValue(res.count));
       })
@@ -77,8 +82,7 @@ const GroupsVk = () => {
   }, [dispatch, groups]);
 
   const handleLike = ({ id }) => {
-    api
-      .addToFavorites({ id })
+    addToFavorites({ id })
       .then((res) => {
         const groupsUpdated = groups.map((group) => {
           if (group.id === id) {
@@ -95,9 +99,9 @@ const GroupsVk = () => {
         }
       });
   };
+
   const handleDeleteLike = ({ id }) => {
-    api
-      .removeFromFavorites({ id })
+    removeFromFavorites({ id })
       .then((res) => {
         const groupsUpdated = groups.map((group) => {
           if (group.id === id) {
@@ -116,8 +120,7 @@ const GroupsVk = () => {
   };
 
   const handleCart = ({ id }) => {
-    api
-      .addToCart({ id })
+    addToCart({ id })
       .then((res) => {
         const groupsUpdated = groups.map((group) => {
           if (group.id === id) {
@@ -135,8 +138,7 @@ const GroupsVk = () => {
       });
   };
   const handleDeleteCart = ({ id }) => {
-    api
-      .removeFromCart({ id })
+    removeFromCart({ id })
       .then((res) => {
         const groupsUpdated = groups.map((group) => {
           if (group.id === id) {

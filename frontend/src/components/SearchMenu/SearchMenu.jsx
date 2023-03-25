@@ -13,23 +13,23 @@ import {
   Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  subjectValue,
+  categoryValue,
   searchValue,
   sortValue,
   labelValue,
   priceMaxValue,
   priceMinValue,
 } from '../../store/slice/filterSlice';
-import api from '../../api/api';
+import { getCategory } from '../../api/api';
 import { selectIsAuth } from '../../store/slice/authSlice';
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 
 const SearchMenu = () => {
-  const [subject, setSubject] = useState([]);
-  const value = useSelector((state) => state.filter.subject);
+  const [category, setCategory] = useState([]);
+  const value = useSelector((state) => state.filter.category);
   const search = useSelector((state) => state.filter.search);
   const sort = useSelector((state) => state.filter.sort);
   const priceMin = useSelector((state) => state.filter.priceMin);
@@ -43,18 +43,17 @@ const SearchMenu = () => {
     location.pathname === '/instagram' ? 'price_post' : 'price';
 
   useEffect(() => {
-    api
-      .getSubject()
+    getCategory()
       .then((res) => {
-        setSubject(res);
+        setCategory(res);
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ${err}`);
       });
   }, []);
 
-  const handleChangeSubjectValue = (e) => {
-    dispatch(subjectValue(e.target.value));
+  const handleChangecategoryValue = (e) => {
+    dispatch(categoryValue(e.target.value));
   };
 
   const handleChangeLabelValue = (e) => {
@@ -78,7 +77,7 @@ const SearchMenu = () => {
   };
 
   const handleClickButtonClear = () => {
-    dispatch(subjectValue(''));
+    dispatch(categoryValue(''));
     dispatch(searchValue(''));
     dispatch(sortValue(''));
     dispatch(labelValue(false));
@@ -143,8 +142,8 @@ const SearchMenu = () => {
             select
             fullWidth
             value={value}
-            onChange={handleChangeSubjectValue}>
-            {subject.map((item) => (
+            onChange={handleChangecategoryValue}>
+            {category.map((item) => (
               <MenuItem
                 key={item.id}
                 value={item.slug}>
@@ -178,6 +177,32 @@ const SearchMenu = () => {
           </Button>
         </ListItem>
       </List>
+      <Divider />
+      <Button
+        size='small'
+        sx={{ marginY: 2 }}>
+        <NavLink
+          style={{ textDecoration: 'none', color: 'inherit' }}
+          to='rules'>
+          Ограничения на содержимое рекламных публикаций
+        </NavLink>
+      </Button>
+      <Button size='small'>
+        <NavLink
+          style={{ textDecoration: 'none', color: 'inherit' }}
+          to='order-variant'>
+          Как заказать
+        </NavLink>
+      </Button>
+      <Button
+        size='small'
+        sx={{ marginY: 2 }}>
+        <NavLink
+          style={{ textDecoration: 'none', color: 'inherit' }}
+          to='payment'>
+          Способы оплаты
+        </NavLink>
+      </Button>
       <Divider />
       {isAuth ? (
         <Box sx={{ pt: 5 }}>

@@ -8,7 +8,13 @@ import {
 } from '../../store/slice/paginatorSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import GroupCardVk from '../GroupCard/GroupCardVk';
-import api from '../../api/api';
+import {
+  addToCart,
+  addToFavorites,
+  getGroupsVk,
+  removeFromCart,
+  removeFromFavorites,
+} from '../../api/api';
 import Paginator from '../Paginator';
 import { badgeValue } from '../../store/slice/badgeSlice';
 
@@ -20,7 +26,7 @@ const GroupsVk = () => {
   const [groups, setGroups] = useState([]);
   const [count, setCount] = useState(0);
 
-  const subjectValue = useSelector((state) => state.filter.subject);
+  const categoryValue = useSelector((state) => state.filter.category);
   const isLabel = useSelector((state) => state.filter.label);
   const searchValue = useSelector((state) => state.filter.search);
   const sortValue = useSelector((state) => state.filter.sort);
@@ -28,20 +34,19 @@ const GroupsVk = () => {
   const pageCurrent = useSelector((state) => state.paginator.pageCurrent);
 
   useEffect(() => {
-    api
-      .getGroupsVk({
-        pageCurrent,
-        subjectValue,
-        searchValue,
-        sortValue,
-        isLabel,
-        isFavorite: 'True',
-      })
+    getGroupsVk({
+      pageCurrent,
+      categoryValue,
+      searchValue,
+      sortValue,
+      isLabel,
+      isFavorite: 'True',
+    })
       .then((res) => {
         setGroups(res.results);
         dispatch(pageCountValue(Math.ceil(res.count / 50)));
         dispatch(
-          pageCurrentValue(parseInt(location.search?.split('=')[1] || 1))
+          pageCurrentValue(parseInt(location.search?.split('=')[1] || 1)),
         );
       })
       .catch((err) => {
@@ -50,7 +55,7 @@ const GroupsVk = () => {
         (() => navigate(`/favorite?page=1`))();
       });
   }, [
-    subjectValue,
+    categoryValue,
     searchValue,
     pageCurrent,
     sortValue,
@@ -62,10 +67,9 @@ const GroupsVk = () => {
   ]);
 
   useEffect(() => {
-    api
-      .getGroupsVk({
-        isShoppingCart: 'True',
-      })
+    getGroupsVk({
+      isShoppingCart: 'True',
+    })
       .then((res) => {
         dispatch(badgeValue(res.count));
       })
@@ -75,8 +79,7 @@ const GroupsVk = () => {
   }, [dispatch, groups]);
 
   const handleLike = ({ id }) => {
-    api
-      .addToFavorites({ id })
+    addToFavorites({ id })
       .then((res) => {
         const groupsUpdated = groups.map((group) => {
           if (group.id === id) {
@@ -102,8 +105,7 @@ const GroupsVk = () => {
     });
     setGroups(groupsUpdated);
     setCount(count + 1);
-    api
-      .removeFromFavorites({ id })
+    removeFromFavorites({ id })
       .then((res) => {})
       .catch((err) => {
         const { errors } = err;
@@ -114,8 +116,7 @@ const GroupsVk = () => {
   };
 
   const handleCart = ({ id }) => {
-    api
-      .addToCart({ id })
+    addToCart({ id })
       .then((res) => {
         const groupsUpdated = groups.map((group) => {
           if (group.id === id) {
@@ -140,8 +141,7 @@ const GroupsVk = () => {
       return group;
     });
     setGroups(groupsUpdated);
-    api
-      .removeFromCart({ id })
+    removeFromCart({ id })
       .then((res) => {})
       .catch((err) => {
         const { errors } = err;
@@ -152,9 +152,16 @@ const GroupsVk = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Grid container spacing={2} flexDirection="column">
-        <Paginator page={pageCurrent} count={pageCount} link={'vk'} />
+    <Container maxWidth='lg'>
+      <Grid
+        container
+        spacing={2}
+        flexDirection='column'>
+        <Paginator
+          page={pageCurrent}
+          count={pageCount}
+          link={'vk'}
+        />
         {groups.map((group) => (
           <GroupCardVk
             key={group.id}
@@ -164,7 +171,11 @@ const GroupsVk = () => {
             handleCart={handleCart}
             handleDeleteCart={handleDeleteCart}></GroupCardVk>
         ))}
-        <Paginator page={pageCurrent} count={pageCount} link={'vk'} />
+        <Paginator
+          page={pageCurrent}
+          count={pageCount}
+          link={'vk'}
+        />
       </Grid>
     </Container>
   );

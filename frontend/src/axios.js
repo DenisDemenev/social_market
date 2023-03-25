@@ -1,18 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
 const instance = axios.create({
   baseURL: 'https://smax.store/api',
+  // baseURL: "http://localhost:8000/api",
 });
 
-if (localStorage.getItem('token')) {
+if (localStorage.getItem("token")) {
   instance.interceptors.request.use((config) => {
-    config.headers.Authorization = `Token ${localStorage.getItem('token')}`;
+    config.headers.Authorization = `Token ${localStorage.getItem("token")}`;
     return config;
   });
 }
-if (localStorage.getItem('access')) {
+if (localStorage.getItem("access")) {
   instance.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('access')}`;
+    config.headers.Authorization = `Bearer ${localStorage.getItem("access")}`;
     return config;
   });
 }

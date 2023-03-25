@@ -4,11 +4,8 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
 
-from price.models import Groups, Subject
-from priceTelegram.models import GroupsTelegram
-from priceInstagram.models import GroupsInstagram
-from favorite.models import Favorite
-from basket.models import Cart
+from price.models import (GroupsVk, Category, GroupsTelegram, GroupsInstagram,
+                          Favorite, Cart)
 
 
 User = get_user_model()
@@ -41,52 +38,53 @@ class CustomUserSerializer(UserSerializer):
                   'email', 'is_staff')
 
 
-class SubjectSerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Subject
+        model = Category
         fields = ('id', 'name', 'slug')
 
 
-class GroupsSerializer(serializers.ModelSerializer):
-    subject = SubjectSerializer(read_only=True, many=True)
+class GroupsVkSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True, many=True)
     is_favorited = serializers.SerializerMethodField()
     is_in_shopping_cart = serializers.SerializerMethodField()
 
     class Meta:
-        model = Groups
+        model = GroupsVk
         exclude = ('owner', )
-        read_only_fields = ('subject', 'label',)
+        read_only_fields = ('category', 'label',)
 
     def get_is_favorited(self, obj):
         user = self.context.get('request').user
         if user.is_anonymous:
             return False
-        return Groups.objects.filter(favorites__user=user, id=obj.id).exists()
+        return GroupsVk.objects.filter(favorites__user=user, id=obj.id).exists()
 
     def get_is_in_shopping_cart(self, obj):
         user = self.context.get('request').user
         if user.is_anonymous:
             return False
-        return Groups.objects.filter(cart__user=user, id=obj.id).exists()
+        return GroupsVk.objects.filter(cart__user=user, id=obj.id).exists()
+    
 
 
 class GroupsTelegramSerializer(serializers.ModelSerializer):
-    subject = SubjectSerializer(read_only=True, many=True)
+    category = CategorySerializer(read_only=True, many=True)
 
     class Meta:
         model = GroupsTelegram
         exclude = ('owner', )
-        read_only_fields = ('subject', 'name', )
+        read_only_fields = ('category', 'name', )
 
 
 class GroupsInstagramSerializer(serializers.ModelSerializer):
-    subject = SubjectSerializer(read_only=True, many=True)
+    category = CategorySerializer(read_only=True, many=True)
 
     class Meta:
         model = GroupsInstagram
         exclude = ('owner', )
-        read_only_fields = ('subject', 'name', )
+        read_only_fields = ('category', 'name', )
 
 
 class FavoriteSerializer(serializers.ModelSerializer):
@@ -112,9 +110,9 @@ class FavoriteSerializer(serializers.ModelSerializer):
 class CropGroupsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Groups
+        model = GroupsVk
         exclude = ('owner', )
-        read_only_fields = ('subject', 'name', )
+        read_only_fields = ('category', 'name', )
 
 
 class CartSerializer(serializers.ModelSerializer):

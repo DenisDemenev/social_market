@@ -26,11 +26,18 @@ const Home = ({ link }) => {
   return (
     <TabContext value={value}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <TabList onChange={handleChange} aria-label="Соцети">
-          <Tab label="Вконтакте" value="vk" component={Link} to={`/vk`} />
+        <TabList
+          onChange={handleChange}
+          aria-label='Соцети'>
           <Tab
-            label="Telegram"
-            value="telegram"
+            label='Вконтакте'
+            value='vk'
+            component={Link}
+            to={`/vk`}
+          />
+          <Tab
+            label='Telegram'
+            value='telegram'
             component={Link}
             to={`/telegram`}
           />
@@ -42,8 +49,8 @@ const Home = ({ link }) => {
           /> */}
           {isAuth ? (
             <Tab
-              label="Избранные"
-              value="favorite"
+              label='Избранные'
+              value='favorite'
               component={Link}
               to={`/favorite`}
             />
@@ -52,16 +59,16 @@ const Home = ({ link }) => {
           )}
         </TabList>
       </Box>
-      <TabPanel value="vk">
+      <TabPanel value='vk'>
         <GroupsVk />
       </TabPanel>
-      <TabPanel value="telegram">
+      <TabPanel value='telegram'>
         <GroupsTelegram />
       </TabPanel>
       {/* <TabPanel value="instagram">
         <GroupsInstagram />
       </TabPanel> */}
-      <TabPanel value="favorite">
+      <TabPanel value='favorite'>
         <GroupsFavorite />
       </TabPanel>
     </TabContext>

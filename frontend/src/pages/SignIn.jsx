@@ -14,7 +14,7 @@ import {
   Snackbar,
   Alert,
 } from '@mui/material';
-import api from '../api/api';
+import { authVk, loginVk, signIn } from '../api/api';
 import { getMe, selectIsAuth } from '../store/slice/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -44,8 +44,7 @@ const SignIn = () => {
   });
 
   const onSubmit = (values) => {
-    api
-      .signIn(values)
+    signIn(values)
       .then((res) => {
         localStorage.setItem('token', res.auth_token);
         dispatch(getMe());
@@ -58,8 +57,7 @@ const SignIn = () => {
   };
 
   const handleVk = () => {
-    api
-      .authVk()
+    authVk()
       .then((res) => {
         window.location.replace(res.authorization_url);
       })
@@ -70,8 +68,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (location.search) {
-      api
-        .loginVk(location.search)
+      loginVk(location.search)
         .then((res) => {
           localStorage.setItem('access', res.access);
           dispatch(getMe());
@@ -84,7 +81,9 @@ const SignIn = () => {
   });
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      component='main'
+      maxWidth='xs'>
       <CssBaseline />
       <Box
         sx={{
@@ -96,48 +95,52 @@ const SignIn = () => {
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography
+          component='h1'
+          variant='h5'>
           Авторизация
         </Typography>
         <Box
-          component="form"
+          component='form'
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           sx={{ mt: 1 }}>
           <TextField
-            margin="normal"
+            margin='normal'
             error={Boolean(errors.email?.message)}
             helperText={errors.email?.message}
             {...register('email', { required: 'Укажите email' })}
             fullWidth
-            id="email"
-            label="Email"
-            name="email"
-            autoComplete="email"
+            id='email'
+            label='Email'
+            name='email'
+            autoComplete='email'
             autoFocus
           />
           <TextField
-            margin="normal"
+            margin='normal'
             error={Boolean(errors.password?.message)}
             helperText={errors.password?.message}
             {...register('password', { required: 'Укажите пароль' })}
             fullWidth
-            name="password"
-            label="Пароль"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            name='password'
+            label='Пароль'
+            type='password'
+            id='password'
+            autoComplete='current-password'
           />
           <Button
-            type="submit"
+            type='submit'
             disabled={!isValid}
             fullWidth
-            variant="contained"
+            variant='contained'
             sx={{ mt: 3, mb: 2 }}>
             Войти
           </Button>
           <Grid container>
-            <Grid item xs>
+            <Grid
+              item
+              xs>
               {/* <Link href="#" variant="body2">
                   Забыли пароль?
                 </Link> */}
@@ -151,12 +154,15 @@ const SignIn = () => {
             </Grid>
           </Grid>
           <Box>
-            <Typography component="h2" variant="h5" sx={{ pb: 1 }}>
+            <Typography
+              component='h2'
+              variant='h5'
+              sx={{ pb: 1 }}>
               Войти через:
             </Typography>
             <Button
-              startIcon={<Avatar src="/static/images/vk-96.svg" />}
-              variant="outlined"
+              startIcon={<Avatar src='/static/images/vk-96.svg' />}
+              variant='outlined'
               onClick={() => handleVk()}>
               Вконтакте
             </Button>
@@ -167,7 +173,9 @@ const SignIn = () => {
         open={open}
         autoHideDuration={3000}
         onClose={() => setOpen(false)}>
-        <Alert severity="error" sx={{ width: '100%' }}>
+        <Alert
+          severity='error'
+          sx={{ width: '100%' }}>
           Неверный логин или пароль
         </Alert>
       </Snackbar>

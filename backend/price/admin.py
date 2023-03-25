@@ -1,17 +1,38 @@
 from django.contrib import admin
 
-from price.models import (Groups, Partner,
-                          Requisites, Subject)
+from price.models import (GroupsVk, Partner,
+                          Requisites, Category, GroupsTelegram,
+                          GroupsInstagram, Favorite, Cart)
 
 
-@admin.register(Groups)
-class GroupsAdmin(admin.ModelAdmin):
+@admin.register(GroupsVk)
+class GroupsVkAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'stats', 'cpm')
-    fields = ['vk_id', 'subject', 'owner',
+    fields = ['vk_id', 'category', 'owner',
               'price', 'coverage', 'label', ]
 
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'link',)
+
+
+@admin.register(GroupsTelegram)
+class GroupsTelegramAdmin(admin.ModelAdmin):
+    list_display = ('name', 'link', 'owner', 'cpm')
+    fields = ['name', 'link', 'avatar', 'category', 'owner',
+              'price', 'subscribes', 'coverage', ]
+
+    ordering = ('name',)
+    search_fields = ('name', 'link',)
+
+
+@admin.register(GroupsInstagram)
+class GroupsInstagramAdmin(admin.ModelAdmin):
+    list_display = ('name', 'link', 'owner', 'cpm')
+    fields = ['name', 'link', 'avatar', 'subscribes', 'category', 'owner',
+              'price_post', 'price_story', 'coverage', ]
+
+    ordering = ('name',)
+    search_fields = ('name', 'link',)
 
 
 @admin.register(Partner)
@@ -29,9 +50,21 @@ class RequisitesAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
-@admin.register(Subject)
-class SubjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'slug')
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
     prepopulated_fields = {'slug': ('name',)}
     ordering = ('name',)
     search_fields = ('name',)
+
+
+@admin.register(Favorite)
+class FavoriteGroupsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'group_vk')
+    empty_value_display = "-пусто-"
+
+
+@admin.register(Cart)
+class ShoppingCartAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'group_vk')
+    empty_value_display = "-пусто-"
