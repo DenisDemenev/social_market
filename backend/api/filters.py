@@ -1,5 +1,4 @@
 from django_filters.rest_framework import FilterSet, filters
-from rest_framework.filters import SearchFilter
 
 from price.models import GroupsVk, GroupsTelegram, GroupsInstagram
 
@@ -30,7 +29,7 @@ class CategoryFilterVk(FilterSet):
 class CategoryFilterTelegram(FilterSet):
     category = filters.AllValuesMultipleFilter(field_name='category__slug')
     price = filters.RangeFilter(field_name='price')
- 
+
     class Meta:
         model = GroupsTelegram
         fields = ('category', 'price')
@@ -39,7 +38,7 @@ class CategoryFilterTelegram(FilterSet):
 class CategoryFilterInstagram(FilterSet):
     category = filters.AllValuesMultipleFilter(field_name='category__slug')
     price = filters.RangeFilter(field_name='price_post')
- 
+
     class Meta:
         model = GroupsInstagram
         fields = ('category', 'price_post')

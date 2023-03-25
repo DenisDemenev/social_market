@@ -59,14 +59,14 @@ class GroupsVkSerializer(serializers.ModelSerializer):
         user = self.context.get('request').user
         if user.is_anonymous:
             return False
-        return GroupsVk.objects.filter(favorites__user=user, id=obj.id).exists()
+        return GroupsVk.objects.filter(favorites__user=user,
+                                       id=obj.id).exists()
 
     def get_is_in_shopping_cart(self, obj):
         user = self.context.get('request').user
         if user.is_anonymous:
             return False
         return GroupsVk.objects.filter(cart__user=user, id=obj.id).exists()
-    
 
 
 class GroupsTelegramSerializer(serializers.ModelSerializer):
