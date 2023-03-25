@@ -64,7 +64,7 @@ class GroupsVk(models.Model):
     avatar_big = models.URLField(verbose_name='Аватар группы большой')
     label = models.BooleanField(verbose_name='Без метки')
     category = models.ManyToManyField(Category, verbose_name='Категория',
-                                     related_name='category_vk')
+                                      related_name='category_vk')
     stats = models.URLField(verbose_name='Ссылка на статистику')
     owner = models.ForeignKey(Partner, on_delete=models.CASCADE,
                               verbose_name='Владелец')
@@ -105,7 +105,7 @@ class GroupsTelegram(models.Model):
     avatar = models.ImageField(upload_to='telegram/',
                                verbose_name='Аватар', blank=True)
     category = models.ManyToManyField(Category, verbose_name='Категория',
-                                     related_name='category_telegram')
+                                      related_name='category_telegram')
     owner = models.ForeignKey(Partner, on_delete=models.CASCADE,
                               verbose_name='Владелец')
     price = models.PositiveIntegerField(verbose_name='Цена')
@@ -135,7 +135,7 @@ class GroupsInstagram(models.Model):
     avatar = models.ImageField(upload_to='instagram/',
                                verbose_name='Аватар', blank=True)
     category = models.ManyToManyField(Category, verbose_name='Категория',
-                                     related_name='category_instagram')
+                                      related_name='category_instagram')
     owner = models.ForeignKey(Partner, on_delete=models.CASCADE,
                               verbose_name='Владелец')
     price_post = models.PositiveIntegerField(verbose_name='Цена поста')
