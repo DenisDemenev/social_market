@@ -9,6 +9,7 @@ from price.models import Cart
 
 token = os.environ.get('VK_TOKEN_GROUPS')
 
+
 def order_shopping_cart(user):
     api = vk.API(access_token=token, v='5.131')
     groups = Cart.objects.filter(user=user).values(
