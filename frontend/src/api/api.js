@@ -105,22 +105,22 @@ export const signIn = async ({ email, password }) => {
   }
 };
 
-// export const authVk = async () => {
-//   try {
-//     const { data } = await axios.get(
-//       `/auth/o/vk-oauth2/?redirect_uri=https://smax.store/auth`,
-//     );
-//     return data;
-//   } catch (err) {
-//     catchError(err);
-//   }
-// };
+export const authVk = async () => {
+  try {
+    const { data } = await axios.get(
+      `/auth/o/vk-oauth2/?redirect_uri=https://smax.store/auth`,
+    );
+    return data;
+  } catch (err) {
+    catchError(err);
+  }
+};
 
-// export const loginVk = async (location) => {
-//   try {
-//     const { data } = await axios.post(`/auth/o/vk-oauth2/${location}`);
-//     return data;
-//   } catch (err) {
-//     catchError(err);
-//   }
-// };
+export const loginVk = async (location) => {
+  try {
+    const { data } = await axios.post(`/auth/o/vk-oauth2/${location}`);
+    return data;
+  } catch (err) {
+    catchError(err);
+  }
+};
