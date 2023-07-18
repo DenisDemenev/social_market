@@ -11,10 +11,10 @@ import {
   Link,
   Box,
   Typography,
-} from '@mui/material';
-import { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   categoryValue,
   searchValue,
@@ -22,10 +22,10 @@ import {
   labelValue,
   priceMaxValue,
   priceMinValue,
-} from '../../store/slice/filterSlice';
-import { getCategory } from '../../api/api';
-import { selectIsAuth } from '../../store/slice/authSlice';
-import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
+} from "../../store/slice/filterSlice";
+import { getCategory } from "../../api/api";
+import { selectIsAuth } from "../../store/slice/authSlice";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 
 const SearchMenu = () => {
   const [category, setCategory] = useState([]);
@@ -40,7 +40,7 @@ const SearchMenu = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const priceValue =
-    location.pathname === '/instagram' ? 'price_post' : 'price';
+    location.pathname === "/instagram" ? "price_post" : "price";
 
   useEffect(() => {
     getCategory()
@@ -77,12 +77,12 @@ const SearchMenu = () => {
   };
 
   const handleClickButtonClear = () => {
-    dispatch(categoryValue(''));
-    dispatch(searchValue(''));
-    dispatch(sortValue(''));
+    dispatch(categoryValue(""));
+    dispatch(searchValue(""));
+    dispatch(sortValue(""));
     dispatch(labelValue(false));
-    dispatch(priceMaxValue(''));
-    dispatch(priceMinValue(''));
+    dispatch(priceMaxValue(""));
+    dispatch(priceMinValue(""));
   };
 
   return (
@@ -152,7 +152,7 @@ const SearchMenu = () => {
             ))}
           </TextField>
         </ListItem>
-        {isAuth ? (
+        {/* {isAuth ? (
           <ListItem>
             <FormControlLabel
               control={
@@ -166,12 +166,12 @@ const SearchMenu = () => {
           </ListItem>
         ) : (
           <></>
-        )}
+        )} */}
         <ListItem>
           <Button
             color='error'
             variant='contained'
-            sx={{ marginX: 'auto' }}
+            sx={{ marginX: "auto" }}
             onClick={handleClickButtonClear}>
             Сбросить
           </Button>
@@ -182,14 +182,14 @@ const SearchMenu = () => {
         size='small'
         sx={{ marginY: 2 }}>
         <NavLink
-          style={{ textDecoration: 'none', color: 'inherit' }}
+          style={{ textDecoration: "none", color: "inherit" }}
           to='rules'>
           Ограничения на содержимое рекламных публикаций
         </NavLink>
       </Button>
       <Button size='small'>
         <NavLink
-          style={{ textDecoration: 'none', color: 'inherit' }}
+          style={{ textDecoration: "none", color: "inherit" }}
           to='order-variant'>
           Как заказать
         </NavLink>
@@ -198,7 +198,7 @@ const SearchMenu = () => {
         size='small'
         sx={{ marginY: 2 }}>
         <NavLink
-          style={{ textDecoration: 'none', color: 'inherit' }}
+          style={{ textDecoration: "none", color: "inherit" }}
           to='payment'>
           Способы оплаты
         </NavLink>
@@ -211,9 +211,9 @@ const SearchMenu = () => {
             color='primary'
             startIcon={<MailOutlineOutlinedIcon />}>
             <Link
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              style={{ textDecoration: "none", color: "inherit" }}
               href='https://vk.me/id773837067'
-              target={'_blank'}>
+              target={"_blank"}>
               Написать нам
             </Link>
           </Button>

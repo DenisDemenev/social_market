@@ -1,6 +1,6 @@
-import React from 'react';
-import { IconButton, TableRow, TableCell, Avatar } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import React from "react";
+import { IconButton, TableRow, TableCell, Avatar } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const BasketElement = ({ group, handleDeleteCart, handleCart }) => {
   const id = group.id;
@@ -10,16 +10,19 @@ const BasketElement = ({ group, handleDeleteCart, handleCart }) => {
       <TableCell>
         <Avatar src={group.avatar} />
       </TableCell>
-      <TableCell align="left">{group.name}</TableCell>
+      <TableCell align='left'>{group.name}</TableCell>
       <TableCell>
         <IconButton
           onClick={(_) =>
             isShoppingCart ? handleDeleteCart({ id }) : handleCart({ id })
           }>
-          <CloseIcon sx={{ color: 'red' }} fontSize="small" />
+          <CloseIcon
+            sx={{ color: "red" }}
+            fontSize='small'
+          />
         </IconButton>
       </TableCell>
-      <TableCell align="right">{group.price}</TableCell>
+      <TableCell align='right'>{group.price}</TableCell>
     </TableRow>
   );
 };

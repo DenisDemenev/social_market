@@ -1,14 +1,13 @@
-import axios from '../axios';
+import axios from "../axios";
 
 const catchError = (err) => {
   if (err.response.status === 401) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('access');
-    window.location.reload()
+    localStorage.removeItem("token");
+    localStorage.removeItem("access");
+    window.location.reload();
   }
   return Promise.reject(`Ошибка: ${err}`);
 };
-
 
 export const getGroupsVk = async ({
   pageCurrent = 1,
@@ -24,53 +23,19 @@ export const getGroupsVk = async ({
 }) => {
   try {
     const { data } = await axios.get(
-      `/groups-vk/?page=${pageCurrent}&limit=${limit}${categoryValue ? `&category=${categoryValue}` : ''
-      }${isLabel ? `&label=true` : ''}${isFavorite ? `&is_favorited=true` : ''
-      }${isShoppingCart ? `&is_in_shopping_cart=true` : ''}${searchValue ? `&search=${searchValue}` : ''
-      }${sortValue ? `&ordering=${sortValue}` : ''}${priceMin ? `&price_min=${priceMin}` : ''
-      }${priceMax ? `&price_max=${priceMax}` : ''}`,
+      `/groups-vk/?page=${pageCurrent}&limit=${limit}${
+        categoryValue ? `&category=${categoryValue}` : ""
+      }${isLabel ? `&label=true` : ""}${
+        isFavorite ? `&is_favorited=true` : ""
+      }${isShoppingCart ? `&is_in_shopping_cart=true` : ""}${
+        searchValue ? `&search=${searchValue}` : ""
+      }${sortValue ? `&ordering=${sortValue}` : ""}${
+        priceMin ? `&price_min=${priceMin}` : ""
+      }${priceMax ? `&price_max=${priceMax}` : ""}`,
     );
     return data;
   } catch (err) {
-    catchError(err)
-  }
-};
-
-
-export const getGroupsInstagram = async ({
-  pageCurrent = 1,
-  limit = 50,
-  categoryValue,
-  searchValue,
-  sortValue,
-}) => {
-  try {
-    const { data } = await axios.get(
-      `/groups-instagram/?page=${pageCurrent}&limit=${limit}${categoryValue ? `&category=${categoryValue}` : ''
-      }${searchValue ? `&search=${searchValue}` : ''}${sortValue ? `&ordering=${sortValue}` : ''
-      }`,
-    );
-    return data;
-  } catch (err) {
-    catchError(err)
-  }
-};
-export const getGroupsTelegram = async ({
-  pageCurrent = 1,
-  limit = 50,
-  categoryValue,
-  searchValue,
-  sortValue,
-}) => {
-  try {
-    const { data } = await axios.get(
-      `/groups-telegram/?page=${pageCurrent}&limit=${limit}${categoryValue ? `&category=${categoryValue}` : ''
-      }${searchValue ? `&search=${searchValue}` : ''}${sortValue ? `&ordering=${sortValue}` : ''
-      }`,
-    );
-    return data;
-  } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };
 
@@ -79,7 +44,7 @@ export const getCategory = async () => {
     const { data } = await axios.get(`/category/`);
     return data;
   } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };
 
@@ -88,8 +53,7 @@ export const addToCart = async ({ id }) => {
     const { data } = await axios.post(`/groups-vk/${id}/shopping_cart/`);
     return data;
   } catch (err) {
-    catchError(err)
-
+    catchError(err);
   }
 };
 
@@ -98,7 +62,7 @@ export const removeFromCart = async ({ id }) => {
     const { data } = await axios.delete(`/groups-vk/${id}/shopping_cart/`);
     return data;
   } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };
 
@@ -107,7 +71,7 @@ export const orderCart = async () => {
     const { data } = await axios.get(`/groups-vk/order_shopping_cart/`);
     return data;
   } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };
 
@@ -116,7 +80,7 @@ export const addToFavorites = async ({ id }) => {
     const { data } = await axios.post(`/groups-vk/${id}/favorite/`);
     return data;
   } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };
 
@@ -125,7 +89,7 @@ export const removeFromFavorites = async ({ id }) => {
     const { data } = await axios.delete(`/groups-vk/${id}/favorite/`);
     return data;
   } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };
 
@@ -137,7 +101,7 @@ export const signIn = async ({ email, password }) => {
     });
     return data;
   } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };
 
@@ -148,7 +112,7 @@ export const authVk = async () => {
     );
     return data;
   } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };
 
@@ -157,6 +121,6 @@ export const loginVk = async (location) => {
     const { data } = await axios.post(`/auth/o/vk-oauth2/${location}`);
     return data;
   } catch (err) {
-    catchError(err)
+    catchError(err);
   }
 };

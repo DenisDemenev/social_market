@@ -1,6 +1,6 @@
 from django_filters.rest_framework import FilterSet, filters
 
-from price.models import GroupsVk, GroupsTelegram, GroupsInstagram
+from price.models import GroupsVk
 
 
 class CategoryFilterVk(FilterSet):
@@ -24,21 +24,3 @@ class CategoryFilterVk(FilterSet):
     class Meta:
         model = GroupsVk
         fields = ('category', 'label', 'price')
-
-
-class CategoryFilterTelegram(FilterSet):
-    category = filters.AllValuesMultipleFilter(field_name='category__slug')
-    price = filters.RangeFilter(field_name='price')
-
-    class Meta:
-        model = GroupsTelegram
-        fields = ('category', 'price')
-
-
-class CategoryFilterInstagram(FilterSet):
-    category = filters.AllValuesMultipleFilter(field_name='category__slug')
-    price = filters.RangeFilter(field_name='price_post')
-
-    class Meta:
-        model = GroupsInstagram
-        fields = ('category', 'price_post')

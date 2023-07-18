@@ -46,13 +46,13 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/social:v1
+          tags: ${{ secrets.DOCKER_USERNAME }}/social:v2
       - name: Push frontend to Docker Hub
         uses: docker/build-push-action@v2
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/social_frontend:v1
+          tags: ${{ secrets.DOCKER_USERNAME }}/social_frontend:v2
   deploy:
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -66,10 +66,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker pull ekbtoys/social_frontend:v1
-            sudo docker pull ekbtoys/social:v1
-            sudo docker compose stop
-            sudo docker compose rm backend
+            sudo docker pull ekbtoys/social_frontend:v2
+            sudo docker pull ekbtoys/social:v2
+            sudo docker-compose stop
+            sudo docker-compose rm backend
             rm .env
             touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
@@ -83,5 +83,7 @@ jobs:
             echo VK_TOKEN_GROUPS=${{ secrets.VK_TOKEN_GROUPS }} >> .env
             echo VK_OAUTH2_KEY=${{ secrets.VK_OAUTH2_KEY }} >> .env
             echo OAUTH2_SECRET=${{ secrets.OAUTH2_SECRET }} >> .env
+            echo PGADMIN_DEFAULT_EMAIL=${{ secrets.PGADMIN_DEFAULT_EMAIL }} >> .env
+            echo PGADMIN_DEFAULT_PASSWORD=${{ secrets.PGADMIN_DEFAULT_PASSWORD }} >> .env
             sudo docker-compose up -d
             sudo docker-compose exec -T backend python manage.py collectstatic --noinput

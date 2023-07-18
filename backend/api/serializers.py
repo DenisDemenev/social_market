@@ -4,8 +4,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
 
-from price.models import (GroupsVk, Category, GroupsTelegram, GroupsInstagram,
-                          Favorite, Cart)
+from price.models import GroupsVk, Category, Favorite, Cart
 
 
 User = get_user_model()
@@ -69,24 +68,6 @@ class GroupsVkSerializer(serializers.ModelSerializer):
         return GroupsVk.objects.filter(cart__user=user, id=obj.id).exists()
 
 
-class GroupsTelegramSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True, many=True)
-
-    class Meta:
-        model = GroupsTelegram
-        exclude = ('owner', )
-        read_only_fields = ('category', 'name', )
-
-
-class GroupsInstagramSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True, many=True)
-
-    class Meta:
-        model = GroupsInstagram
-        exclude = ('owner', )
-        read_only_fields = ('category', 'name', )
-
-
 class FavoriteSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField(source='group_vk.id')
     name = serializers.ReadOnlyField(source='group_vk.name')
@@ -130,7 +111,7 @@ class CartSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         if Cart.objects.filter(user=data['user'],
-                               recipe=data['group_vk']).exists():
+                               group_vk=data['group_vk']).exists():
             raise serializers.ValidationError('Группа уже есть в списке'
                                               ' покупок!')
         return data

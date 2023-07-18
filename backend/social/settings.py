@@ -4,16 +4,16 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-# SECRET_KEY = 'hbvuygyg98u90utfdeds46rt980ui-oi089traa67yuhbvcr46789ihgfrd65768g'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'hbvuygyg98u90utfdeds46rt980ui-oi089traa67yuhbvcr46789ihgfrd65768g'
 
 DEBUG = True
 
 ALLOWED_HOSTS = [
     '91.201.53.16',
     '*',
-    'http://localhost',
-    'http://smax.store/',
+    'localhost',
+    'smax.store',
 ]
 
 
@@ -71,23 +71,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'social.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('DB_ENGINE'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'ENGINE': os.environ.get('DB_ENGINE'),
+#         'NAME': os.environ.get('DB_NAME'),
+#         'USER': os.environ.get('POSTGRES_USER'),
+#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+#         'HOST': os.environ.get('DB_HOST'),
+#         'PORT': os.environ.get('DB_PORT'),
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -162,7 +162,7 @@ SIMPLE_JWT = {
 
 DJOSER = {
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['https://smax.store/auth', ],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['https://smax.store/auth/', ],
     'LOGIN_FIELD': 'email',
     'HIDE_USERS': False,
     'SERIALIZERS': {

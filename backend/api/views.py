@@ -6,15 +6,12 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.filters import (CategoryFilterVk, CategoryFilterTelegram,
-                         CategoryFilterInstagram)
+from api.filters import CategoryFilterVk
 from api.pagination import LimitPageNumberPagination
 from api.serializers import (GroupsVkSerializer, CategorySerializer,
-                             GroupsTelegramSerializer,
-                             GroupsInstagramSerializer,
                              CropGroupsSerializer)
 from api.utils import order_shopping_cart
-from price.models import (GroupsVk, Category, GroupsTelegram, GroupsInstagram,
+from price.models import (GroupsVk, Category,
                           Favorite, Cart)
 
 
@@ -70,30 +67,6 @@ class GroupVkViewSet(viewsets.ModelViewSet):
         return Response({
             'errors': 'Группа уже удалена'
         }, status=status.HTTP_400_BAD_REQUEST)
-
-
-class GroupsTelegramViewSet(viewsets.ModelViewSet):
-    queryset = GroupsTelegram.objects.all()
-    serializer_class = GroupsTelegramSerializer
-    pagination_class = LimitPageNumberPagination
-
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter,
-                       filters.OrderingFilter)
-    filterset_class = CategoryFilterTelegram
-    search_fields = ('category__slug', 'name', 'link',)
-    ordering_fields = ('price', 'cpm')
-
-
-class GroupsInstagramViewSet(viewsets.ModelViewSet):
-    queryset = GroupsInstagram.objects.all()
-    serializer_class = GroupsInstagramSerializer
-    pagination_class = LimitPageNumberPagination
-
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter,
-                       filters.OrderingFilter)
-    filterset_class = CategoryFilterInstagram
-    search_fields = ('category__slug', 'name', 'link',)
-    ordering_fields = ('price_post', 'cpm')
 
 
 class CategoryViewSet(ReadOnlyModelViewSet):

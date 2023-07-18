@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: 'https://smax.store/api',
+  // baseURL: 'https://smax.store/api',
   // baseURL: "http://localhost:8000/api",
+  baseURL: "http://80.87.96.10:8000/api",
 });
 
 if (localStorage.getItem("token")) {

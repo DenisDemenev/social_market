@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 from price.models import (GroupsVk, Partner,
-                          Requisites, Category, GroupsTelegram,
-                          GroupsInstagram, Favorite, Cart)
+                          Requisites, Category, 
+                          Favorite, Cart)
 
 
 @admin.register(GroupsVk)
@@ -13,26 +13,6 @@ class GroupsVkAdmin(admin.ModelAdmin):
 
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'link',)
-
-
-@admin.register(GroupsTelegram)
-class GroupsTelegramAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link', 'owner', 'cpm')
-    fields = ['name', 'link', 'avatar', 'category', 'owner',
-              'price', 'subscribes', 'coverage', ]
-
-    ordering = ('name',)
-    search_fields = ('name', 'link',)
-
-
-@admin.register(GroupsInstagram)
-class GroupsInstagramAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link', 'owner', 'cpm')
-    fields = ['name', 'link', 'avatar', 'subscribes', 'category', 'owner',
-              'price_post', 'price_story', 'coverage', ]
-
-    ordering = ('name',)
-    search_fields = ('name', 'link',)
 
 
 @admin.register(Partner)

@@ -1,6 +1,7 @@
 version: '3.0'
 services:
   db:
+    container_name: postgres
     image: postgres:12.4
     restart: always
     volumes:
@@ -8,8 +9,20 @@ services:
     env_file:
       - ./.env
 
+  pgadmin4:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_value:/var/lib/pgadmin_data/
+    env_file:
+      - ./.env
+
+
   backend:
-    image: ekbtoys/social:v1
+    image: ekbtoys/social:v2
     container_name: social
     restart: always
     volumes:
@@ -21,7 +34,7 @@ services:
       - ./.env
 
   frontend:
-    image: ekbtoys/social_frontend:v1
+    image: ekbtoys/social_frontend:v2
     container_name: social_frontend
     volumes:
       - ../frontend/:/app/result_build/
@@ -32,11 +45,11 @@ services:
     image: nginx:1.19.3
     ports:
       - 80:80
-      - 443:443
+      # - 443:443
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./smax.crt:/etc/ssl/smax.crt
-      - ./smax.key:/etc/ssl/smax.key
+      # - ./smax.crt:/etc/ssl/smax.crt
+      # - ./smax.key:/etc/ssl/smax.key
       - ../frontend/build:/usr/share/nginx/html/
       - static_value:/var/html/static/
       - media_value:/var/html/media/
@@ -47,5 +60,6 @@ services:
 
 volumes:
   postgres_data:
+  pgadmin_value:
   static_value:
   media_value:
