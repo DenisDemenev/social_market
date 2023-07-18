@@ -4,13 +4,13 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = 'hbvuygyg98u90utfdeds46rt980ui-oi089traa67yuhbvcr46789ihgfrd65768g'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = 'hbvuygyg98u90utfdeds46rt980ui-oi089traa67yuhbvcr46789ihgfrd65768g'
 
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '91.201.53.16',
+    '80.87.96.10',
     '*',
     'localhost',
     'smax.store',
