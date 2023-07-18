@@ -1,6 +1,6 @@
-import { Paper, Typography, Box } from '@mui/material';
-import { Container } from '@mui/system';
-import React from 'react';
+import { Paper, Typography, Box } from "@mui/material";
+import { Container } from "@mui/system";
+import React from "react";
 
 const OrderVariant = () => {
   return (
@@ -20,15 +20,22 @@ const OrderVariant = () => {
             <strong>С помощью менеджера:</strong>
             <p>
               Заказать размещение Ваших рекламных материалов можно через соц.
-              сеть Вконтакте. Для этого напишите{' '}
+              сеть Вконтакте. Для этого напишите{" "}
               <a
                 target='_blank'
                 rel='noreferrer'
                 href='https://vk.me/id773837067'
-                style={{ color: '#447BBA' }}>
+                style={{ color: "#447BBA" }}>
                 нашему менеджеру
               </a>
               .
+            </p>
+            <p>
+              Ваша реклама публикуется и находится в ленте на первом месте как
+              минимум 1 час, затем сдвигается в ленте новостей по мере
+              публикации других постов.Пост размещается на час в топе и 24 ч в
+              ленте.
+              <p>Возможно размещение без удаления, +50% к цене поста.</p>
             </p>
           </Typography>
           <Typography
@@ -38,67 +45,67 @@ const OrderVariant = () => {
             <strong>Оформить заказ на сайте:</strong>
             <ul>
               <li>Перейдите на страницу авторизации</li>
-              <Box sx={{ textAlign: 'start' }}>
+              <Box sx={{ textAlign: "start" }}>
                 <img
                   alt='step 1'
                   src='/static/images/step1.png'
                   style={{
                     marginTop: 10,
                     marginBottom: 30,
-                    display: 'inline-block',
-                    maxWidth: '100%',
+                    display: "inline-block",
+                    maxWidth: "100%",
                   }}
                 />
               </Box>
               <li>Авторизуйтейсь с помощью Вконтакте</li>
-              <Box sx={{ textAlign: 'start' }}>
+              <Box sx={{ textAlign: "start" }}>
                 <img
                   alt='step 2'
                   src='/static/images/step2.png'
                   style={{
                     marginTop: 10,
                     marginBottom: 30,
-                    display: 'inline-block',
-                    maxWidth: '100%',
+                    display: "inline-block",
+                    maxWidth: "100%",
                   }}
                 />
               </Box>
               <li>Добавьте в корзину интересующие Вас площадки</li>
-              <Box sx={{ textAlign: 'start' }}>
+              <Box sx={{ textAlign: "start" }}>
                 <img
                   alt='step 3'
                   src='/static/images/step3.png'
                   style={{
                     marginTop: 10,
                     marginBottom: 30,
-                    display: 'inline-block',
-                    maxWidth: '100%',
+                    display: "inline-block",
+                    maxWidth: "100%",
                   }}
                 />
               </Box>
               <li>Перейдите в корзину</li>
-              <Box sx={{ textAlign: 'start' }}>
+              <Box sx={{ textAlign: "start" }}>
                 <img
                   alt='step 4'
                   src='/static/images/step4.png'
                   style={{
                     marginTop: 10,
                     marginBottom: 30,
-                    display: 'inline-block',
-                    maxWidth: '100%',
+                    display: "inline-block",
+                    maxWidth: "100%",
                   }}
                 />
               </Box>
               <li>Оформите заказ</li>
-              <Box sx={{ textAlign: 'start' }}>
+              <Box sx={{ textAlign: "start" }}>
                 <img
                   alt='step 5'
                   src='/static/images/step5.png'
                   style={{
                     marginTop: 10,
                     marginBottom: 30,
-                    display: 'inline-block',
-                    maxWidth: '100%',
+                    display: "inline-block",
+                    maxWidth: "100%",
                   }}
                 />
               </Box>
