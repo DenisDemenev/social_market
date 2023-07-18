@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from "react";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import {
   Box,
   Container,
@@ -13,10 +13,11 @@ import {
   Avatar,
   Snackbar,
   Alert,
-} from '@mui/material';
-import { authVk, loginVk, signIn } from '../api/api';
-import { getMe, selectIsAuth } from '../store/slice/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
+} from "@mui/material";
+import { authVk, loginVk, signIn } from "../api/api";
+import { getMe, selectIsAuth } from "../store/slice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import api from "../api/apiVk";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -37,18 +38,18 @@ const SignIn = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
-    mode: 'all',
+    mode: "all",
   });
 
   const onSubmit = (values) => {
     signIn(values)
       .then((res) => {
-        localStorage.setItem('token', res.auth_token);
+        localStorage.setItem("token", res.auth_token);
         dispatch(getMe());
-        window.location.replace('https://smax.store/');
+        window.location.replace("https://smax.store/");
       })
       .catch((err) => {
         setOpen(true);
@@ -56,7 +57,18 @@ const SignIn = () => {
       });
   };
 
+  // const handleVk = () => {
+  //   authVk()
+  //     .then((res) => {
+  //       window.location.replace(res.authorization_url);
+  //     })
+  //     .catch((err) => {
+  //       console.log(`Что-то пошло не так: ${err}`);
+  //     });
+  // };
+
   const handleVk = () => {
+    api.authVk();
     authVk()
       .then((res) => {
         window.location.replace(res.authorization_url);
@@ -66,13 +78,28 @@ const SignIn = () => {
       });
   };
 
+  // useEffect(() => {
+  //   if (location.search) {
+  //     loginVk(location.search)
+  //       .then((res) => {
+  //         localStorage.setItem("access", res.access);
+  //         dispatch(getMe());
+  //         window.location.replace("https://smax.store/");
+  //       })
+  //       .catch((err) => {
+  //         console.log(`Что-то пошло не так: ${err}`);
+  //       });
+  //   }
+  // });
+
   useEffect(() => {
     if (location.search) {
+      api.loginVk(location.search);
       loginVk(location.search)
         .then((res) => {
-          localStorage.setItem('access', res.access);
+          localStorage.setItem("access", res.access);
           dispatch(getMe());
-          window.location.replace('https://smax.store/');
+          window.location.replace("https://smax.store/");
         })
         .catch((err) => {
           console.log(`Что-то пошло не так: ${err}`);
@@ -88,11 +115,11 @@ const SignIn = () => {
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}>
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography
@@ -109,7 +136,7 @@ const SignIn = () => {
             margin='normal'
             error={Boolean(errors.email?.message)}
             helperText={errors.email?.message}
-            {...register('email', { required: 'Укажите email' })}
+            {...register("email", { required: "Укажите email" })}
             fullWidth
             id='email'
             label='Email'
@@ -121,7 +148,7 @@ const SignIn = () => {
             margin='normal'
             error={Boolean(errors.password?.message)}
             helperText={errors.password?.message}
-            {...register('password', { required: 'Укажите пароль' })}
+            {...register("password", { required: "Укажите пароль" })}
             fullWidth
             name='password'
             label='Пароль'
@@ -175,7 +202,7 @@ const SignIn = () => {
         onClose={() => setOpen(false)}>
         <Alert
           severity='error'
-          sx={{ width: '100%' }}>
+          sx={{ width: "100%" }}>
           Неверный логин или пароль
         </Alert>
       </Snackbar>
