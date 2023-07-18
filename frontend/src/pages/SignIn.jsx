@@ -17,7 +17,6 @@ import {
 import { authVk, loginVk, signIn } from "../api/api";
 import { getMe, selectIsAuth } from "../store/slice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import api from "../api/apiVk";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -57,18 +56,7 @@ const SignIn = () => {
       });
   };
 
-  // const handleVk = () => {
-  //   authVk()
-  //     .then((res) => {
-  //       window.location.replace(res.authorization_url);
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Что-то пошло не так: ${err}`);
-  //     });
-  // };
-
   const handleVk = () => {
-    api.authVk();
     authVk()
       .then((res) => {
         window.location.replace(res.authorization_url);
@@ -78,23 +66,8 @@ const SignIn = () => {
       });
   };
 
-  // useEffect(() => {
-  //   if (location.search) {
-  //     loginVk(location.search)
-  //       .then((res) => {
-  //         localStorage.setItem("access", res.access);
-  //         dispatch(getMe());
-  //         window.location.replace("https://smax.store/");
-  //       })
-  //       .catch((err) => {
-  //         console.log(`Что-то пошло не так: ${err}`);
-  //       });
-  //   }
-  // });
-
   useEffect(() => {
     if (location.search) {
-      api.loginVk(location.search);
       loginVk(location.search)
         .then((res) => {
           localStorage.setItem("access", res.access);
