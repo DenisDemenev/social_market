@@ -7,9 +7,7 @@ import vk
 from social_django.models import UserSocialAuth
 from price.models import Cart
 
-# token = os.environ.get('VK_TOKEN_GROUPS')
-token = 'vk1.a.oaKu2SvC9fz380tCtvfUSTMMPZtkXj7Y36qWojZWgSmMtU-5qMro66mjgXyUOlfv6Xpo7BnQczTup2KAb_4Z7OhfKKn4NbUwmCqjhnZfZjf08h0M_0PbEjNAieqZGip3espv7ZyAuGurw839QW7MGDBKhe87CdZvoxfBBv-oqf6h298FGnICJaOSU4fmpCHYgXmQDwZNoulD2VnEwYZ14Q'
-
+token = os.environ.get('VK_TOKEN_GROUPS')
 
 def order_shopping_cart(user):
     api = vk.API(access_token=token, v='5.131')
