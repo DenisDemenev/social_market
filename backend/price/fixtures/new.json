@@ -544,7 +544,6 @@
         "pk": 1,
         "fields": {
             "name": "Музыка",
-            "description": "",
             "slug": "muzyka"
         }
     },
@@ -553,7 +552,6 @@
         "pk": 3,
         "fields": {
             "name": "Разное",
-            "description": "",
             "slug": "raznoe"
         }
     },
@@ -562,7 +560,6 @@
         "pk": 4,
         "fields": {
             "name": "Бизнес",
-            "description": "",
             "slug": "biznes"
         }
     },
@@ -571,7 +568,6 @@
         "pk": 5,
         "fields": {
             "name": "Психология",
-            "description": "",
             "slug": "psihologiya"
         }
     },
@@ -580,7 +576,6 @@
         "pk": 6,
         "fields": {
             "name": "Новости",
-            "description": "",
             "slug": "novosti"
         }
     },
@@ -589,7 +584,6 @@
         "pk": 7,
         "fields": {
             "name": "Философия",
-            "description": "",
             "slug": "filosofiya"
         }
     },
@@ -598,7 +592,6 @@
         "pk": 8,
         "fields": {
             "name": "Женские",
-            "description": "",
             "slug": "zhenskie"
         }
     },
@@ -607,7 +600,6 @@
         "pk": 9,
         "fields": {
             "name": "Цитаты",
-            "description": "",
             "slug": "citaty"
         }
     },
@@ -616,7 +608,6 @@
         "pk": 10,
         "fields": {
             "name": "Вдохновение",
-            "description": "",
             "slug": "vdohnovenie"
         }
     },
@@ -625,7 +616,6 @@
         "pk": 11,
         "fields": {
             "name": "Фотография",
-            "description": "",
             "slug": "fotografiya"
         }
     },
@@ -634,7 +624,6 @@
         "pk": 12,
         "fields": {
             "name": "Мужские",
-            "description": "",
             "slug": "muzhskie"
         }
     },
@@ -643,7 +632,6 @@
         "pk": 13,
         "fields": {
             "name": "Журнал",
-            "description": "",
             "slug": "zhurnal"
         }
     },
@@ -652,7 +640,6 @@
         "pk": 14,
         "fields": {
             "name": "Развлекательные",
-            "description": "",
             "slug": "razvlekatelnye"
         }
     },
@@ -661,7 +648,6 @@
         "pk": 15,
         "fields": {
             "name": "Литература",
-            "description": "",
             "slug": "literatura"
         }
     },
@@ -670,7 +656,6 @@
         "pk": 16,
         "fields": {
             "name": "18 +",
-            "description": "",
             "slug": "18"
         }
     },
@@ -679,7 +664,6 @@
         "pk": 17,
         "fields": {
             "name": "Эзотерика",
-            "description": "",
             "slug": "ezoterika"
         }
     },
@@ -688,7 +672,6 @@
         "pk": 18,
         "fields": {
             "name": "ЗОЖ",
-            "description": "",
             "slug": "zozh"
         }
     },
@@ -697,7 +680,6 @@
         "pk": 19,
         "fields": {
             "name": "Творчество",
-            "description": "",
             "slug": "tvorchestvo"
         }
     },
@@ -706,7 +688,6 @@
         "pk": 20,
         "fields": {
             "name": "Семья и дети",
-            "description": "",
             "slug": "semya-i-deti"
         }
     },
@@ -715,7 +696,6 @@
         "pk": 21,
         "fields": {
             "name": "Кулинария",
-            "description": "",
             "slug": "kulinariya"
         }
     },
@@ -724,7 +704,6 @@
         "pk": 22,
         "fields": {
             "name": "Познавательные",
-            "description": "",
             "slug": "poznavatelnye"
         }
     },
@@ -733,7 +712,6 @@
         "pk": 23,
         "fields": {
             "name": "Лайфхаки",
-            "description": "",
             "slug": "lajfhaki"
         }
     },
@@ -742,7 +720,6 @@
         "pk": 24,
         "fields": {
             "name": "Спорт",
-            "description": "",
             "slug": "sport"
         }
     },
@@ -751,7 +728,6 @@
         "pk": 26,
         "fields": {
             "name": "Садоводство",
-            "description": "",
             "slug": "sadovodstvo"
         }
     },
@@ -760,7 +736,6 @@
         "pk": 27,
         "fields": {
             "name": "Строительство",
-            "description": "",
             "slug": "stroitelstvo"
         }
     },
@@ -769,7 +744,6 @@
         "pk": 28,
         "fields": {
             "name": "Дизайн интерьера",
-            "description": "",
             "slug": "dizajn-interera"
         }
     },
@@ -778,7 +752,6 @@
         "pk": 29,
         "fields": {
             "name": "Ремонт",
-            "description": "",
             "slug": "remont"
         }
     },
@@ -787,7 +760,6 @@
         "pk": 30,
         "fields": {
             "name": "Мода",
-            "description": "",
             "slug": "moda"
         }
     },
@@ -796,7 +768,6 @@
         "pk": 31,
         "fields": {
             "name": "Авто",
-            "description": "",
             "slug": "avto"
         }
     },
@@ -805,7 +776,6 @@
         "pk": 32,
         "fields": {
             "name": "Патриотические",
-            "description": "",
             "slug": "patrioticheskie"
         }
     },
@@ -814,7 +784,6 @@
         "pk": 33,
         "fields": {
             "name": "Кино",
-            "description": "",
             "slug": "kino"
         }
     },
@@ -823,7 +792,6 @@
         "pk": 34,
         "fields": {
             "name": "Политика",
-            "description": "",
             "slug": "politika"
         }
     },
@@ -832,7 +800,6 @@
         "pk": 35,
         "fields": {
             "name": "Городские",
-            "description": "",
             "slug": "gorodskie"
         }
     },
@@ -841,7 +808,6 @@
         "pk": 36,
         "fields": {
             "name": "Животные",
-            "description": "",
             "slug": "zhivotnye"
         }
     },
@@ -850,7 +816,6 @@
         "pk": 37,
         "fields": {
             "name": "Путешествия",
-            "description": "",
             "slug": "puteshestviya"
         }
     },
@@ -859,7 +824,6 @@
         "pk": 38,
         "fields": {
             "name": "Природа",
-            "description": "",
             "slug": "priroda"
         }
     },
