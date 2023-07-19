@@ -57,34 +57,9 @@ const SignIn = () => {
       });
   };
 
-  const handleVk = () => {
-    api
-      .authVk()
-      .then((res) => {
-        window.location.replace(res.authorization_url);
-      })
-      .catch((err) => {
-        console.log(`Что-то пошло не так: ${err}`);
-      });
-  };
-
-  useEffect(() => {
-    if (location.search) {
-      api
-        .loginVk(location.search)
-        .then((res) => {
-          localStorage.setItem("access", res.access);
-          dispatch(getMe());
-          window.location.replace("https://smax.store/");
-        })
-        .catch((err) => {
-          console.log(`Что-то пошло не так: ${err}`);
-        });
-    }
-  });
-
   // const handleVk = () => {
-  //   authVk()
+  //   api
+  //     .authVk()
   //     .then((res) => {
   //       window.location.replace(res.authorization_url);
   //     })
@@ -95,7 +70,8 @@ const SignIn = () => {
 
   // useEffect(() => {
   //   if (location.search) {
-  //     loginVk(location.search)
+  //     api
+  //       .loginVk(location.search)
   //       .then((res) => {
   //         localStorage.setItem("access", res.access);
   //         dispatch(getMe());
@@ -106,6 +82,30 @@ const SignIn = () => {
   //       });
   //   }
   // });
+
+  const handleVk = () => {
+    authVk()
+      .then((res) => {
+        window.location.replace(res.authorization_url);
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ${err}`);
+      });
+  };
+
+  useEffect(() => {
+    if (location.search) {
+      loginVk(location.search)
+        .then((res) => {
+          localStorage.setItem("access", res.access);
+          dispatch(getMe());
+          window.location.replace("https://smax.store/");
+        })
+        .catch((err) => {
+          console.log(`Что-то пошло не так: ${err}`);
+        });
+    }
+  });
 
   return (
     <Container
