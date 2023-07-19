@@ -4,10 +4,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-# SECRET_KEY = 'hbvuygyg98u90utfdeds46rt980ui-oi089traa67yuhbvcr46789ihgfrd65768g'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'hbvuygyg98u90utfdeds46rt980ui-oi089traa67yuhbvcr46789ihgfrd65768g'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '80.87.96.10',
@@ -136,8 +136,10 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
-SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get('VK_OAUTH2_KEY')
-SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get('OAUTH2_SECRET')
+SOCIAL_AUTH_VK_OAUTH2_KEY = '51550993'
+# SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get('VK_OAUTH2_KEY')
+# SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get('OAUTH2_SECRET')
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'woVp6lSxe6eLKUyfb4NT'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 SOCIAL_AUTH_VK_APP_USER_MODE = 2
 SOCIAL_AUTH_URL_NAMESPACE = 'social'

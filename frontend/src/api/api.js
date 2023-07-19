@@ -108,7 +108,7 @@ export const signIn = async ({ email, password }) => {
 export const authVk = async () => {
   try {
     const { data } = await axios.get(
-      `/auth/o/vk-oauth2/?redirect_uri=https://smax.store/auth`,
+      `/auth/o/vk-oauth2/?redirect_uri=https://smax.store/auth/`,
     );
     return data;
   } catch (err) {
