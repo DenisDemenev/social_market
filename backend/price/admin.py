@@ -5,6 +5,12 @@ from price.models import (GroupsVk, Partner,
                           Favorite, Cart)
 
 
+@admin.action(description='Обновить данные в группах')
+def make_published(modeladmin, request, queryset):
+    for obj in queryset:
+        obj.save()
+
+
 @admin.register(GroupsVk)
 class GroupsVkAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'stats', 'cpm')
@@ -13,6 +19,7 @@ class GroupsVkAdmin(admin.ModelAdmin):
 
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'link',)
+    actions = [make_published]
 
 
 @admin.register(Partner)
