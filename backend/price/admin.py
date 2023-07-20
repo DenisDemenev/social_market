@@ -23,6 +23,7 @@ class GroupsVkAdmin(admin.ModelAdmin):
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'link',)
     actions = [make_published]
+    list_per_page = 40
 
 
 @admin.register(Partner)
