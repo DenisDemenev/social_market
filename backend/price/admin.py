@@ -1,3 +1,5 @@
+import time
+
 from django.contrib import admin
 
 from price.models import (GroupsVk, Partner,
@@ -9,6 +11,7 @@ from price.models import (GroupsVk, Partner,
 def make_published(modeladmin, request, queryset):
     for obj in queryset:
         obj.save()
+        time.sleep(0.5)
 
 
 @admin.register(GroupsVk)
