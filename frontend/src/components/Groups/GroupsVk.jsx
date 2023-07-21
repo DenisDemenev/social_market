@@ -1,22 +1,23 @@
-import { Grid } from '@mui/material';
-import { Container } from '@mui/system';
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { Grid } from "@mui/material";
+import { Container } from "@mui/system";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   pageCurrentValue,
   pageCountValue,
-} from '../../store/slice/paginatorSlice';
-import { useLocation, useNavigate } from 'react-router-dom';
-import GroupCardVk from '../GroupCard/GroupCardVk';
+} from "../../store/slice/paginatorSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import GroupCardVk from "../GroupCard/GroupCardVk";
 import {
   addToCart,
   addToFavorites,
   getGroupsVk,
+  getGroupsVkShoppingCart,
   removeFromCart,
   removeFromFavorites,
-} from '../../api/api';
-import Paginator from '../Paginator';
-import { badgeValue } from '../../store/slice/badgeSlice';
+} from "../../api/api";
+import Paginator from "../Paginator";
+import { badgeValue } from "../../store/slice/badgeSlice";
 
 const GroupsVk = () => {
   const location = useLocation();
@@ -48,7 +49,7 @@ const GroupsVk = () => {
         setGroups(res.results);
         dispatch(pageCountValue(Math.ceil(res.count / 50)));
         dispatch(
-          pageCurrentValue(parseInt(location.search?.split('=')[1] || 1)),
+          pageCurrentValue(parseInt(location.search?.split("=")[1] || 1)),
         );
       })
       .catch((err) => {
@@ -70,8 +71,8 @@ const GroupsVk = () => {
   ]);
 
   useEffect(() => {
-    getGroupsVk({
-      isShoppingCart: 'True',
+    getGroupsVkShoppingCart({
+      isShoppingCart: "True",
     })
       .then((res) => {
         dispatch(badgeValue(res.count));
@@ -165,7 +166,7 @@ const GroupsVk = () => {
         <Paginator
           page={pageCurrent}
           count={pageCount}
-          link={'vk'}
+          link={"vk"}
         />
         {groups.map((group) => (
           <GroupCardVk
@@ -179,7 +180,7 @@ const GroupsVk = () => {
         <Paginator
           page={pageCurrent}
           count={pageCount}
-          link={'vk'}
+          link={"vk"}
         />
       </Grid>
     </Container>
