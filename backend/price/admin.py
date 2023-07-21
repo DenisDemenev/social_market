@@ -23,7 +23,7 @@ class GroupsVkAdmin(admin.ModelAdmin):
 
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'link', 'link_screen',)
-    list_filter = ('category', 'owner',)
+    list_filter = ('category', 'owner__name')
     actions = [make_published]
     list_per_page = 40
 
