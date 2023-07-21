@@ -37,6 +37,7 @@ def order_shopping_cart(user):
         {' '.join(group_message)}
         Сумма: {count_price} руб.
         """
-    api.messages.send(user_ids=(773837067, 266109525),
-                      random_id=0, message=message)
+    if len(message) <= 4096:
+        api.messages.send(user_ids=(773837067, 266109525),
+                          random_id=0, message=message)
     return HttpResponse("Заказ оформлен")
