@@ -85,7 +85,8 @@ const Basket = () => {
   const handleOrderCart = async () => {
     await orderCart()
       .then((res) => {
-        groups.map(async (group) => {
+        // eslint-disable-next-line array-callback-return
+        groups.map((group) => {
           const id = group.id;
           removeFromCart({ id })
             .then((res) => {})
@@ -95,8 +96,8 @@ const Basket = () => {
                 alert(errors);
               }
             });
-          return navigate("/confirm");
         });
+        return navigate("/confirm");
       })
       .catch((err) => {
         const { errors } = err;
