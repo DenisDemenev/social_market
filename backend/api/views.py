@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.filters import CategoryFilterVk
-from api.pagination import LimitPageNumberPagination, LimitBasketPagination
+from api.pagination import LimitPageNumberPagination
 from api.serializers import (GroupsVkSerializer, CategorySerializer,
                              CropGroupsSerializer)
 from api.utils import order_shopping_cart
@@ -35,8 +35,7 @@ class GroupVkViewSet(viewsets.ModelViewSet):
         return None
 
     @action(detail=True, methods=['post', 'delete'],
-            permission_classes=[IsAuthenticated],
-            pagination_class=[LimitBasketPagination])
+            permission_classes=[IsAuthenticated])
     def shopping_cart(self, request, pk=None):
         if request.method == 'POST':
             return self.add_obj(Cart, request.user, pk)

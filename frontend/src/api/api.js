@@ -42,7 +42,6 @@ export const getGroupsVk = async ({
 export const getGroupsVkShoppingCart = async ({
   pageCurrent = 1,
   limit = 200,
-
   isShoppingCart,
 }) => {
   try {
