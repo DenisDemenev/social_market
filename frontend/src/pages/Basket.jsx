@@ -13,7 +13,12 @@ import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addToCart, getGroupsVk, orderCart, removeFromCart } from "../api/api";
+import {
+  addToCart,
+  getGroupsVkShoppingCart,
+  orderCart,
+  removeFromCart,
+} from "../api/api";
 import BasketElement from "../components/BasketElement/BasketElement";
 import { badgeValue } from "../store/slice/badgeSlice";
 
@@ -26,7 +31,7 @@ const Basket = () => {
   const isDisabled = Boolean(groups.length);
 
   useEffect(() => {
-    getGroupsVk({
+    getGroupsVkShoppingCart({
       isShoppingCart: "True",
     })
       .then((res) => {

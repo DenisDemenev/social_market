@@ -11,7 +11,7 @@ const catchError = (err) => {
 
 export const getGroupsVk = async ({
   pageCurrent = 1,
-  // limit = 50,
+  limit = 50,
   categoryValue,
   searchValue,
   sortValue,
@@ -23,7 +23,7 @@ export const getGroupsVk = async ({
 }) => {
   try {
     const { data } = await axios.get(
-      `/groups-vk/?page=${pageCurrent}${
+      `/groups-vk/?page=${pageCurrent}&limit=${limit}${
         categoryValue ? `&category=${categoryValue}` : ""
       }${isLabel ? `&label=true` : ""}${
         isFavorite ? `&is_favorited=true` : ""
@@ -32,6 +32,24 @@ export const getGroupsVk = async ({
       }${sortValue ? `&ordering=${sortValue}` : ""}${
         priceMin ? `&price_min=${priceMin}` : ""
       }${priceMax ? `&price_max=${priceMax}` : ""}`,
+    );
+    return data;
+  } catch (err) {
+    catchError(err);
+  }
+};
+
+export const getGroupsVkShoppingCart = async ({
+  pageCurrent = 1,
+  limit = 200,
+
+  isShoppingCart,
+}) => {
+  try {
+    const { data } = await axios.get(
+      `/groups-vk/?page=${pageCurrent}&limit=${limit}${
+        isShoppingCart ? `&is_in_shopping_cart=true` : ""
+      }`,
     );
     return data;
   } catch (err) {
