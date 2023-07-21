@@ -16,13 +16,14 @@ def make_published(modeladmin, request, queryset):
 
 @admin.register(GroupsVk)
 class GroupsVkAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link', 'link_screen', 'owner', 'stats',
+    list_display = ('name', 'link', 'owner', 'stats',
                     'price', 'subscribes', 'cpm')
     fields = ['vk_id', 'category', 'owner',
               'price', 'coverage', 'label', ]
 
     ordering = ('name',)
-    search_fields = ('name', 'vk_id', 'owner', 'link_screen',)
+    search_fields = ('name', 'vk_id', 'link', 'link_screen',)
+    list_filter = ('category', 'owner',)
     actions = [make_published]
     list_per_page = 40
 
