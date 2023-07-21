@@ -11,7 +11,7 @@ const catchError = (err) => {
 
 export const getGroupsVk = async ({
   pageCurrent = 1,
-  limit = 50,
+  // limit = 50,
   categoryValue,
   searchValue,
   sortValue,
@@ -23,7 +23,7 @@ export const getGroupsVk = async ({
 }) => {
   try {
     const { data } = await axios.get(
-      `/groups-vk/?page=${pageCurrent}&limit=${limit}${
+      `/groups-vk/?page=${pageCurrent}${
         categoryValue ? `&category=${categoryValue}` : ""
       }${isLabel ? `&label=true` : ""}${
         isFavorite ? `&is_favorited=true` : ""
