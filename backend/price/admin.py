@@ -1,6 +1,8 @@
 import time
 
 from django.contrib import admin
+from django.utils.translation import ngettext
+from django.contrib import messages
 
 from price.models import (GroupsVk, Partner,
                           Requisites, Category,
@@ -8,10 +10,16 @@ from price.models import (GroupsVk, Partner,
 
 
 @admin.action(description='Обновить данные в группах')
-def make_published(modeladmin, request, queryset):
+def make_published(self, request, queryset):
     for obj in queryset:
         obj.save()
         time.sleep(0.5)
+    updated = queryset.count()
+    self.message_user(request, ngettext(
+        '%d группа обновлена.',
+        '%d групп обновлены.',
+        updated,
+    ) % updated, messages.SUCCESS)
 
 
 @admin.register(GroupsVk)
