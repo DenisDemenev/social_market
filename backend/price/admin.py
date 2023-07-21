@@ -24,7 +24,6 @@ class GroupsVkAdmin(admin.ModelAdmin):
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'owner', 'link_screen',)
     actions = [make_published]
-    radio_fields = {'label': admin.HORIZONTAL}
     list_per_page = 40
 
 
