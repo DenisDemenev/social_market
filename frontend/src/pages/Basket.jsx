@@ -82,10 +82,9 @@ const Basket = () => {
       });
   };
 
-  const handleOrderCart = async () => {
-    await orderCart()
+  const handleOrderCart = () => {
+    orderCart()
       .then((res) => {
-        // eslint-disable-next-line array-callback-return
         groups.map((group) => {
           const id = group.id;
           removeFromCart({ id })
@@ -96,8 +95,8 @@ const Basket = () => {
                 alert(errors);
               }
             });
+          return navigate("/confirm");
         });
-        return navigate("/confirm");
       })
       .catch((err) => {
         const { errors } = err;
