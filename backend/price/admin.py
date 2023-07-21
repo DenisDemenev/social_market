@@ -16,15 +16,15 @@ def make_published(modeladmin, request, queryset):
 
 @admin.register(GroupsVk)
 class GroupsVkAdmin(admin.ModelAdmin):
-    list_display = ('name', ('link', 'link_screen'), 'owner', 'stats',
-                    ('price', 'subscribes', 'cpm'))
+    list_display = ('name', 'link', 'link_screen', 'owner', 'stats',
+                    'price', 'subscribes', 'cpm')
     fields = ['vk_id', 'category', 'owner',
               'price', 'coverage', 'label', ]
 
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'owner', 'link_screen',)
     actions = [make_published]
-    radio_fields = {"label": admin.HORIZONTAL}
+    radio_fields = {'label': admin.HORIZONTAL}
     list_per_page = 40
 
 
