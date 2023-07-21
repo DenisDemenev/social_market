@@ -24,8 +24,8 @@ def make_published(self, request, queryset):
     except Exception as e:
         updated = queryset.count()
         self.message_user(request, ngettext(
-            '%d группа необновлена.',
-            '%d групп необновлены.',
+            f'%d группа необновлена. Ошибка: {e}',
+            f'%d групп необновлены. Ошибка: {e}',
             updated,
         ) % updated, messages.SUCCESS)
 
