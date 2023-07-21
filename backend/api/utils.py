@@ -40,4 +40,11 @@ def order_shopping_cart(user):
     if len(message) <= 4096:
         api.messages.send(user_ids=(773837067, 266109525),
                           random_id=0, message=message)
+    else:
+        n = 4096
+        message_array = [message[i:i + n] for i in range(0, len(message), n)]
+        for message in message_array:
+            api.messages.send(user_ids=(773837067, 266109525),
+                              random_id=0, message=message)
+
     return HttpResponse("Заказ оформлен")
