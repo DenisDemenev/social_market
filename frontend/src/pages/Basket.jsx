@@ -8,14 +8,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from '@mui/material';
-import { Container } from '@mui/system';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { addToCart, getGroupsVk, orderCart, removeFromCart } from '../api/api';
-import BasketElement from '../components/BasketElement/BasketElement';
-import { badgeValue } from '../store/slice/badgeSlice';
+} from "@mui/material";
+import { Container } from "@mui/system";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addToCart, getGroupsVk, orderCart, removeFromCart } from "../api/api";
+import BasketElement from "../components/BasketElement/BasketElement";
+import { badgeValue } from "../store/slice/badgeSlice";
 
 const Basket = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const Basket = () => {
 
   useEffect(() => {
     getGroupsVk({
-      isShoppingCart: 'True',
+      isShoppingCart: "True",
     })
       .then((res) => {
         setGroups(res.results);
@@ -82,10 +82,10 @@ const Basket = () => {
       });
   };
 
-  const handleOrderCart = () => {
-    orderCart()
+  const handleOrderCart = async () => {
+    await orderCart()
       .then((res) => {
-        groups.map((group) => {
+        groups.map(async (group) => {
           const id = group.id;
           removeFromCart({ id })
             .then((res) => {})
@@ -95,7 +95,7 @@ const Basket = () => {
                 alert(errors);
               }
             });
-          return navigate('/confirm');
+          return navigate("/confirm");
         });
       })
       .catch((err) => {
@@ -142,7 +142,7 @@ const Basket = () => {
               <TableCell align='right'>Сумма:</TableCell>
               <TableCell align='right'>{sum} руб.</TableCell>
             </TableRow>
-            <TableRow sx={{ display: { xs: 'none', sm: 'contents' } }}>
+            <TableRow sx={{ display: { xs: "none", sm: "contents" } }}>
               <TableCell>
                 <Button
                   variant='contained'
@@ -165,8 +165,8 @@ const Basket = () => {
         </Table>
         <Box
           sx={{
-            display: { xs: 'flex', sm: 'none' },
-            justifyContent: 'space-between',
+            display: { xs: "flex", sm: "none" },
+            justifyContent: "space-between",
             m: 2,
           }}>
           <Button
