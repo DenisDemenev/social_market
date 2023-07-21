@@ -11,15 +11,23 @@ from price.models import (GroupsVk, Partner,
 
 @admin.action(description='Обновить данные в группах')
 def make_published(self, request, queryset):
-    for obj in queryset:
-        obj.save()
-        time.sleep(0.5)
-    updated = queryset.count()
-    self.message_user(request, ngettext(
-        '%d группа обновлена.',
-        '%d групп обновлены.',
-        updated,
-    ) % updated, messages.SUCCESS)
+    try:
+        for obj in queryset:
+            obj.save()
+            time.sleep(0.5)
+        updated = queryset.count()
+        self.message_user(request, ngettext(
+            '%d группа обновлена.',
+            '%d групп обновлены.',
+            updated,
+        ) % updated, messages.SUCCESS)
+    except:
+        updated = queryset.count()
+        self.message_user(request, ngettext(
+            '%d группа необновлена.',
+            '%d групп необновлены.',
+            updated,
+        ) % updated, messages.SUCCESS)
 
 
 @admin.register(GroupsVk)
