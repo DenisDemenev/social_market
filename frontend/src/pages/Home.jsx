@@ -18,7 +18,9 @@ const Home = ({ link }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMe());
+    if (localStorage.getItem("token") || localStorage.getItem("access")) {
+      dispatch(getMe());
+    }
   }, [dispatch]);
 
   return (
