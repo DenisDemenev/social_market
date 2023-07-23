@@ -14,7 +14,7 @@ def make_published(self, request, queryset):
     try:
         for obj in queryset:
             obj.save()
-            time.sleep(1)
+            time.sleep(2)
         updated = queryset.count()
         self.message_user(request, ngettext(
             '%d группа обновлена.',
