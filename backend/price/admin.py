@@ -9,6 +9,11 @@ from price.models import (GroupsVk, Partner,
                           Favorite, Cart)
 
 
+admin.site.site_header = 'SocialMax'
+admin.site.site_title = 'SocialMax'
+admin.site.index_title = 'Панель администратора'
+
+
 @admin.action(description='Обновить данные в группах')
 def update_group(self, request, queryset):
     try:
@@ -34,9 +39,10 @@ def update_group(self, request, queryset):
 class GroupsVkAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'owner', 'stats',
                     'price', 'subscribes', 'cpm')
+    list_editable = ('price',)
     fields = ['vk_id', 'category', 'owner',
               'price', 'coverage', 'label', ]
-
+    filter_horizontal = ('category',)
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'link', 'link_screen',)
     list_filter = ('category', 'owner__name')
