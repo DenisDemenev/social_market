@@ -10,7 +10,7 @@ from price.models import (GroupsVk, Partner,
 
 
 @admin.action(description='Обновить данные в группах')
-def make_published(self, request, queryset):
+def update_group(self, request, queryset):
     try:
         for obj in queryset:
             obj.save()
@@ -40,12 +40,12 @@ class GroupsVkAdmin(admin.ModelAdmin):
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'link', 'link_screen',)
     list_filter = ('category', 'owner__name')
-    actions = [make_published]
+    actions = [update_group]
     list_per_page = 40
 
 
 @admin.register(Partner)
-class PartnerAdmin(admin.ModelAdmin):
+class PartnerAdmin(admin.TabularInline):
     list_display = ('name', 'requisites')
     fields = ['vk_id', 'requisites']
     ordering = ('name',)
@@ -57,6 +57,7 @@ class RequisitesAdmin(admin.ModelAdmin):
     list_display = ('name', 'account_number')
     ordering = ('name',)
     search_fields = ('name',)
+    inlines = [PartnerAdmin,]
 
 
 @admin.register(Category)
