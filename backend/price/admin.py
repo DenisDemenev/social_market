@@ -45,7 +45,7 @@ class GroupsVkAdmin(admin.ModelAdmin):
 
 
 @admin.register(Partner)
-class PartnerAdmin(admin.TabularInline):
+class PartnerAdmin(admin.ModelAdmin):
     list_display = ('name', 'requisites')
     fields = ['vk_id', 'requisites']
     ordering = ('name',)
@@ -57,7 +57,6 @@ class RequisitesAdmin(admin.ModelAdmin):
     list_display = ('name', 'account_number')
     ordering = ('name',)
     search_fields = ('name',)
-    inlines = [PartnerAdmin,]
 
 
 @admin.register(Category)
