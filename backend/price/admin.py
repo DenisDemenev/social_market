@@ -29,8 +29,7 @@ def update_group(self, request, queryset):
     except Exception as e:
         updated = queryset.count()
         self.message_user(request, ngettext(
-            f'%d группа необновлена. Группа {obj.name} Ошибка: {e}',
-            f'%d групп необновлены. Группа {obj.name} Ошибка: {e}',
+            f'При обновлении произошла ошибка в группе: {obj.name}. Ошибка: {e}',
             updated,
         ) % updated, messages.ERROR)
 
