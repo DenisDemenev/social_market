@@ -29,10 +29,10 @@ def update_group(self, request, queryset):
     except Exception as e:
         updated = queryset.count()
         self.message_user(request, ngettext(
-            f'%d группа необновлена. Ошибка: {e}',
-            f'%d групп необновлены. Ошибка: {e}',
+            f'%d группа необновлена. Группа {obj.name} Ошибка: {e}',
+            f'%d групп необновлены. Группа {obj.name} Ошибка: {e}',
             updated,
-        ) % updated, messages.SUCCESS)
+        ) % updated, messages.ERROR)
 
 
 @admin.register(GroupsVk)
