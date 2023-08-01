@@ -30,7 +30,6 @@ services:
       - media_value:/backend/media/
     depends_on:
       - db
-      - redis
     env_file:
       - ./.env
 
@@ -58,34 +57,9 @@ services:
     depends_on:
       - frontend
       - backend
-  
-  redis:
-    image: redis:alpine
-  
-  celery:
-    image: celery:latest
-    volumes:
-      - ./celery/:/backend/celery/
-    env_file:
-      - ./.env
-    depends_on:
-      - redis
-      - backend
-  
-  # celery-beat:
-  #   build: 
-  #     context: .
-  #   command: celery -A core beat -l info
-  #   volumes:
-  #     - ./celery/:/backend/celery/
-  #   env_file:
-  #     - ./.env
-  #   depends_on:
-  #     - redis
 
 volumes:
   postgres_data:
   pgadmin_value:
   static_value:
   media_value:
-  celery:
