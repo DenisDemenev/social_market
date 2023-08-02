@@ -8,7 +8,6 @@ import {
 } from "../../store/slice/paginatorSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import GroupCardVk from "../GroupCard/GroupCardVk";
-import GroupIsStaff from "../GroupCard/GroupIsStaff";
 import {
   addToCart,
   addToFavorites,
@@ -34,7 +33,6 @@ const GroupsVk = () => {
   const sortValue = useSelector((state) => state.filter.sort);
   const pageCount = useSelector((state) => state.paginator.pageCount);
   const pageCurrent = useSelector((state) => state.paginator.pageCurrent);
-  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     getGroupsVk({
@@ -163,32 +161,22 @@ const GroupsVk = () => {
         <Paginator
           page={pageCurrent}
           count={pageCount}
-          link={"vk"}
+          link={"favorite"}
         />
-        {user.is_staff
-          ? groups.map((group) => (
-              <GroupIsStaff
-                key={group.id}
-                group={group}
-                handleLike={handleLike}
-                handleDeleteLike={handleDeleteLike}
-                handleCart={handleCart}
-                handleDeleteCart={handleDeleteCart}></GroupIsStaff>
-            ))
-          : groups.map((group) => (
-              <GroupCardVk
-                key={group.id}
-                group={group}
-                handleLike={handleLike}
-                handleDeleteLike={handleDeleteLike}
-                handleCart={handleCart}
-                handleDeleteCart={handleDeleteCart}></GroupCardVk>
-            ))}
+        {groups.map((group) => (
+          <GroupCardVk
+            key={group.id}
+            group={group}
+            handleLike={handleLike}
+            handleDeleteLike={handleDeleteLike}
+            handleCart={handleCart}
+            handleDeleteCart={handleDeleteCart}></GroupCardVk>
+        ))}
 
         <Paginator
           page={pageCurrent}
           count={pageCount}
-          link={"vk"}
+          link={"favorite"}
         />
       </Grid>
     </Container>
