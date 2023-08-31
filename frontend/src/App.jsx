@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { getMe } from "./store/slice/authSlice";
 import OrderConfirm from "./pages/OrderConfirm";
 import Rules from "./pages/Rules";
+import Oferta from "./pages/Oferta";
 
 function App() {
   const dispatch = useDispatch();
@@ -66,6 +67,10 @@ function App() {
           <Route
             path='order-variant'
             element={<OrderVariant />}
+          />
+          <Route
+            path='oferta'
+            element={<Oferta />}
           />
           <Route
             path='*'

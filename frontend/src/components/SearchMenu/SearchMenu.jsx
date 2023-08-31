@@ -203,6 +203,17 @@ const SearchMenu = () => {
           Способы оплаты
         </NavLink>
       </Button>
+      <Box>
+        <Button
+          size='small'
+          sx={{ marginBottom: 2 }}>
+          <NavLink
+            style={{ textDecoration: "none", color: "inherit" }}
+            to='oferta'>
+            Оферта
+          </NavLink>
+        </Button>
+      </Box>
       <Divider />
       {isAuth ? (
         <Box sx={{ pt: 5 }}>
