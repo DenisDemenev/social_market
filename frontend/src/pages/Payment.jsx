@@ -1,6 +1,6 @@
-import { Paper, Typography, Box } from '@mui/material';
-import { Container } from '@mui/system';
-import React from 'react';
+import { Paper, Typography, Box } from "@mui/material";
+import { Container } from "@mui/system";
+import React from "react";
 
 const Payment = () => {
   return (
@@ -27,16 +27,13 @@ const Payment = () => {
             <strong>Для физических лиц:</strong>
             <ul>
               <li>
-                <em>Перевод на карту Сбербанк и Тинькофф</em>
+                <em>Оплата по счету</em>
               </li>
               <li>
-                <em>QIWI Кошелек</em>
+                <em>Картой</em>
               </li>
               <li>
-                <em>ЮMoney</em>
-              </li>
-              <li>
-                <em>Оплата на расчетный счет самозанятого</em>
+                <em>QR код</em>
               </li>
             </ul>
           </Typography>
@@ -47,7 +44,7 @@ const Payment = () => {
             <strong>Для юридических лиц:</strong>
             <ul>
               <li>
-                <em>Оплата на расчетный счет самозанятого</em>
+                <em>Оплата на расчетный счет</em>
               </li>
             </ul>
           </Typography>

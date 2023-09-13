@@ -214,6 +214,17 @@ const SearchMenu = () => {
           </NavLink>
         </Button>
       </Box>
+      <Box>
+        <Button
+          size='small'
+          sx={{ marginBottom: 2 }}>
+          <NavLink
+            style={{ textDecoration: "none", color: "inherit" }}
+            to='contacts'>
+            Контакты
+          </NavLink>
+        </Button>
+      </Box>
       <Divider />
       {isAuth ? (
         <Box sx={{ pt: 5 }}>

@@ -14,6 +14,7 @@ import { getMe } from "./store/slice/authSlice";
 import OrderConfirm from "./pages/OrderConfirm";
 import Rules from "./pages/Rules";
 import Oferta from "./pages/Oferta";
+import Contacts from "./pages/Contacts";
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +72,10 @@ function App() {
           <Route
             path='oferta'
             element={<Oferta />}
+          />
+          <Route
+            path='contacts'
+            element={<Contacts />}
           />
           <Route
             path='*'

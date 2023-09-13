@@ -419,7 +419,7 @@ const Oferta = () => {
             подлежит разрешению в Арбитражном суде города Екатеринбурга.
           </Typography>
         </Box>
-        <Box>
+        <Box sx={{ padding: 5 }}>
           <Typography
             align='justify'
             paragraph>
