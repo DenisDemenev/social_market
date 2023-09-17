@@ -7,6 +7,7 @@ from django.contrib import messages
 from price.models import (GroupsVk, Partner,
                           Requisites, Category,
                           Favorite, Cart)
+from price.tasks import manual_update_group_task
 
 
 admin.site.site_header = 'SocialMax'
@@ -18,8 +19,7 @@ admin.site.index_title = 'Панель администратора'
 def update_group(self, request, queryset):
     try:
         for obj in queryset:
-            obj.save()
-            time.sleep(0.5)
+            manual_update_group_task.delay(obj.id)
         updated = queryset.count()
         self.message_user(request, ngettext(
             '%d группа обновлена.',
