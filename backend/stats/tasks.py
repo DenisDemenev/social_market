@@ -71,11 +71,11 @@ def is_active_task():
 
 @shared_task
 def manual_release_date_task(record_id):
-    from stats.models import Record
-    from stats.utils import release_date
-
     import datetime
     import time
+
+    from stats.models import Record
+    from stats.utils import release_date
 
     record = Record.objects.get(id=record_id)
     time.sleep(1)
@@ -90,9 +90,9 @@ def manual_release_date_task(record_id):
 
 @shared_task
 def views_time_out_task():
-    from stats.models import Record
-
     import time
+
+    from stats.models import Record
 
     record = Record.objects.filter(is_active=True)
     for rec in record:
@@ -104,10 +104,10 @@ def views_time_out_task():
 
 @shared_task(bind=True, max_retries=3)
 def manual_views_task(self, record_id):
+    import time
+
     from stats.models import Record
     from stats.utils import release_date
-
-    import time
 
     try:
         time.sleep(1)
