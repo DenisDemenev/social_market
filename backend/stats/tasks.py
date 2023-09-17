@@ -7,12 +7,11 @@ logger = get_task_logger(__name__)
 
 @shared_task(bind=True, max_retries=3)
 def views_task(self, id):
-    from celery.exceptions import Retry
+    import time
 
+    from celery.exceptions import Retry
     from stats.models import Record
     from stats.utils import release_date
-
-    import time
 
     try:
         time.sleep(1)
@@ -32,11 +31,11 @@ def views_task(self, id):
 
 @shared_task
 def release_date_task():
-    from stats.models import Record
-    from stats.utils import release_date
-
     import datetime
     import time
+
+    from stats.models import Record
+    from stats.utils import release_date
 
     record = Record.objects.filter(is_active=True)
     for rec in record:
