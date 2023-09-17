@@ -78,7 +78,7 @@ services:
 
   celery-beat:
     image: ekbtoys/social:v2
-    hostname: flower
+    hostname: beat
     command: celery -A social beat -l info
     volumes:
       - media_value:/backend/media/
@@ -99,7 +99,7 @@ services:
     depends_on:
       - redis
     ports:
-      - 5555:5555
+      - 5555:80
 
 volumes:
   postgres_data:
