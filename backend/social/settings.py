@@ -4,6 +4,7 @@ from pathlib import Path
 
 from celery.schedules import crontab
 import price.tasks
+import stats.tasks
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     'django_filters',
     'social_django',
     'price',
+    'stats',
     'api',
 ]
 
@@ -191,4 +193,17 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(minute=0, hour=0),
     },
 
+    "release_date_task": {
+        "task": "stats.tasks.release_date_task",
+        "schedule": crontab(minute=0, hour='*/1'),
+    },
+
+    "is_active_task": {
+        "task": "stats.tasks.is_active_task",
+        "schedule": crontab(minute=0, hour='*/3'),
+    },
+    "views_time_out_task": {
+        "task": "stats.tasks.views_time_out_task",
+        "schedule": crontab(minute='*/30'),
+    },
 }
