@@ -1,6 +1,9 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+from celery.schedules import crontab
+import price.tasks
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -174,4 +177,17 @@ DJOSER = {
         'user': ('djoser.permissions.CurrentUserOrAdminOrReadOnly',),
         'user_list': ('rest_framework.permissions.AllowAny',)
     }
+}
+
+
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = "redis://redis:6379/0"
+
+CELERY_BEAT_SCHEDULE = {
+
+    "test_task": {
+        "task": "price.tasks.test_task",
+        "schedule": crontab(minute='*/1'),
+    },
+
 }

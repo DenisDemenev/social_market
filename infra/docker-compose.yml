@@ -58,6 +58,49 @@ services:
       - frontend
       - backend
 
+  redis:
+      image: redis:7.0.5-alpine
+      hostname: redis
+  
+  celery:
+    image: ekbtoys/social:v2
+    hostname: worker
+    command: celery -A social worker -l INFO
+    volumes:
+      - media_value:/backend/media/
+    links:
+      - redis
+    depends_on:
+      - redis
+      - db
+    env_file:
+     - ./.env
+
+  celery-beat:
+    image: ekbtoys/social:v2
+    hostname: flower
+    command: celery -A social beat -l info
+    volumes:
+      - media_value:/backend/media/
+    env_file:
+     - ./.env
+    depends_on:
+      - redis
+  
+  flower:
+    image: ekbtoys/social:v2
+    command: celery -A social flower
+    volumes:
+      - media_value:/backend/media/
+    env_file:
+     - ./.env
+    links:
+      - redis
+    depends_on:
+      - redis
+    ports:
+      - 5555:5555
+
 volumes:
   postgres_data:
   pgadmin_value:
