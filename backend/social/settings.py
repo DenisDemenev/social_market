@@ -188,7 +188,7 @@ CELERY_BEAT_SCHEDULE = {
 
     "update_group_task": {
         "task": "price.tasks.update_group_task",
-        "schedule": crontab(day='*/1'),
+        "schedule": crontab(minute=0, hour=0),
     },
 
 }
