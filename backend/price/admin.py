@@ -42,7 +42,7 @@ class GroupsVkAdmin(admin.ModelAdmin):
     list_editable = ('price',)
     fields = ['vk_id', 'category', 'owner',
               'price', 'coverage', 'label', ]
-    raw_id_fields = ['owner', ]
+    autocomplete_fields = ['owner', ]
     filter_horizontal = ('category',)
     ordering = ('name',)
     search_fields = ('name', 'vk_id', 'link', 'link_screen',)
