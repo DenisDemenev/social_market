@@ -58,14 +58,19 @@ class GroupsVk(models.Model):
     name = models.CharField(max_length=64, verbose_name='Название')
     vk_id = models.PositiveIntegerField(verbose_name='ID группы в ВК',
                                         unique=True)
-    link = models.URLField(max_length=2000, verbose_name='Ссылка на группу')
-    link_screen = models.URLField(max_length=2000, verbose_name='Видимая ссылка')
-    avatar = models.URLField(max_length=2000, verbose_name='Аватар группы')
-    avatar_big = models.URLField(max_length=2000, verbose_name='Аватар группы большой')
+    link = models.URLField(max_length=2000,
+                           verbose_name='Ссылка на группу')
+    link_screen = models.URLField(max_length=2000,
+                                  verbose_name='Видимая ссылка')
+    avatar = models.URLField(max_length=2000,
+                             verbose_name='Аватар группы')
+    avatar_big = models.URLField(max_length=2000,
+                                 verbose_name='Аватар группы большой')
     label = models.BooleanField(verbose_name='Без метки')
     category = models.ManyToManyField(Category, verbose_name='Категория',
                                       related_name='category_vk')
-    stats = models.URLField(max_length=2000, verbose_name='Ссылка на статистику')
+    stats = models.URLField(max_length=2000,
+                            verbose_name='Ссылка на статистику')
     owner = models.ForeignKey(Partner, on_delete=models.CASCADE,
                               verbose_name='Владелец')
     price = models.PositiveIntegerField(verbose_name='Цена')
