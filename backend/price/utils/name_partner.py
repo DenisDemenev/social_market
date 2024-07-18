@@ -12,7 +12,7 @@ def partner(id):
 
 def groups(id):
     api = vk.API(access_token=token, v='5.131')
-    return api.groups.getById(group_id=id, fields='members_count')[0][0]
+    return api.groups.getById(group_id=id, fields='members_count')['groups'][0]
 
 
 def coverage(id):
