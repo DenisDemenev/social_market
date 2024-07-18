@@ -22,5 +22,3 @@ def coverage(id):
         post = data[i]
         count += post['views']['count']
     return count / len(data)
-
-print (groups(544555))
