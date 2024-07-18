@@ -60,8 +60,9 @@ class GroupsVk(models.Model):
                                         unique=True)
     link = models.URLField(verbose_name='Ссылка на группу')
     link_screen = models.URLField(verbose_name='Видимая ссылка')
-    avatar = models.URLField(verbose_name='Аватар группы')
-    avatar_big = models.URLField(verbose_name='Аватар группы большой')
+    avatar = models.TextField(max_length=640, verbose_name='Аватар группы')
+    avatar_big = models.TextField(max_length=640,
+                                  verbose_name='Аватар группы большой')
     label = models.BooleanField(verbose_name='Без метки')
     category = models.ManyToManyField(Category, verbose_name='Категория',
                                       related_name='category_vk')
