@@ -6,8 +6,8 @@ token = os.environ.get('VK_TOKEN')
 
 
 def partner(id):
-    api = vk.API(access_token=token, v='5.139')
-    return api.users.get(user_ids=id, fields='photo_max')['response'][0]
+    api = vk.API(access_token=token, v='5.199')
+    return api.users.get(user_ids=id, fields='photo_max')[0]
 
 
 def groups(id):
