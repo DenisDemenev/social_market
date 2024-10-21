@@ -22,7 +22,7 @@ class Requisites(models.Model):
 
 class Partner(models.Model):
     name = models.CharField(max_length=32, verbose_name='Имя')
-    avatar = models.URLField(verbose_name='Аватар партнера')
+    avatar = models.TextField(max_length=640, verbose_name='Аватар партнера')
     vk_id = models.PositiveIntegerField(verbose_name='ID партнера в ВК')
     requisites = models.ForeignKey(Requisites, on_delete=models.CASCADE,
                                    blank=True, null=True)
