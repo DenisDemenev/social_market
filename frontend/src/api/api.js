@@ -125,7 +125,7 @@ export const signIn = async ({ email, password }) => {
 export const authVk = async () => {
   try {
     const { data } = await axios.get(
-      `/auth/o/vk-oauth2/?redirect_uri=https://smax.store/auth/`,
+      `/auth/o/vk-oauth2/?redirect_uri=https://social-max.ru/auth/`,
     );
     return data;
   } catch (err) {

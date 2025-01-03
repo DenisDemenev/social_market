@@ -48,7 +48,7 @@ const SignIn = () => {
       .then((res) => {
         localStorage.setItem("token", res.auth_token);
         dispatch(getMe());
-        window.location.replace("https://smax.store/");
+        window.location.replace("https://social-max.ru/");
       })
       .catch((err) => {
         setOpen(true);
@@ -72,7 +72,7 @@ const SignIn = () => {
         .then((res) => {
           localStorage.setItem("access", res.access);
           dispatch(getMe());
-          window.location.replace("https://smax.store/");
+          window.location.replace("https://social-max.ru/");
         })
         .catch((err) => {
           console.log(`Что-то пошло не так: ${err}`);

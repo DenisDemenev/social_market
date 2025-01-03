@@ -19,6 +19,7 @@ ALLOWED_HOSTS = [
     '*',
     'localhost',
     'smax.store',
+    'social-max.ru',
 ]
 
 
@@ -168,7 +169,7 @@ SIMPLE_JWT = {
 
 DJOSER = {
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['https://smax.store/auth/', ],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['https://social-max.ru/auth/', ],
     'LOGIN_FIELD': 'email',
     'HIDE_USERS': False,
     'SERIALIZERS': {
