@@ -18,7 +18,6 @@ ALLOWED_HOSTS = [
     '80.87.96.10',
     '*',
     'localhost',
-    'smax.store',
     'social-max.ru',
 ]
 
