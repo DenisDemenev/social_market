@@ -23,6 +23,16 @@ const Home = ({ link }) => {
     }
   }, [dispatch]);
 
+  const yandexRtb = (
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-14187607-1",
+            "type": "floorAd",
+            "platform": "desktop"
+        })
+    })
+  )
+
   return (
     <>
       <TabContext value={value}>
@@ -55,7 +65,7 @@ const Home = ({ link }) => {
           <GroupsFavorite />
         </TabPanel>
       </TabContext>
-      {window.yaContextCb.push(() => {Ya.Context.AdvManager.render({"blockId": "R-A-14187607-1", "type": "floorAd", "platform": "desktop"})})}
+      {yandexRtb}
     </>  
   );
 };
