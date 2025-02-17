@@ -24,36 +24,46 @@ const Home = ({ link }) => {
   }, [dispatch]);
 
   return (
-    <TabContext value={value}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <TabList
-          onChange={handleChange}
-          aria-label='Соцети'>
-          <Tab
-            label='Вконтакте'
-            value='vk'
-            component={Link}
-            to={`/vk`}
-          />
-          {isAuth ? (
+    <>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <TabList
+            onChange={handleChange}
+            aria-label='Соцети'>
             <Tab
-              label='Избранные'
-              value='favorite'
+              label='Вконтакте'
+              value='vk'
               component={Link}
-              to={`/favorite`}
+              to={`/vk`}
             />
-          ) : (
-            <></>
-          )}
-        </TabList>
-      </Box>
-      <TabPanel value='vk'>
-        <GroupsVk />
-      </TabPanel>
-      <TabPanel value='favorite'>
-        <GroupsFavorite />
-      </TabPanel>
-    </TabContext>
+            {isAuth ? (
+              <Tab
+                label='Избранные'
+                value='favorite'
+                component={Link}
+                to={`/favorite`}
+              />
+            ) : (
+              <></>
+            )}
+          </TabList>
+        </Box>
+        <TabPanel value='vk'>
+          <GroupsVk />
+        </TabPanel>
+        <TabPanel value='favorite'>
+          <GroupsFavorite />
+        </TabPanel>
+      </TabContext>
+      {window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+        "blockId": "R-A-14187607-1",
+        "type": "floorAd",
+        "platform": "desktop"
+       })
+       })
+      }
+    </>  
   );
 };
 
