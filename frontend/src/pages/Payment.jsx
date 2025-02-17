@@ -3,19 +3,6 @@ import { Container } from "@mui/system";
 import React from "react";
 
 
-const codeStr = `
-  <div id="yandex_rtb_R-A-14187607-2"></div>
-  <script>
-  window.yaContextCb.push(() => {
-    Ya.Context.AdvManager.render({
-        "blockId": "R-A-14187607-2",
-        "renderTo": "yandex_rtb_R-A-14187607-2"
-    })
-  })
-  </script>
-`
-
-
 const Payment = () => {
   return (
     <Container maxWidth='xl'>
@@ -63,7 +50,6 @@ const Payment = () => {
             </ul>
           </Typography>
         </Box>
-        <Box sx={{ padding: 5 }} dangerouslySetInnerHTML={{ __html: codeStr }} />
       </Paper>
     </Container>
   );
