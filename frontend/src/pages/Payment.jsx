@@ -63,7 +63,7 @@ const Payment = () => {
             </ul>
           </Typography>
         </Box>
-        <div dangerouslySetInnerHTML={{ __html: codeStr }} />
+        <Box dangerouslySetInnerHTML={{ __html: codeStr }} />
       </Paper>
     </Container>
   );
