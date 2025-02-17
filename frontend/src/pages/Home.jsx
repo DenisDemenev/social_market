@@ -23,18 +23,6 @@ const Home = ({ link }) => {
     }
   }, [dispatch]);
 
-
-  useEffect(() => {
-    window.yaContextCb.push(() => {
-      Ya.Context.AdvManager.render({
-          "blockId": "R-A-14187607-1",
-          "type": "floorAd",
-          "platform": "desktop"
-      })
-  })
-}, []);
-
-
   return (
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
