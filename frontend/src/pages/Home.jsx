@@ -55,14 +55,7 @@ const Home = ({ link }) => {
           <GroupsFavorite />
         </TabPanel>
       </TabContext>
-      {window.yaContextCb.push(() => {
-      Ya.Context.AdvManager.render({
-        "blockId": "R-A-14187607-1",
-        "type": "floorAd",
-        "platform": "desktop"
-       })
-       })
-      }
+      {window.yaContextCb.push(() => {Ya.Context.AdvManager.render({"blockId": "R-A-14187607-1", "type": "floorAd", "platform": "desktop"})})}
     </>  
   );
 };
