@@ -23,18 +23,19 @@ const Home = ({ link }) => {
     }
   }, [dispatch]);
 
-  const yandexRtb = (
+
+  useEffect(() => {
     window.yaContextCb.push(() => {
-        Ya.Context.AdvManager.render({
-            "blockId": "R-A-14187607-1",
-            "type": "floorAd",
-            "platform": "desktop"
-        })
-    })
-  )
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-14187607-1",
+          "type": "floorAd",
+          "platform": "desktop"
+      })
+  })
+}, [])
+
 
   return (
-    <>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
@@ -65,8 +66,6 @@ const Home = ({ link }) => {
           <GroupsFavorite />
         </TabPanel>
       </TabContext>
-      {yandexRtb}
-    </>  
   );
 };
 
