@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -182,6 +182,7 @@ const GroupsVk = () => {
           count={pageCount}
           link={"vk"}
         />
+        <Box sx={{ flexGrow: 1 }} />
       </Grid>
     </Container>
   );
