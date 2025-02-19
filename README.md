@@ -13,7 +13,6 @@ Django, DRF, PostreSQL, Djoser, React(Material UI), Redux, Axios
 Планы по развитию:
 
 - Кабинет менеджера для ведения взаиморасчетов с партнерами(владельцами рекламных ресурсов)
-- Регистрация через соц. сети(VK и Telegram)
 - Постепенный переход axios и rtk
 
-- [Ссылка на работу](http://smax.store)
+- [Ссылка на работу](https://social-max.ru)
