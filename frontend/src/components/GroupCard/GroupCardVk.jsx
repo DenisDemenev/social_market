@@ -72,7 +72,7 @@ const GroupCardVk = ({
               alignSelf: 'center',
               ml: 2,
               textAlign: { xs: 'center', sm: 'start' },
-              width: { sm: '150px' },
+              width: { sm: '250px' },
             }}>
             <a
               href={group.link_screen}
@@ -106,7 +106,7 @@ const GroupCardVk = ({
               </IconButton>
             </Tooltip>
           </Box>
-          <Box sx={{ alignSelf: 'center' }}>
+          {/* <Box sx={{ alignSelf: 'center' }}>
             <Tooltip title='Посмотреть статистику'>
               <IconButton>
                 <a
@@ -120,7 +120,7 @@ const GroupCardVk = ({
                 </a>
               </IconButton>
             </Tooltip>
-          </Box>
+          </Box> */}
           <Box sx={{ alignSelf: 'center', textAlign: 'center' }}>
             <Typography component='div'>
               {group.price.toLocaleString('ru')} руб.
