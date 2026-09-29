@@ -79,14 +79,14 @@ class GroupsVk(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.link = f'https://vk.com/public{self.vk_id}'
-        self.stats = f'https://vk.com/stats?gid={self.vk_id}'
+        self.link = f'https://vk.ru/public{self.vk_id}'
+        self.stats = f'https://vk.ru/stats?gid={self.vk_id}'
         group = groups(self.vk_id)
         self.subscribes = group['members_count']
         self.name = group['name']
         self.avatar = group['photo_100']
         self.avatar_big = group['photo_200']
-        self.link_screen = f"https://vk.com/{group['screen_name']}"
+        self.link_screen = f"https://vk.ru/{group['screen_name']}"
 
         if not self.coverage:
             self.coverage = 500
